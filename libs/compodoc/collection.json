@@ -1,0 +1,12 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "name": "compodoc",
+  "version": "0.0.1",
+  "schematics": {
+    "compodoc": {
+      "factory": "./src/schematics/compodoc/schematic",
+      "schema": "./src/schematics/compodoc/schema.json",
+      "description": "compodoc schematic"
+    }
+  }
+}
