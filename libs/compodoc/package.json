@@ -1,6 +1,26 @@
 {
   "name": "@twittwer/compodoc",
-  "version": "0.0.1",
+  "description": "Nx Plugin to integrate the generation of documentation with compodoc in the Nx workflow.",
+  "version": "0.0.3",
+  "private": false,
+  "license": "MIT",
+  "author": "Tobias Wittwer <t.wittwer95@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twittwer/nx-tools.git"
+  },
+  "homepage": "https://github.com/twittwer/nx-tools/blob/master/libs/compodoc#readme",
+  "bugs": {
+    "url": "https://github.com/twittwer/nx-tools/issues"
+  },
+  "keywords": [
+    "angular",
+    "angular-builders",
+    "angular-schematics",
+    "nx",
+    "nx-plugin",
+    "compodoc"
+  ],
   "main": "src/index.js",
   "schematics": "./collection.json",
   "builders": "./builders.json"

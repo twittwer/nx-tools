@@ -1,9 +1,195 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema",
   "$id": "https://json-schema.org/draft-07/schema",
-  "title": "Compodoc builder",
-  "description": "",
+  "title": "Compodoc Builder",
+  "description": "Build Compodoc documentation.",
   "type": "object",
-  "properties": {},
-  "required": []
+  "properties": {
+    "tsConfig": {
+      "description": "Path to project's TypeScript configuration file.",
+      "type": "string"
+    },
+    "outputPath": {
+      "description": "The output path of the generated files.",
+      "type": "string"
+    },
+    "exportFormat": {
+      "description": "Output format (html, json).",
+      "type": "string",
+      "default": "html",
+      "anyOf": [
+        {
+          "enum": ["html", "json"]
+        },
+        { "minLength": 1 }
+      ]
+    },
+
+    "name": {
+      "description": "Title of the documentation.",
+      "type": "string"
+    },
+    "language": {
+      "description": "Language used for the generated documentation.",
+      "type": "string",
+      "default": "en-US",
+      "anyOf": [
+        {
+          "enum": [
+            "en-US",
+            "es-ES",
+            "fr-FR",
+            "hu-HU",
+            "it-IT",
+            "ja-JP",
+            "nl-NL",
+            "pt-BR",
+            "zh-CN"
+          ]
+        },
+        { "minLength": 1 }
+      ]
+    },
+
+    "theme": {
+      "description": "Theme used for the generated documentation.",
+      "type": "string",
+      "default": "gitbook",
+      "anyOf": [
+        {
+          "enum": [
+            "gitbook",
+            "laravel",
+            "original",
+            "material",
+            "postmark",
+            "readthedocs",
+            "stripe",
+            "vagrant"
+          ]
+        },
+        { "minLength": 1 }
+      ]
+    },
+    "extTheme": {
+      "description": "Path to external theme file.",
+      "type": "string"
+    },
+    "templates": {
+      "description": "Path to directory of Handlebars templates to override built-in templates.",
+      "type": "string"
+    },
+
+    "customLogo": {
+      "description": "Path to custom logo.",
+      "type": "string"
+    },
+    "customFavicon": {
+      "description": "Path to custom favicon.",
+      "type": "string"
+    },
+    "hideGenerator": {
+      "description": "Do not print the Compodoc logo at the bottom of the page.",
+      "type": "boolean",
+      "default": false
+    },
+
+    "includes": {
+      "description": "Path of external markdown files to include (folder should contain a summary.json).",
+      "type": "string"
+    },
+    "includesName": {
+      "description": "Name of item menu of externals markdown files.",
+      "type": "string",
+      "default": "Additional documentation"
+    },
+
+    "disableCoverage": {
+      "description": "Do not add the documentation coverage report.",
+      "type": "boolean",
+      "default": true
+    },
+    "disableSourceCode": {
+      "description": "Do not add source code tab and links to source code.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableDomTree": {
+      "description": "Do not add dom tree tab.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableTemplateTab": {
+      "description": "Do not add template tab.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableStyleTab": {
+      "description": "Do not add style tab.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableGraph": {
+      "description": "Disable rendering of the dependency graph.",
+      "type": "boolean",
+      "default": false
+    },
+    "disablePrivate": {
+      "description": "Do not show private in generated documentation.",
+      "type": "boolean",
+      "default": true
+    },
+    "disableProtected": {
+      "description": "Do not show protected in generated documentation.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableInternal": {
+      "description": "Do not show @internal in generated documentation.",
+      "type": "boolean",
+      "default": true
+    },
+    "disableLifeCycleHooks": {
+      "description": "Do not show Angular lifecycle hooks in generated documentation.",
+      "type": "boolean",
+      "default": true
+    },
+    "disableRoutesGraph": {
+      "description": "Do not add the routes graph.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableSearch": {
+      "description": "Do not add the search input.",
+      "type": "boolean",
+      "default": false
+    },
+    "disableDependencies": {
+      "description": "Do not add the dependencies list.",
+      "type": "boolean",
+      "default": false
+    },
+
+    "assetsFolder": {
+      "description": "External assets folder to copy in generated documentation folder.",
+      "type": "string"
+    },
+
+    "serve": {
+      "description": "Serve generated documentation.",
+      "type": "boolean",
+      "default": false
+    },
+    "port": {
+      "description": "Port for serving of documentation (default: 8080).",
+      "type": "number",
+      "default": 8080
+    },
+
+    "silent": {
+      "description": "Suppress verbose build output.",
+      "type": "boolean",
+      "default": true
+    }
+  }
 }

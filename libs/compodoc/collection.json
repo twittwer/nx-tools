@@ -1,12 +1,18 @@
 {
   "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
-  "name": "compodoc",
+  "name": "Compodoc",
   "version": "0.0.1",
   "schematics": {
-    "compodoc": {
-      "factory": "./src/schematics/compodoc/schematic",
-      "schema": "./src/schematics/compodoc/schema.json",
-      "description": "compodoc schematic"
+    "ng-add": {
+      "factory": "./src/schematics/ng-add/schematic",
+      "schema": "./src/schematics/ng-add/schema.json",
+      "save": "devDependencies",
+      "description": "Install compodoc plugin."
+    },
+    "config": {
+      "factory": "./src/schematics/config/schematic",
+      "schema": "./src/schematics/config/schema.json",
+      "description": "Configure compodoc target for a project."
     }
   }
 }

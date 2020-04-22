@@ -6,7 +6,7 @@
 
 ## Projects
 
-| Status | Project   | Description                                                      |
-| :----: | --------- | ---------------------------------------------------------------- |
-|   🗓️   | Compodoc  | Integrate Compodoc generation in the Nx workflow.                |
-|   🗓️   | Storydocs | Combine Compodoc & Storybook plugins for Storybook's Docs addon. |
+| Status | Project                     | Description                                                      |
+| :----: | --------------------------- | ---------------------------------------------------------------- |
+|   ✅   | [Compodoc](./libs/compodoc) | Integrate Compodoc generation in the Nx workflow.                |
+|   🗓️   | Storydocs                   | Combine Compodoc & Storybook plugins for Storybook's Docs addon. |

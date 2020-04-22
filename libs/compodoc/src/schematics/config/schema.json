@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "id": "compodoc-configure",
+  "title": "Compodoc Configuration",
+  "description": "Configure compodoc target for a project.",
+  "type": "object",
+  "properties": {
+    "project": {
+      "description": "Project name to add the target to.",
+      "type": "string",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "Which project the target should be added to?"
+    }
+  },
+  "required": ["project"]
+}

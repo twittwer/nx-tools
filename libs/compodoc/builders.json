@@ -1,10 +1,10 @@
 {
   "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
   "builders": {
-    "build": {
+    "compodoc": {
       "implementation": "./src/builders/compodoc/builder",
       "schema": "./src/builders/compodoc/schema.json",
-      "description": "compodoc builder"
+      "description": "Builder for Compodoc documentation."
     }
   }
 }

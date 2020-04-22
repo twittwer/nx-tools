@@ -50,6 +50,8 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.901.1",
+    "@angular-devkit/core": "^9.1.1",
+    "@angular-devkit/schematics": "^9.1.1",
     "@compodoc/compodoc": "^1.1.11",
     "@nrwl/eslint-plugin-nx": "9.2.2",
     "@nrwl/jest": "9.2.2",
