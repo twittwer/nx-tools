@@ -11,7 +11,7 @@ describe('compodoc schematic', () => {
 
   const testRunner = new SchematicTestRunner(
     '@twittwer/compodoc',
-    join(__dirname, '../../../collection.json')
+    join(__dirname, '../../../collection.json'),
   );
 
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('compodoc schematic', () => {
 
   it('should run successfully', async () => {
     await expect(
-      testRunner.runSchematicAsync('compodoc', options, appTree).toPromise()
+      testRunner.runSchematicAsync('compodoc', options, appTree).toPromise(),
     ).resolves.not.toThrowError();
   });
 });

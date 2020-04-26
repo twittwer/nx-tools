@@ -5,7 +5,7 @@ import {
   mergeWith,
   move,
   Rule,
-  url
+  url,
 } from '@angular-devkit/schematics';
 import {
   addProjectToNxJsonInTree,
@@ -14,7 +14,7 @@ import {
   projectRootDir,
   ProjectType,
   toFileName,
-  updateWorkspace
+  updateWorkspace,
 } from '@nrwl/workspace';
 import { CompodocSchematicSchema } from './schema';
 
@@ -46,7 +46,7 @@ function normalizeOptions(options: CompodocSchematicSchema): NormalizedSchema {
     projectName,
     projectRoot,
     projectDirectory,
-    parsedTags
+    parsedTags,
   };
 }
 
@@ -56,10 +56,10 @@ function addFiles(options: NormalizedSchema): Rule {
       applyTemplates({
         ...options,
         ...names(options.name),
-        offsetFromRoot: offsetFromRoot(options.projectRoot)
+        offsetFromRoot: offsetFromRoot(options.projectRoot),
       }),
-      move(options.projectRoot)
-    ])
+      move(options.projectRoot),
+    ]),
   );
 }
 
@@ -72,16 +72,16 @@ export default function(options: CompodocSchematicSchema): Rule {
           name: normalizedOptions.projectName,
           root: normalizedOptions.projectRoot,
           sourceRoot: `${normalizedOptions.projectRoot}/src`,
-          projectType
+          projectType,
         })
         .targets.add({
           name: 'build',
-          builder: '@twittwer/compodoc:build'
+          builder: '@twittwer/compodoc:build',
         });
     }),
     addProjectToNxJsonInTree(normalizedOptions.projectName, {
-      tags: normalizedOptions.parsedTags
+      tags: normalizedOptions.parsedTags,
     }),
-    addFiles(normalizedOptions)
+    addFiles(normalizedOptions),
   ]);
 }

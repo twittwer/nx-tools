@@ -3,8 +3,9 @@ import {
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq
+  uniq,
 } from '@nrwl/nx-plugin/testing';
+
 describe('compodoc e2e', () => {
   it('should create compodoc', async done => {
     const plugin = uniq('compodoc');
@@ -22,10 +23,10 @@ describe('compodoc e2e', () => {
       const plugin = uniq('compodoc');
       ensureNxProject('@twittwer/compodoc', 'dist/libs/compodoc');
       await runNxCommandAsync(
-        `generate @twittwer/compodoc:compodoc ${plugin} --directory subdir`
+        `generate @twittwer/compodoc:compodoc ${plugin} --directory subdir`,
       );
       expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`)
+        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`),
       ).not.toThrow();
       done();
     });
@@ -36,7 +37,7 @@ describe('compodoc e2e', () => {
       const plugin = uniq('compodoc');
       ensureNxProject('@twittwer/compodoc', 'dist/libs/compodoc');
       await runNxCommandAsync(
-        `generate @twittwer/compodoc:compodoc ${plugin} --tags e2etag,e2ePackage`
+        `generate @twittwer/compodoc:compodoc ${plugin} --tags e2etag,e2ePackage`,
       );
       const nxJson = readJson('nx.json');
       expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);

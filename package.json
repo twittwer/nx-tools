@@ -1,7 +1,26 @@
 {
-  "name": "twittwer",
+  "name": "nx-tools",
+  "description": "Workspace for Nx Plugins.",
   "version": "0.0.0",
+  "private": false,
   "license": "MIT",
+  "author": "Tobias Wittwer <t.wittwer95@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twittwer/nx-tools.git"
+  },
+  "homepage": "https://github.com/twittwer/nx-tools#readme",
+  "bugs": {
+    "url": "https://github.com/twittwer/nx-tools/issues"
+  },
+  "keywords": [
+    "angular",
+    "angular-builders",
+    "angular-schematics",
+    "nx",
+    "nx-plugin",
+    "compodoc"
+  ],
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
@@ -25,25 +44,28 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help"
   },
-  "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "rxjs": "^6.5.5"
+  },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.901.1",
+    "@compodoc/compodoc": "^1.1.11",
+    "@nrwl/eslint-plugin-nx": "9.2.2",
+    "@nrwl/jest": "9.2.2",
     "@nrwl/nx-plugin": "9.2.2",
     "@nrwl/workspace": "9.2.2",
+    "@types/jest": "25.1.4",
     "@types/node": "~8.9.4",
+    "@typescript-eslint/eslint-plugin": "2.19.2",
+    "@typescript-eslint/parser": "2.19.2",
     "dotenv": "6.2.0",
     "eslint": "6.8.0",
+    "eslint-config-prettier": "6.0.0",
+    "jest": "25.2.3",
     "prettier": "1.19.1",
+    "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "~3.8.3",
-    "@nrwl/eslint-plugin-nx": "9.2.2",
-    "@typescript-eslint/parser": "2.19.2",
-    "@typescript-eslint/eslint-plugin": "2.19.2",
-    "eslint-config-prettier": "6.0.0",
-    "@nrwl/jest": "9.2.2",
-    "jest": "25.2.3",
-    "@types/jest": "25.1.4",
-    "ts-jest": "25.2.1"
+    "typescript": "~3.8.3"
   }
 }
