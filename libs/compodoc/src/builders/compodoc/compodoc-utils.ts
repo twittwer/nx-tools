@@ -1,15 +1,54 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { resolve } from 'path';
+import { join, relative, resolve, sep } from 'path';
 import { CompodocBuilderSchema } from './schema';
+import { readWorkspaceJson } from '@nrwl/workspace';
+import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
+import { tmpdir } from 'os';
+import { copyFileSync, existsSync, mkdtempSync, writeFileSync } from 'fs';
 
-export function buildCompodocCmd({ workspaceRoot }: BuilderContext) {
+export function buildCompodocCmd(
+  options: CompodocBuilderSchema,
+  context: BuilderContext,
+) {
+  const { workspaceRoot } = context;
   return resolve(workspaceRoot, 'node_modules', '.bin', 'compodoc');
+}
+
+function buildIncludesFolderForWorkspace(context: BuilderContext): string {
+  const { workspaceRoot } = context;
+  const { projects } = readWorkspaceJson() as WorkspaceSchema;
+
+  const tmpFolder = mkdtempSync(`${tmpdir()}${sep}`);
+
+  const summary = Object.entries(projects)
+    .map(([projectName, project]) => {
+      const projectReadme = `${projectName}.md`;
+      const projectReadmeOrigin = join(project.root, 'README.md');
+
+      if (existsSync(projectReadmeOrigin)) {
+        copyFileSync(projectReadmeOrigin, join(tmpFolder, projectReadme));
+        return {
+          title: projectName,
+          file: projectReadme,
+        };
+      }
+    })
+    .filter(Boolean);
+
+  writeFileSync(join(tmpFolder, 'summary.json'), JSON.stringify(summary));
+
+  return relative(workspaceRoot, tmpFolder);
 }
 
 export function buildCompodocArgs(
   options: CompodocBuilderSchema,
-  { workspaceRoot, target: { project } }: BuilderContext,
+  context: BuilderContext,
 ): string[] {
+  const {
+    workspaceRoot,
+    target: { project },
+  } = context;
+
   const args: string[] = [];
 
   const tsConfigPath = resolve(workspaceRoot, options.tsConfig);
@@ -52,15 +91,20 @@ export function buildCompodocArgs(
     args.push('--hideGenerator');
   }
 
-  if (options.includes) {
-    const includesPath = resolve(workspaceRoot, options.includes);
+  if (options.workspaceDocs) {
+    const includesPath = buildIncludesFolderForWorkspace(context);
     args.push(`--includes=${includesPath}`);
+    args.push(`--includesName=${options.includesName ?? 'Projects'}`);
+  } else {
+    if (options.includes) {
+      const includesPath = resolve(workspaceRoot, options.includes);
+      args.push(`--includes=${includesPath}`);
+    }
+    if (options.includesName) {
+      args.push(`--includesName=${options.includesName}`);
+    }
   }
-  args.push(`--includesName=${options.includesName}`);
 
-  if (options.hideGenerator) {
-    args.push('--hideGenerator');
-  }
   if (options.disableCoverage) {
     args.push('--disableCoverage');
   }
@@ -101,6 +145,7 @@ export function buildCompodocArgs(
     args.push('--disableDependencies');
   }
 
+  // TODO: maybe use `<projectRoot>/src/assets` as default
   if (options.assetsFolder) {
     const assetsFolderPath = resolve(workspaceRoot, options.assetsFolder);
     args.push(`--assetsFolder=${assetsFolderPath}`);

@@ -24,6 +24,11 @@
         { "minLength": 1 }
       ]
     },
+    "workspaceDocs": {
+      "description": "Use readme of workspace root as entry and add the readme files of all project as additional documentation.",
+      "type": "boolean",
+      "default": false
+    },
 
     "name": {
       "description": "Title of the documentation.",
@@ -100,8 +105,7 @@
     },
     "includesName": {
       "description": "Name of item menu of externals markdown files.",
-      "type": "string",
-      "default": "Additional documentation"
+      "type": "string"
     },
 
     "disableCoverage": {

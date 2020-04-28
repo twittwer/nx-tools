@@ -4,6 +4,7 @@ export interface CompodocBuilderSchema extends JsonObject {
   tsConfig?: string;
   outputPath?: string;
   exportFormat: 'html' | 'json';
+  workspaceDocs: boolean;
 
   name?: string;
   language:
@@ -34,7 +35,7 @@ export interface CompodocBuilderSchema extends JsonObject {
   hideGenerator: boolean;
 
   includes?: string;
-  includesName: string;
+  includesName?: string;
 
   disableCoverage: boolean;
   disableSourceCode: boolean;

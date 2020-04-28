@@ -32,9 +32,9 @@ async function runBuilder(
 
   return new Promise<BuilderOutput>(res => {
     const childProcess = spawn(
-      buildCompodocCmd(context),
+      buildCompodocCmd(options, context),
       buildCompodocArgs(options, context),
-      { cwd: projectRoot },
+      { cwd: options.workspaceDocs ? workspaceRoot : projectRoot },
     );
 
     process.on('exit', () => childProcess.kill());
