@@ -1,0 +1,27 @@
+name: PR Check
+
+on: pull_request
+
+env:
+  CI: true
+
+jobs:
+  check:
+    name: PR Check
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v1
+      - name: Install Dependencies
+        run: npm ci
+      - name: Check Format
+        run: npm run format:check
+      - name: Lint Workspace & Code
+        run: |
+          npm run nx -- workspace-lint
+          npm run affected:lint -- --all
+      - name: Unit Tests
+        run: npm run affected:test -- --all
+      - name: Test Builds
+        run: npm run affected:build -- --all

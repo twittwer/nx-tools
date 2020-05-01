@@ -8,6 +8,9 @@ on:
       - beta
       - alpha
 
+env:
+  CI: true
+
 jobs:
   release:
     name: Build, Release & Publish
@@ -17,12 +20,9 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v1
       - name: Install Dependencies
-        env:
-          CI: true
         run: npm ci
       - name: Build, Release on GitHub & Publish to NPM
         env:
-          CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm run release
