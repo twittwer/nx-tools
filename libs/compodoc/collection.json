@@ -6,7 +6,6 @@
     "ng-add": {
       "factory": "./src/schematics/ng-add/schematic",
       "schema": "./src/schematics/ng-add/schema.json",
-      "save": "devDependencies",
       "description": "Install compodoc plugin."
     },
     "config": {

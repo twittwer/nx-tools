@@ -1,6 +1,6 @@
 {
   "name": "@twittwer/compodoc",
-  "description": "Nx Plugin to integrate the generation of documentation with compodoc in the Nx workflow.",
+  "description": "Nx Plugin to integrate the generation of documentation with Compodoc in the Nx workflow.",
   "version": "0.0.0",
   "private": false,
   "license": "MIT",
@@ -23,5 +23,9 @@
   ],
   "main": "src/index.js",
   "schematics": "./collection.json",
-  "builders": "./builders.json"
+  "builders": "./builders.json",
+  "peerDependencies": {
+    "@nrwl/workspace": "*",
+    "@compodoc/compodoc": "*"
+  }
 }
