@@ -8,6 +8,7 @@ import {
 } from '@angular-devkit/core/src/workspace';
 import { CompodocBuilderSchema } from '@twittwer/compodoc';
 import { join } from 'path';
+import { fileExists } from '@nrwl/nx-plugin/testing';
 
 type TypedProjectDefinition = Omit<ProjectDefinition, 'extensions'> & {
   extensions: ProjectDefinition['extensions'] & { projectType: ProjectType };
@@ -24,10 +25,14 @@ function buildCompodocOptions(
   schema: CompodocConfigSchema,
   projectDefinition: TypedProjectDefinition,
 ): Partial<CompodocBuilderSchema> {
-  const tsConfig =
+  let tsConfig =
     projectDefinition.extensions.projectType === ProjectType.Application
       ? `${projectDefinition.root}/tsconfig.app.json`
       : `${projectDefinition.root}/tsconfig.lib.json`;
+  if (!fileExists(tsConfig)) {
+    tsConfig = `${projectDefinition.root}/tsconfig.json`;
+  }
+
   const outputPath = join('dist', 'compodoc', schema.project);
 
   return {
