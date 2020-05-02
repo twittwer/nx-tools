@@ -1,5 +1,9 @@
 import { chain, Rule } from '@angular-devkit/schematics';
-import { installDependencies, moveToDevDependencies } from './ng-add-utils';
+import {
+  addCacheableOperation,
+  installDependencies,
+  moveToDevDependencies,
+} from './ng-add-utils';
 
 // TODO: Evaluate the best option for plugin dependency on compodoc
 //  - defined a wildcard version (`*`)
@@ -15,6 +19,6 @@ export default function(): Rule {
       },
     }),
     moveToDevDependencies('@twittwer/compodoc'), // is eventually added to the dependencies by the ng-add command
-    // TODO: add `compodoc` to `cacheableOperations` in `nx.json`
+    addCacheableOperation('compodoc'),
   ]);
 }
