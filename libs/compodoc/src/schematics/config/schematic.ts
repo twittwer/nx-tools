@@ -6,9 +6,9 @@ import {
   TargetDefinition,
   WorkspaceDefinition,
 } from '@angular-devkit/core/src/workspace';
-import { CompodocBuilderSchema } from '@twittwer/compodoc';
+import { CompodocBuilderSchema } from '../../builders/compodoc/schema';
 import { join } from 'path';
-import { fileExists } from '@nrwl/nx-plugin/testing';
+import { existsSync } from 'fs';
 
 type TypedProjectDefinition = Omit<ProjectDefinition, 'extensions'> & {
   extensions: ProjectDefinition['extensions'] & { projectType: ProjectType };
@@ -29,7 +29,7 @@ function buildCompodocOptions(
     projectDefinition.extensions.projectType === ProjectType.Application
       ? `${projectDefinition.root}/tsconfig.app.json`
       : `${projectDefinition.root}/tsconfig.lib.json`;
-  if (!fileExists(tsConfig)) {
+  if (!existsSync(tsConfig)) {
     tsConfig = `${projectDefinition.root}/tsconfig.json`;
   }
 
