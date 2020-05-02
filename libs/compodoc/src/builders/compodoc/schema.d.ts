@@ -7,32 +7,6 @@ export interface CompodocBuilderSchema extends JsonObject {
   workspaceDocs: boolean;
 
   name?: string;
-  language:
-    | 'en-US'
-    | 'es-ES'
-    | 'fr-FR'
-    | 'hu-HU'
-    | 'it-IT'
-    | 'ja-JP'
-    | 'nl-NL'
-    | 'pt-BR'
-    | 'zh-CN';
-
-  theme:
-    | 'gitbook'
-    | 'laravel'
-    | 'original'
-    | 'material'
-    | 'postmark'
-    | 'readthedocs'
-    | 'stripe'
-    | 'vagrant';
-  extTheme?: string;
-  templates?: string;
-
-  customLogo?: string;
-  customFavicon?: string;
-  hideGenerator: boolean;
 
   includes?: string;
   includesName?: string;
@@ -51,6 +25,30 @@ export interface CompodocBuilderSchema extends JsonObject {
   disableSearch: boolean;
   disableDependencies: boolean;
 
+  language:
+    | 'en-US'
+    | 'es-ES'
+    | 'fr-FR'
+    | 'hu-HU'
+    | 'it-IT'
+    | 'ja-JP'
+    | 'nl-NL'
+    | 'pt-BR'
+    | 'zh-CN';
+  theme:
+    | 'gitbook'
+    | 'laravel'
+    | 'original'
+    | 'material'
+    | 'postmark'
+    | 'readthedocs'
+    | 'stripe'
+    | 'vagrant';
+  hideGenerator: boolean;
+  customLogo?: string;
+  customFavicon?: string;
+  extTheme?: string;
+  templates?: string;
   assetsFolder?: string;
 
   serve: boolean;

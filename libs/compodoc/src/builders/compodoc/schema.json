@@ -6,15 +6,15 @@
   "type": "object",
   "properties": {
     "tsConfig": {
-      "description": "Path to project's TypeScript configuration file.",
+      "description": "Path to project's TypeScript configuration file. (default: `<projectRoot>/tsconfig.json`)",
       "type": "string"
     },
     "outputPath": {
-      "description": "The output path of the generated files.",
+      "description": "The output path of the generated files. (default: `dist/compodoc/<projectName>`)",
       "type": "string"
     },
     "exportFormat": {
-      "description": "Output format (html, json).",
+      "description": "Format of generated documentation. (html, json - enables Compodoc's `minimal` mode as well)",
       "type": "string",
       "default": "html",
       "anyOf": [
@@ -31,80 +31,16 @@
     },
 
     "name": {
-      "description": "Title of the documentation.",
+      "description": "Title of the documentation. (`workspaceDocs` uses workspace name as default - defined in `package.json`)",
       "type": "string"
-    },
-    "language": {
-      "description": "Language used for the generated documentation.",
-      "type": "string",
-      "default": "en-US",
-      "anyOf": [
-        {
-          "enum": [
-            "en-US",
-            "es-ES",
-            "fr-FR",
-            "hu-HU",
-            "it-IT",
-            "ja-JP",
-            "nl-NL",
-            "pt-BR",
-            "zh-CN"
-          ]
-        },
-        { "minLength": 1 }
-      ]
-    },
-
-    "theme": {
-      "description": "Theme used for the generated documentation.",
-      "type": "string",
-      "default": "gitbook",
-      "anyOf": [
-        {
-          "enum": [
-            "gitbook",
-            "laravel",
-            "original",
-            "material",
-            "postmark",
-            "readthedocs",
-            "stripe",
-            "vagrant"
-          ]
-        },
-        { "minLength": 1 }
-      ]
-    },
-    "extTheme": {
-      "description": "Path to external theme file.",
-      "type": "string"
-    },
-    "templates": {
-      "description": "Path to directory of Handlebars templates to override built-in templates.",
-      "type": "string"
-    },
-
-    "customLogo": {
-      "description": "Path to custom logo.",
-      "type": "string"
-    },
-    "customFavicon": {
-      "description": "Path to custom favicon.",
-      "type": "string"
-    },
-    "hideGenerator": {
-      "description": "Do not print the Compodoc logo at the bottom of the page.",
-      "type": "boolean",
-      "default": false
     },
 
     "includes": {
-      "description": "Path of external markdown files to include (folder should contain a summary.json).",
+      "description": "Path to external markdown files, folder should contain a summary.json. (`workspaceDocs` will override this)",
       "type": "string"
     },
     "includesName": {
-      "description": "Name of item menu of externals markdown files.",
+      "description": "Name of menu item containing external markdown files. (workspaceDocs uses \"Projects\" as default)",
       "type": "string"
     },
 
@@ -174,6 +110,68 @@
       "default": false
     },
 
+    "language": {
+      "description": "Language used for generated documentation.",
+      "type": "string",
+      "default": "en-US",
+      "anyOf": [
+        {
+          "enum": [
+            "en-US",
+            "es-ES",
+            "fr-FR",
+            "hu-HU",
+            "it-IT",
+            "ja-JP",
+            "nl-NL",
+            "pt-BR",
+            "zh-CN"
+          ]
+        },
+        { "minLength": 1 }
+      ]
+    },
+    "theme": {
+      "description": "Theme used for generated documentation.",
+      "type": "string",
+      "default": "gitbook",
+      "anyOf": [
+        {
+          "enum": [
+            "gitbook",
+            "laravel",
+            "original",
+            "material",
+            "postmark",
+            "readthedocs",
+            "stripe",
+            "vagrant"
+          ]
+        },
+        { "minLength": 1 }
+      ]
+    },
+    "hideGenerator": {
+      "description": "Do not print the Compodoc logo at the bottom of the page.",
+      "type": "boolean",
+      "default": false
+    },
+    "customLogo": {
+      "description": "Path to custom logo.",
+      "type": "string"
+    },
+    "customFavicon": {
+      "description": "Path to custom favicon.",
+      "type": "string"
+    },
+    "extTheme": {
+      "description": "Path to external theme file.",
+      "type": "string"
+    },
+    "templates": {
+      "description": "Path to directory of Handlebars templates to override built-in templates.",
+      "type": "string"
+    },
     "assetsFolder": {
       "description": "External assets folder to copy in generated documentation folder.",
       "type": "string"
@@ -185,7 +183,7 @@
       "default": false
     },
     "port": {
-      "description": "Port for serving of documentation (default: 8080).",
+      "description": "Port for serving of documentation. (default: 8080)",
       "type": "number",
       "default": 8080
     },

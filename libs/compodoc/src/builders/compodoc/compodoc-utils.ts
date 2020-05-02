@@ -1,7 +1,7 @@
 import { BuilderContext } from '@angular-devkit/architect';
 import { join, relative, resolve, sep } from 'path';
 import { CompodocBuilderSchema } from './schema';
-import { readWorkspaceJson } from '@nrwl/workspace';
+import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { tmpdir } from 'os';
 import { copyFileSync, existsSync, mkdtempSync, writeFileSync } from 'fs';
@@ -14,7 +14,10 @@ export function buildCompodocCmd(
   return resolve(workspaceRoot, 'node_modules', '.bin', 'compodoc');
 }
 
-function buildIncludesFolderForWorkspace(context: BuilderContext): string {
+function buildIncludesFolderForWorkspace(
+  options: CompodocBuilderSchema,
+  context: BuilderContext,
+): string {
   const { workspaceRoot } = context;
   const { projects } = readWorkspaceJson() as WorkspaceSchema;
 
@@ -40,70 +43,11 @@ function buildIncludesFolderForWorkspace(context: BuilderContext): string {
   return relative(workspaceRoot, tmpFolder);
 }
 
-export function buildCompodocArgs(
+function buildDisableArgs(
   options: CompodocBuilderSchema,
   context: BuilderContext,
 ): string[] {
-  const {
-    workspaceRoot,
-    target: { project },
-  } = context;
-
-  const args: string[] = [];
-
-  const tsConfigPath = resolve(workspaceRoot, options.tsConfig);
-  const outputPath = resolve(workspaceRoot, options.outputPath);
-  args.push(
-    `--tsconfig=${tsConfigPath}`,
-    `--output=${outputPath}`,
-    `--exportFormat=${options.exportFormat}`,
-  );
-  if (options.exportFormat === 'json') {
-    args.push('--minimal');
-  }
-
-  if (options.name) {
-    args.push(`--name=${options.name}`);
-  } else {
-    args.push(`--name=${project}`);
-  }
-  args.push(`--language=${options.language}`);
-
-  args.push(`--theme=${options.theme}`);
-  if (options.extTheme) {
-    const extThemePath = resolve(workspaceRoot, options.extTheme);
-    args.push(`--extTheme=${extThemePath}`);
-  }
-  if (options.templates) {
-    const templatesPath = resolve(workspaceRoot, options.templates);
-    args.push(`--templates=${templatesPath}`);
-  }
-
-  if (options.customLogo) {
-    const customLogoPath = resolve(workspaceRoot, options.customLogo);
-    args.push(`--customLogo=${customLogoPath}`);
-  }
-  if (options.customFavicon) {
-    const customFaviconPath = resolve(workspaceRoot, options.customFavicon);
-    args.push(`--customFavicon=${customFaviconPath}`);
-  }
-  if (options.hideGenerator) {
-    args.push('--hideGenerator');
-  }
-
-  if (options.workspaceDocs) {
-    const includesPath = buildIncludesFolderForWorkspace(context);
-    args.push(`--includes=${includesPath}`);
-    args.push(`--includesName=${options.includesName ?? 'Projects'}`);
-  } else {
-    if (options.includes) {
-      const includesPath = resolve(workspaceRoot, options.includes);
-      args.push(`--includes=${includesPath}`);
-    }
-    if (options.includesName) {
-      args.push(`--includesName=${options.includesName}`);
-    }
-  }
+  const args = [];
 
   if (options.disableCoverage) {
     args.push('--disableCoverage');
@@ -145,6 +89,77 @@ export function buildCompodocArgs(
     args.push('--disableDependencies');
   }
 
+  return args;
+}
+
+export function buildCompodocArgs(
+  options: CompodocBuilderSchema,
+  context: BuilderContext,
+): string[] {
+  const {
+    workspaceRoot,
+    target: { project },
+  } = context;
+
+  const args: string[] = [];
+
+  const tsConfigPath = resolve(workspaceRoot, options.tsConfig);
+  const outputPath = resolve(workspaceRoot, options.outputPath);
+  args.push(
+    `--tsconfig=${tsConfigPath}`,
+    `--output=${outputPath}`,
+    `--exportFormat=${options.exportFormat}`,
+  );
+  if (options.exportFormat === 'json') {
+    args.push('--minimal');
+  }
+
+  if (options.name) {
+    args.push(`--name=${options.name}`);
+  } else if (options.workspaceDocs) {
+    const workspaceName = readJsonFile('package.json').name;
+    args.push(`--name=${workspaceName}`);
+  } else {
+    args.push(`--name=${project}`);
+  }
+
+  if (options.workspaceDocs) {
+    const includesPath = buildIncludesFolderForWorkspace(options, context);
+    args.push(`--includes=${includesPath}`);
+    args.push(`--includesName=${options.includesName ?? 'Projects'}`);
+  } else {
+    if (options.includes) {
+      const includesPath = resolve(workspaceRoot, options.includes);
+      args.push(`--includes=${includesPath}`);
+    }
+    if (options.includesName) {
+      args.push(`--includesName=${options.includesName}`);
+    }
+  }
+
+  args.push(...buildDisableArgs(options, context));
+
+  args.push(`--language=${options.language}`);
+  args.push(`--theme=${options.theme}`);
+  if (options.hideGenerator) {
+    args.push('--hideGenerator');
+  }
+  if (options.customLogo) {
+    const customLogoPath = resolve(workspaceRoot, options.customLogo);
+    args.push(`--customLogo=${customLogoPath}`);
+  }
+  if (options.customFavicon) {
+    const customFaviconPath = resolve(workspaceRoot, options.customFavicon);
+    args.push(`--customFavicon=${customFaviconPath}`);
+  }
+  if (options.extTheme) {
+    const extThemePath = resolve(workspaceRoot, options.extTheme);
+    args.push(`--extTheme=${extThemePath}`);
+  }
+  if (options.templates) {
+    const templatesPath = resolve(workspaceRoot, options.templates);
+    args.push(`--templates=${templatesPath}`);
+  }
   // TODO: maybe use `<projectRoot>/src/assets` as default
   if (options.assetsFolder) {
     const assetsFolderPath = resolve(workspaceRoot, options.assetsFolder);
