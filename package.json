@@ -42,7 +42,8 @@
     "update": "nx migrate latest",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "release": "nx affected --target release"
+    "prerelease": "nx affected:build --all",
+    "release": "nx affected --target release --all"
   },
   "dependencies": {
     "rxjs": "^6.5.5"
