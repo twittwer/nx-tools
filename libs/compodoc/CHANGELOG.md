@@ -1,3 +1,13 @@
+## [1.0.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.0...compodoc/v1.0.1) (2020-05-02)
+
+### Bug Fixes
+
+- **compodoc:** use node fs for file existence check ([c987daa](https://github.com/twittwer/nx-tools/commit/c987daaa9002dc386527e02ee63e500617985e6a))
+
+### Documentation
+
+- **compodoc:** add kudos to [@compodoc](https://github.com/compodoc) ([7c9cbf1](https://github.com/twittwer/nx-tools/commit/7c9cbf1bd1a747ee5a7668bf945d7a3a3701b7bb))
+
 # 1.0.0 (2020-05-02)
 
 ### Bug Fixes
