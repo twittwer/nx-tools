@@ -1,5 +1,5 @@
 {
-  "npmScope": "nx-tools",
+  "npmScope": "twittwer",
   "implicitDependencies": {
     "workspace.json": "*",
     "package.json": {

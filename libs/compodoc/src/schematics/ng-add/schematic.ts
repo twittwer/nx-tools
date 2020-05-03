@@ -14,11 +14,11 @@ export default function(): Rule {
   return chain([
     installDependencies({
       devDependencies: {
-        '@nx-tools/compodoc': '*',
+        '@twittwer/compodoc': '*',
         '@compodoc/compodoc': '*',
       },
     }),
-    moveToDevDependencies('@nx-tools/compodoc'), // is eventually added to the dependencies by the ng-add command
+    moveToDevDependencies('@twittwer/compodoc'), // is eventually added to the dependencies by the ng-add command
     addCacheableOperation('compodoc'),
   ]);
 }

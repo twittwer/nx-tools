@@ -1,6 +1,6 @@
 # Compodoc (Nx Plugin)
 
-[![npm version](https://img.shields.io/npm/v/@nx-tools/compodoc?style=flat-square)](https://www.npmjs.com/package/@nx-tools/compodoc)
+[![npm version](https://img.shields.io/npm/v/@twittwer/compodoc?style=flat-square)](https://www.npmjs.com/package/@twittwer/compodoc)
 [![github action - release](https://img.shields.io/github/workflow/status/twittwer/nx-tools/Release?label=release&style=flat-square)](https://github.com/twittwer/nx-tools/actions?query=workflow%3ARelease)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 [![commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](https://commitizen.github.io/cz-cli/)
@@ -20,14 +20,14 @@
 Add the plugin to your Nx workspace:
 
 ```
-ng add @nx-tools/compodoc
-// adds `@compdoc/compodoc` & `@nx-tools/compodoc` as devDependencies
+ng add @twittwer/compodoc
+// adds `@compdoc/compodoc` & `@twittwer/compodoc` as devDependencies
 ```
 
 Configure Compodoc for a project:
 
 ```
-ng g @nx-tools/compodoc:config <project>
+ng g @twittwer/compodoc:config <project>
 // adds a `compodoc` target to the specified project in your `angular.json`
 ```
 
@@ -100,7 +100,7 @@ Additional options (used by the builder only) are indicated by an italic written
         '<project>': {
           architects: {
             compodoc: {
-              builder: '@nx-tools/compodoc:compodoc',
+              builder: '@twittwer/compodoc:compodoc',
               options: {
                 /* Define your options here */
               },
@@ -127,7 +127,7 @@ This recipe will describe how to create a Compodoc documentation including your 
 1. Create a library for shared/workspace wide tooling (e.g. `tools`)  
    `ng g @nrwl/workspace:library tools --unitTestRunner=none`
 2. Configure Compodoc for the created project  
-   `ng g @nx-tools/compodoc:config tools`
+   `ng g @twittwer/compodoc:config tools`
 3. Configure tsconfig to include the whole workspace  
    Therefore you can change the existing `tsconfig.lib.json` (by default the compodoc builder is using this file) or create a separate `tsconfig.compodoc.json`.  
    The important part is to change defined the file paths (include, exclude) in a way they are including all libs or the whole workspace.
@@ -141,7 +141,7 @@ This recipe will describe how to create a Compodoc documentation including your 
    Simply add `"workspaceDocs": true` in the builder's options.
    ```diff
    "compodoc": {
-        "builder": "@nx-tools/compodoc:compodoc",
+        "builder": "@twittwer/compodoc:compodoc",
         "options": {
             "tsConfig": "libs/tools/tsconfig.json",
             // ...

@@ -21,7 +21,7 @@ it.todo('Compodoc Builder');
 //   it('can run', async () => {
 //     // A "run" can have multiple outputs, and contains progress information.
 //     const run = await architect.scheduleBuilder(
-//       '@nx-tools/compodoc:build',
+//       '@twittwer/compodoc:build',
 //       options,
 //     );
 //     // The "result" member (of type BuilderOutput) is the next output.
