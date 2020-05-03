@@ -1,3 +1,10 @@
+## [1.0.2-beta.4](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2-beta.3...compodoc/v1.0.2-beta.4) (2020-05-03)
+
+### Miscellaneous
+
+- Revert "fix(compodoc): ensure public access for npm package" ([a36718b](https://github.com/twittwer/nx-tools/commit/a36718b015cf6f00efa600f9cd973c3f10bcaf6f))
+- Revert "build: rename npm scope from `twittwer` to `nx-tools`" ([0495951](https://github.com/twittwer/nx-tools/commit/0495951d62f4bfbf50bf3d8ab9bf51f565311373))
+
 ## [1.0.2-beta.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2-beta.2...compodoc/v1.0.2-beta.3) (2020-05-03)
 
 ### Bug Fixes
