@@ -1,3 +1,17 @@
+## [1.0.2-beta.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.1...compodoc/v1.0.2-beta.1) (2020-05-03)
+
+### Chores
+
+- remove unused yarn.lock ([32ba144](https://github.com/twittwer/nx-tools/commit/32ba14428460fd00c11494b3b8a8753858f9308d))
+
+### Code Refactoring
+
+- **compodoc:** cleanup schematic definition ([ba59e6d](https://github.com/twittwer/nx-tools/commit/ba59e6dab8de0ef6d3e6011b6fac82e4bde281ba))
+
+### Documentation
+
+- **compodoc:** add more badges ([097c97b](https://github.com/twittwer/nx-tools/commit/097c97b009857b61660f70035dcaec55c8f6da79))
+
 ## [1.0.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.0...compodoc/v1.0.1) (2020-05-02)
 
 ### Bug Fixes
