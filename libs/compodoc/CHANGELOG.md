@@ -1,3 +1,13 @@
+## [1.0.2-beta.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2-beta.1...compodoc/v1.0.2-beta.2) (2020-05-03)
+
+### Build System
+
+- rename npm scope from `twittwer` to `nx-tools` ([4bd2873](https://github.com/twittwer/nx-tools/commit/4bd28733c7bedf0ca9ba53f98d3af5c694e8855b))
+
+### BREAKING CHANGES
+
+- NPM scope changes therefore the package name is changed to `@nx-tools/compodoc`
+
 ## [1.0.2-beta.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.1...compodoc/v1.0.2-beta.1) (2020-05-03)
 
 ### Chores
