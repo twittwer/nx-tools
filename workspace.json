@@ -72,7 +72,7 @@
           "builder": "@nrwl/nx-plugin:e2e",
           "options": {
             "target": "compodoc:build",
-            "npmPackageName": "@twittwer/compodoc",
+            "npmPackageName": "@nx-tools/compodoc",
             "pluginOutputPath": "dist/libs/compodoc",
             "jestConfig": "apps/compodoc-e2e/jest.config.js",
             "tsSpecConfig": "apps/compodoc-e2e/tsconfig.spec.json"

@@ -16,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@twittwer/compodoc": ["libs/compodoc/src/index.ts"]
+      "@nx-tools/compodoc": ["libs/compodoc/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

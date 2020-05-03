@@ -1,5 +1,5 @@
 {
-  "name": "@twittwer/compodoc",
+  "name": "@nx-tools/compodoc",
   "description": "Nx Plugin to integrate the generation of documentation with Compodoc in the Nx workflow.",
   "version": "0.0.0",
   "private": false,

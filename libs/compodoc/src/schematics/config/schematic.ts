@@ -60,7 +60,7 @@ function addCompodocTarget(schema: CompodocConfigSchema): Rule {
     const configurations = buildCompodocConfigurations();
 
     projectDefinition.targets.set('compodoc', {
-      builder: '@twittwer/compodoc:compodoc',
+      builder: '@nx-tools/compodoc:compodoc',
       options,
       configurations,
     } as TargetDefinition);
