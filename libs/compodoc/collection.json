@@ -1,7 +1,5 @@
 {
   "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
-  "name": "Compodoc",
-  "version": "0.0.1",
   "schematics": {
     "ng-add": {
       "factory": "./src/schematics/ng-add/schematic",
@@ -11,7 +9,8 @@
     "config": {
       "factory": "./src/schematics/config/schematic",
       "schema": "./src/schematics/config/schema.json",
-      "description": "Configure compodoc target for a project."
+      "description": "Configure compodoc target for a project.",
+      "aliases": ["configuration"]
     }
   }
 }
