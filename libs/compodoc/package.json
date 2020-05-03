@@ -27,5 +27,8 @@
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "@compodoc/compodoc": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
