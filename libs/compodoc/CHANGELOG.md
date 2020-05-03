@@ -1,3 +1,9 @@
+## [1.0.2-beta.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2-beta.2...compodoc/v1.0.2-beta.3) (2020-05-03)
+
+### Bug Fixes
+
+- **compodoc:** ensure public access for npm package ([aec4b02](https://github.com/twittwer/nx-tools/commit/aec4b021c0667a837a1c0c1e01e086d69c53a03d))
+
 ## [1.0.2-beta.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2-beta.1...compodoc/v1.0.2-beta.2) (2020-05-03)
 
 ### Build System
