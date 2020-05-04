@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2...compodoc/v1.1.0) (2020-05-04)
+
+### Features
+
+- **compodoc:** add schematic option for workspaceDocs ([2942d09](https://github.com/twittwer/nx-tools/commit/2942d09605ccc9936277dfe39ca7f723ef7c6cfc)), closes [#9](https://github.com/twittwer/nx-tools/issues/9)
+
 ## [1.0.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.1...compodoc/v1.0.2) (2020-05-03)
 
 ### Chores
