@@ -1,5 +1,18 @@
-import { Rule } from '@angular-devkit/schematics';
-import { ProjectType, updateWorkspace } from '@nrwl/workspace';
+import {
+  apply,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  template,
+  url,
+} from '@angular-devkit/schematics';
+import {
+  getWorkspace,
+  offsetFromRoot,
+  ProjectType,
+  updateWorkspace,
+} from '@nrwl/workspace';
 import { CompodocConfigSchema } from './schema';
 import {
   ProjectDefinition,
@@ -21,24 +34,37 @@ function getProject(
   return workspace.projects.get(projectName) as TypedProjectDefinition;
 }
 
+function getTsConfig(
+  schema: CompodocConfigSchema,
+  projectDefinition: TypedProjectDefinition,
+): string {
+  let tsConfig = `${projectDefinition.root}/tsconfig.compodoc.json`;
+  if (!existsSync(tsConfig)) {
+    tsConfig =
+      projectDefinition.extensions.projectType === ProjectType.Application
+        ? `${projectDefinition.root}/tsconfig.app.json`
+        : `${projectDefinition.root}/tsconfig.lib.json`;
+  }
+  if (!existsSync(tsConfig)) {
+    tsConfig = `${projectDefinition.root}/tsconfig.json`;
+  }
+  return tsConfig;
+}
+
 function buildCompodocOptions(
   schema: CompodocConfigSchema,
   projectDefinition: TypedProjectDefinition,
 ): Partial<CompodocBuilderSchema> {
-  let tsConfig =
-    projectDefinition.extensions.projectType === ProjectType.Application
-      ? `${projectDefinition.root}/tsconfig.app.json`
-      : `${projectDefinition.root}/tsconfig.lib.json`;
-  if (!existsSync(tsConfig)) {
-    tsConfig = `${projectDefinition.root}/tsconfig.json`;
+  const options: Partial<CompodocBuilderSchema> = {};
+
+  options.tsConfig = getTsConfig(schema, projectDefinition);
+  options.outputPath = join('dist', 'compodoc', schema.project);
+
+  if (schema.workspaceDocs) {
+    options.workspaceDocs = true;
   }
 
-  const outputPath = join('dist', 'compodoc', schema.project);
-
-  return {
-    tsConfig,
-    outputPath,
-  };
+  return options;
 }
 
 function buildCompodocConfigurations(): Record<
@@ -67,6 +93,43 @@ function addCompodocTarget(schema: CompodocConfigSchema): Rule {
   });
 }
 
+function addTsConfigForWorkspaceDocs(schema: CompodocConfigSchema): Rule {
+  return async (tree, context) => {
+    const workspaceDefinition = await getWorkspace(tree);
+    const projectDefinition = getProject(workspaceDefinition, schema.project);
+
+    const tsConfigPath = join(projectDefinition.root, 'tsconfig.compodoc.json');
+
+    if (existsSync(tsConfigPath)) {
+      context.logger.warn(
+        'Skipping generation of "tsconfig.compodoc.json" file and using existing one.',
+      );
+      return;
+    }
+
+    let tsConfigBaseFile =
+      projectDefinition.extensions.projectType === ProjectType.Application
+        ? 'tsconfig.app.json'
+        : 'tsconfig.lib.json';
+    if (!existsSync(`${projectDefinition.root}/${tsConfigBaseFile}`)) {
+      tsConfigBaseFile = 'tsconfig.json';
+    }
+
+    return mergeWith(
+      apply(url('./files'), [
+        template({
+          tsConfigBaseFile,
+          offsetFromRoot: offsetFromRoot(projectDefinition.root),
+        }),
+        move(projectDefinition.root),
+      ]),
+    );
+  };
+}
+
 export default function(schema: CompodocConfigSchema): Rule {
-  return addCompodocTarget(schema);
+  return chain([
+    ...(schema.workspaceDocs ? [addTsConfigForWorkspaceDocs(schema)] : []),
+    addCompodocTarget(schema),
+  ]);
 }

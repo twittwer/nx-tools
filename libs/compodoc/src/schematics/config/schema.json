@@ -13,6 +13,11 @@
         "index": 0
       },
       "x-prompt": "Which project the target should be added to?"
+    },
+    "workspaceDocs": {
+      "description": "Will add a \"tsconfig.compodoc.json\" to the project that includes the whole workspace.",
+      "type": "boolean",
+      "default": false
     }
   },
   "required": ["project"]

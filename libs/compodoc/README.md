@@ -11,7 +11,8 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Builder Options](#builder-options)
+- [Schematics](#schematics)
+- [Builder](#builder)
 - [Recipes](#recipes)
   - [Workspace Docs](#workspace-docs)
 
@@ -31,7 +32,19 @@ ng g @twittwer/compodoc:config <project>
 // adds a `compodoc` target to the specified project in your `angular.json`
 ```
 
-## Usage
+## Schematics
+
+Add compodoc target to a project:
+
+```
+ng g @twittwer/compodoc:config <project> [options]
+```
+
+| Option        | Default | Description                                                                                                       |
+| ------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| workspaceDocs | `false` | Will add a "tsconfig.compodoc.json" to the project that includes the whole workspace. ([Recipe](#workspace-docs)) |
+
+## Builder
 
 Generate Compodoc documentation for a project:
 
@@ -41,8 +54,6 @@ ng run <project>:compodoc
 // JSON Format
 ng run <project>:compodoc:json
 ```
-
-## Builder Options
 
 The builder supports several configuration options which are passed to the Compodoc command.  
 Additional options (used by the builder only) are indicated by an italic written option name.
@@ -125,27 +136,12 @@ Additional options (used by the builder only) are indicated by an italic written
 This recipe will describe how to create a Compodoc documentation including your whole workspace and listing the Readme files of all projects.
 
 1. Create a library for shared/workspace wide tooling (e.g. `tools`)  
+   `ng g @nrwl/(workspace|angular):library <project> [--unitTestRunner=none]`  
    `ng g @nrwl/workspace:library tools --unitTestRunner=none`
-2. Configure Compodoc for the created project  
-   `ng g @twittwer/compodoc:config tools`
-3. Configure tsconfig to include the whole workspace  
-   Therefore you can change the existing `tsconfig.lib.json` (by default the compodoc builder is using this file) or create a separate `tsconfig.compodoc.json`.  
-   The important part is to change defined the file paths (include, exclude) in a way they are including all libs or the whole workspace.
-   ```diff
-   - "include": ["**/*.ts"]
-   + "include": ["../**/*.ts"] // all libraries
-   + "include": ["../../**/*.ts"] // whole workspace
-   ```
-   In case you created a new tsconfig it is necessary to update the Compodoc builder option (`tsConfig`) accordingly. (the new file should extend the existing ones)
-4. Enable workspace mode for Compodoc builder to include the Readme files of all projects  
-   Simply add `"workspaceDocs": true` in the builder's options.
-   ```diff
-   "compodoc": {
-        "builder": "@twittwer/compodoc:compodoc",
-        "options": {
-            "tsConfig": "libs/tools/tsconfig.json",
-            // ...
-   +        "workspaceDocs": true
-        },
-   },
-   ```
+2. Optionally you can delete some unused code (you should keep at least `tsconfig.json` & `README.md`).
+3. Configure Compodoc for the created project  
+   `ng g @twittwer/compodoc:config <project> --workspaceDocs`  
+   `ng g @twittwer/compodoc:config tools --workspaceDocs`
+4. Generate your docs:  
+   `ng run <project>:compodoc`  
+   `ng run tools:compodoc`
