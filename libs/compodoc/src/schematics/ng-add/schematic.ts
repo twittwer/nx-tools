@@ -1,9 +1,9 @@
 import { chain, Rule } from '@angular-devkit/schematics';
 import {
-  addCacheableOperation,
   installDependencies,
   moveToDevDependencies,
-} from './ng-add-utils';
+} from './utils/dependency.utils';
+import { addCacheableOperation } from './utils/nx.utils';
 
 // TODO: Evaluate the best option for plugin dependency on compodoc
 //  - defined a wildcard version (`*`)

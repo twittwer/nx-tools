@@ -7,121 +7,63 @@ import {
   template,
   url,
 } from '@angular-devkit/schematics';
-import {
-  getWorkspace,
-  offsetFromRoot,
-  ProjectType,
-  updateWorkspace,
-} from '@nrwl/workspace';
+import { getWorkspace, offsetFromRoot, updateWorkspace } from '@nrwl/workspace';
 import { CompodocConfigSchema } from './schema';
 import {
-  ProjectDefinition,
-  TargetDefinition,
-  WorkspaceDefinition,
-} from '@angular-devkit/core/src/workspace';
-import { CompodocBuilderSchema } from '../../builders/compodoc/schema';
-import { join } from 'path';
-import { existsSync } from 'fs';
-
-type TypedProjectDefinition = Omit<ProjectDefinition, 'extensions'> & {
-  extensions: ProjectDefinition['extensions'] & { projectType: ProjectType };
-};
-
-function getProject(
-  workspace: WorkspaceDefinition,
-  projectName: string,
-): TypedProjectDefinition {
-  return workspace.projects.get(projectName) as TypedProjectDefinition;
-}
-
-function getTsConfig(
-  schema: CompodocConfigSchema,
-  projectDefinition: TypedProjectDefinition,
-): string {
-  let tsConfig = `${projectDefinition.root}/tsconfig.compodoc.json`;
-  if (!existsSync(tsConfig)) {
-    tsConfig =
-      projectDefinition.extensions.projectType === ProjectType.Application
-        ? `${projectDefinition.root}/tsconfig.app.json`
-        : `${projectDefinition.root}/tsconfig.lib.json`;
-  }
-  if (!existsSync(tsConfig)) {
-    tsConfig = `${projectDefinition.root}/tsconfig.json`;
-  }
-  return tsConfig;
-}
-
-function buildCompodocOptions(
-  schema: CompodocConfigSchema,
-  projectDefinition: TypedProjectDefinition,
-): Partial<CompodocBuilderSchema> {
-  const options: Partial<CompodocBuilderSchema> = {};
-
-  options.tsConfig = getTsConfig(schema, projectDefinition);
-  options.outputPath = join('dist', 'compodoc', schema.project);
-
-  if (schema.workspaceDocs) {
-    options.workspaceDocs = true;
-  }
-
-  return options;
-}
-
-function buildCompodocConfigurations(): Record<
-  string,
-  Partial<CompodocBuilderSchema>
-> {
-  return {
-    json: {
-      exportFormat: 'json',
-    },
-  };
-}
+  getProjectConfig,
+  getProjectDefinition,
+} from './utils/workspace.utils';
+import { TargetDefinition } from '@angular-devkit/core/src/workspace';
+import {
+  buildCompodocConfigurations,
+  buildCompodocOptions,
+} from './utils/target.utils';
+import { getTsConfigForProject } from './utils/compodoc.utils';
 
 function addCompodocTarget(schema: CompodocConfigSchema): Rule {
-  return updateWorkspace(workspace => {
-    const projectDefinition = getProject(workspace, schema.project);
+  return async (tree, context) => {
+    const workspaceDefinition = await getWorkspace(tree);
+    const projectDefinition = await getProjectDefinition(
+      workspaceDefinition,
+      schema.project,
+    );
 
-    const options = buildCompodocOptions(schema, projectDefinition);
+    const options = buildCompodocOptions(tree, schema);
     const configurations = buildCompodocConfigurations();
 
-    projectDefinition.targets.set('compodoc', {
+    const targetDefinition: TargetDefinition = {
       builder: '@twittwer/compodoc:compodoc',
       options,
       configurations,
-    } as TargetDefinition);
-  });
+    };
+    projectDefinition.targets.add({ name: 'compodoc', ...targetDefinition });
+
+    return updateWorkspace(workspaceDefinition);
+  };
 }
 
 function addTsConfigForWorkspaceDocs(schema: CompodocConfigSchema): Rule {
   return async (tree, context) => {
-    const workspaceDefinition = await getWorkspace(tree);
-    const projectDefinition = getProject(workspaceDefinition, schema.project);
+    const { root: projectRoot, projectType } = getProjectConfig(
+      tree,
+      schema.project,
+    );
 
-    const tsConfigPath = join(projectDefinition.root, 'tsconfig.compodoc.json');
-
-    if (existsSync(tsConfigPath)) {
+    const tsConfig = getTsConfigForProject(tree, schema.project);
+    if (tsConfig === 'tsconfig.compodoc.json') {
       context.logger.warn(
         'Skipping generation of "tsconfig.compodoc.json" file and using existing one.',
       );
       return;
     }
 
-    let tsConfigBaseFile =
-      projectDefinition.extensions.projectType === ProjectType.Application
-        ? 'tsconfig.app.json'
-        : 'tsconfig.lib.json';
-    if (!existsSync(`${projectDefinition.root}/${tsConfigBaseFile}`)) {
-      tsConfigBaseFile = 'tsconfig.json';
-    }
-
     return mergeWith(
       apply(url('./files'), [
         template({
-          tsConfigBaseFile,
-          offsetFromRoot: offsetFromRoot(projectDefinition.root),
+          tsConfigBaseFile: tsConfig,
+          offsetFromRoot: offsetFromRoot(projectRoot),
         }),
-        move(projectDefinition.root),
+        move(projectRoot),
       ]),
     );
   };
