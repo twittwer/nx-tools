@@ -1,3 +1,18 @@
+## [1.1.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.1.0...compodoc/v1.1.1) (2020-05-05)
+
+### Code Refactoring
+
+- **compodoc:** improve testability of schematics ([5d46bcd](https://github.com/twittwer/nx-tools/commit/5d46bcdbfa3fdc233b5d3c312f33663e07b60c23))
+
+### Continuous Integration
+
+- add tests to release process ([e90b29b](https://github.com/twittwer/nx-tools/commit/e90b29b133523d8718835afd26d9ff98e4fa4283))
+
+### Tests
+
+- **compodoc:** add unit tests for config schematic ([cc84362](https://github.com/twittwer/nx-tools/commit/cc84362a33665aa35c6d418880daf29ebd1ee23d))
+- **compodoc:** add unit tests for ng-add schematic ([16eb2e0](https://github.com/twittwer/nx-tools/commit/16eb2e0f12246650c7a481c1c1ef3a9ade5d7af6))
+
 # [1.1.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.0.2...compodoc/v1.1.0) (2020-05-04)
 
 ### Features
