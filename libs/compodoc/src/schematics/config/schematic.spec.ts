@@ -20,7 +20,7 @@ describe('Compodoc "config" Schematic', () => {
 
   describe('for library', () => {
     beforeEach(async () => {
-      await testRunner
+      testTree = await testRunner
         .runExternalSchematicAsync(
           // TODO: should use `@nrwl/angular`
           '@nrwl/angular',
