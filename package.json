@@ -68,6 +68,7 @@
     "@commitlint/config-conventional": "^8.3.4",
     "@commitlint/prompt": "^8.3.5",
     "@compodoc/compodoc": "^1.1.11",
+    "@nrwl/angular": "^9.2.3",
     "@nrwl/eslint-plugin-nx": "9.2.2",
     "@nrwl/jest": "9.2.2",
     "@nrwl/nx-plugin": "9.2.2",
