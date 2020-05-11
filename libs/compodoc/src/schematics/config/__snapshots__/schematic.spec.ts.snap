@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Compodoc "config" Schematic for application in nested directory --workspaceDocs tsconfig.compodoc.json should create a compodoc specific tsconfig file 1`] = `
+Object {
+  "extends": "./tsconfig.app.json",
+  "include": Array [
+    "../../../apps/**/*.ts",
+    "../../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for application in nested directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.app.json 1`] = `
+Object {
+  "extends": "./tsconfig.app.json",
+  "include": Array [
+    "../../../apps/**/*.ts",
+    "../../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for application in nested directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.json 1`] = `
+Object {
+  "extends": "./tsconfig.json",
+  "include": Array [
+    "../../../apps/**/*.ts",
+    "../../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for application in undefined directory --workspaceDocs tsconfig.compodoc.json should create a compodoc specific tsconfig file 1`] = `
+Object {
+  "extends": "./tsconfig.app.json",
+  "include": Array [
+    "../../apps/**/*.ts",
+    "../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for application in undefined directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.app.json 1`] = `
+Object {
+  "extends": "./tsconfig.app.json",
+  "include": Array [
+    "../../apps/**/*.ts",
+    "../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for application in undefined directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.json 1`] = `
+Object {
+  "extends": "./tsconfig.json",
+  "include": Array [
+    "../../apps/**/*.ts",
+    "../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for library in nested directory --workspaceDocs tsconfig.compodoc.json should create a compodoc specific tsconfig file 1`] = `
+Object {
+  "extends": "./tsconfig.lib.json",
+  "include": Array [
+    "../../../apps/**/*.ts",
+    "../../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for library in nested directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.json 1`] = `
+Object {
+  "extends": "./tsconfig.json",
+  "include": Array [
+    "../../../apps/**/*.ts",
+    "../../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for library in nested directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.lib.json 1`] = `
+Object {
+  "extends": "./tsconfig.lib.json",
+  "include": Array [
+    "../../../apps/**/*.ts",
+    "../../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for library in undefined directory --workspaceDocs tsconfig.compodoc.json should create a compodoc specific tsconfig file 1`] = `
+Object {
+  "extends": "./tsconfig.lib.json",
+  "include": Array [
+    "../../apps/**/*.ts",
+    "../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for library in undefined directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.json 1`] = `
+Object {
+  "extends": "./tsconfig.json",
+  "include": Array [
+    "../../apps/**/*.ts",
+    "../../libs/**/*.ts",
+  ],
+}
+`;
+
+exports[`Compodoc "config" Schematic for library in undefined directory --workspaceDocs tsconfig.compodoc.json should extend most specific tsconfig files tsconfig.lib.json 1`] = `
+Object {
+  "extends": "./tsconfig.lib.json",
+  "include": Array [
+    "../../apps/**/*.ts",
+    "../../libs/**/*.ts",
+  ],
+}
+`;
