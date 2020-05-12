@@ -9,8 +9,18 @@ const buildReversePath = path =>
     .map(() => '..')
     .join('/');
 
+const toolsScript = (script, ...args) =>
+  [
+    'ts-node',
+    '--project tools/tsconfig.tools.json',
+    `tools/${script}`,
+    ...args,
+  ].join(' ');
+
 const formatFile = file => `nx format:write --files ${file}`;
 const copyFile = (file, dest) => `cp ${file} ${dest}`;
+const insertVersions = packageRoot =>
+  toolsScript('release/insert-versions.ts', packageRoot);
 
 function createReleaseConfigWithScopeFilter({
   projectScope,
@@ -47,6 +57,7 @@ function createReleaseConfigWithScopeFilter({
           prepareCmd: [
             formatFile(`${projectRoot}/${changelogFile}`),
             copyFile(`${projectRoot}/${changelogFile}`, buildOutput),
+            insertVersions(buildOutput),
           ].join(' && '),
           execCwd: relativeWorkspaceRoot,
         },
