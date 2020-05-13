@@ -1,26 +1,28 @@
 import { Rule } from '@angular-devkit/schematics';
-import { updateJsonInTree } from '@nrwl/workspace';
+import { readNxJsonInTree, updateJsonInTree } from '@nrwl/workspace';
+
+interface TaskRunnerOptions {
+  cacheableOperations: string[];
+}
 
 export function addCacheableOperation(operation: string): Rule {
-  return updateJsonInTree('nx.json', nxJson => {
+  return tree => {
+    const nxJson = readNxJsonInTree(tree);
+    const defaultTaskRunnerOptions = nxJson.tasksRunnerOptions?.default
+      ?.options as TaskRunnerOptions | undefined;
+
     if (
-      !nxJson.tasksRunnerOptions?.default?.runner ||
-      !Array.isArray(
-        nxJson.tasksRunnerOptions?.default?.options?.cacheableOperations,
-      )
+      !Array.isArray(defaultTaskRunnerOptions?.cacheableOperations) ||
+      defaultTaskRunnerOptions.cacheableOperations.includes(operation)
     ) {
-      return nxJson;
+      return;
     }
 
-    const isAlreadyCached = nxJson.tasksRunnerOptions.default.options.cacheableOperations.includes(
-      operation,
-    );
-    if (!isAlreadyCached) {
+    return updateJsonInTree('nx.json', nxJson => {
       nxJson.tasksRunnerOptions.default.options.cacheableOperations.push(
         operation,
       );
-    }
-
-    return nxJson;
-  });
+      return nxJson;
+    });
+  };
 }

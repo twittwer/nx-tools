@@ -4,6 +4,7 @@ import {
   mergeWith,
   move,
   Rule,
+  schematic,
   template,
   url,
 } from '@angular-devkit/schematics';
@@ -71,6 +72,7 @@ function addTsConfigForWorkspaceDocs(schema: CompodocConfigSchema): Rule {
 
 export default function(schema: CompodocConfigSchema): Rule {
   return chain([
+    schematic('ng-add', {}),
     ...(schema.workspaceDocs ? [addTsConfigForWorkspaceDocs(schema)] : []),
     addCompodocTarget(schema),
   ]);

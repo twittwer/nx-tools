@@ -26,6 +26,6 @@
   "builders": "./builders.json",
   "peerDependencies": {
     "@nrwl/workspace": "*",
-    "@compodoc/compodoc": "*"
+    "@compodoc/compodoc": "^1.1.11"
   }
 }
