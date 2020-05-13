@@ -1,3 +1,25 @@
+# [1.2.0-beta.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.1.1...compodoc/v1.2.0-beta.1) (2020-05-13)
+
+### Build System
+
+- add version injection in release process ([442e889](https://github.com/twittwer/nx-tools/commit/442e889c42d923e59e510b8f2d21d8775d3f2495))
+
+### Chores
+
+- pin dependencies ([f26fcb7](https://github.com/twittwer/nx-tools/commit/f26fcb786807c04ee344a68e6fb10e764f779b6a))
+
+### Features
+
+- **compodoc:** add specific version numbers during ng-add ([faf60fc](https://github.com/twittwer/nx-tools/commit/faf60fc8ecd2df2e3e093d66da409c83fe55ee9c))
+
+### Miscellaneous
+
+- WIP feat(compodoc): execute ng-add implicitly during config schematic ([c470de1](https://github.com/twittwer/nx-tools/commit/c470de1da60429895e003b832d251af254d7bdb1))
+
+### Tests
+
+- **compodoc:** improve unit tests for config schematic ([84a2a18](https://github.com/twittwer/nx-tools/commit/84a2a1825c54e6fdd4b56d6fcf825909462cc5f4))
+
 ## [1.1.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.1.0...compodoc/v1.1.1) (2020-05-05)
 
 ### Code Refactoring
