@@ -1,14 +1,51 @@
 import { Rule } from '@angular-devkit/schematics';
-import { addDepsToPackageJson, updateJsonInTree } from '@nrwl/workspace';
+import {
+  addDepsToPackageJson,
+  readJsonInTree,
+  updateJsonInTree,
+} from '@nrwl/workspace';
 
-export function installDependencies({
-  dependencies = {},
-  devDependencies = {},
-}: {
+interface PackageJson {
+  name: string;
+  version: string;
   dependencies?: Record<string, string>;
   devDependencies?: Record<string, string>;
-}): Rule {
-  return addDepsToPackageJson(dependencies, devDependencies);
+  peerDependencies?: Record<string, string>;
+}
+
+function filterExistingDependencies(
+  requiredDeps: PackageJson['dependencies'] | PackageJson['devDependencies'],
+  existingDeps: PackageJson['dependencies'] | PackageJson['devDependencies'],
+) {
+  return Object.keys(requiredDeps)
+    .filter(packageName => !existingDeps[packageName])
+    .reduce(
+      (deps, packageName) => ({
+        ...deps,
+        [packageName]: requiredDeps[packageName],
+      }),
+      {},
+    );
+}
+
+export function ensureDependencies({
+  dependencies = {},
+  devDependencies = {},
+}: Partial<Pick<PackageJson, 'dependencies' | 'devDependencies'>>): Rule {
+  return tree => {
+    const packageJson: PackageJson = readJsonInTree(tree, 'package.json');
+
+    const filteredDependencies = filterExistingDependencies(
+      dependencies,
+      packageJson.dependencies,
+    );
+    const filteredDevDependencies = filterExistingDependencies(
+      devDependencies,
+      packageJson.devDependencies,
+    );
+
+    return addDepsToPackageJson(filteredDependencies, filteredDevDependencies);
+  };
 }
 
 export function moveToDevDependencies(packageName: string): Rule {
