@@ -44,21 +44,33 @@ export function ensureDependencies({
       packageJson.devDependencies,
     );
 
+    const dependencyChanges =
+      Object.keys(filteredDependencies).length +
+      Object.keys(filteredDevDependencies).length;
+    if (dependencyChanges === 0) {
+      return;
+    }
+
     return addDepsToPackageJson(filteredDependencies, filteredDevDependencies);
   };
 }
 
 export function moveToDevDependencies(packageName: string): Rule {
-  return updateJsonInTree('package.json', packageJson => {
-    packageJson.dependencies = packageJson.dependencies || {};
-    packageJson.devDependencies = packageJson.devDependencies || {};
+  return tree => {
+    const { dependencies }: PackageJson = readJsonInTree(tree, 'package.json');
+    if (!dependencies?.[packageName]) {
+      return;
+    }
 
-    if (packageJson.dependencies[packageName]) {
+    return updateJsonInTree('package.json', packageJson => {
+      packageJson.dependencies = packageJson.dependencies || {};
+      packageJson.devDependencies = packageJson.devDependencies || {};
+
       packageJson.devDependencies[packageName] =
         packageJson.dependencies[packageName];
       delete packageJson.dependencies[packageName];
-    }
 
-    return packageJson;
-  });
+      return packageJson;
+    });
+  };
 }
