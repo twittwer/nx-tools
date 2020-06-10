@@ -1,3 +1,18 @@
+## [1.3.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.0...compodoc/v1.3.1) (2020-06-10)
+
+### Bug Fixes
+
+- **compodoc:** use shell to fix compodoc spawn on windows ([9fb51ad](https://github.com/twittwer/nx-tools/commit/9fb51ad9ea91d2318a4db578754224862422868c)), closes [#11](https://github.com/twittwer/nx-tools/issues/11)
+
+### Chores
+
+- **compodoc:** release 1.3.1-alpha.1 ([4a8604e](https://github.com/twittwer/nx-tools/commit/4a8604ec68992cf9b4fb4e852be85863dcd2e8f8)), closes [#11](https://github.com/twittwer/nx-tools/issues/11) [#13](https://github.com/twittwer/nx-tools/issues/13)
+
+### Miscellaneous
+
+- Merge pull request #15 from twittwer/alpha ([a0a7049](https://github.com/twittwer/nx-tools/commit/a0a7049620ac2969e6673cf625a2e5c6dc70c53a)), closes [#15](https://github.com/twittwer/nx-tools/issues/15)
+- Merge pull request #13 from twittwer/dependabot/npm_and_yarn/websocket-extensions-0.1.4 ([1e6b8a9](https://github.com/twittwer/nx-tools/commit/1e6b8a99b231c3946c24d0e527e7130152a3d694)), closes [#13](https://github.com/twittwer/nx-tools/issues/13)
+
 ## [1.3.1-alpha.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.0...compodoc/v1.3.1-alpha.1) (2020-06-10)
 
 ### Bug Fixes
