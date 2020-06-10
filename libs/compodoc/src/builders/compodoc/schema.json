@@ -192,6 +192,11 @@
       "description": "Suppress verbose build output.",
       "type": "boolean",
       "default": true
+    },
+
+    "unitTestCoverage": {
+      "description": "To include unit test coverage, specify istanbul JSON coverage summary file",
+      "type": "string"
     }
   }
 }

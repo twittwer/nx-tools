@@ -174,5 +174,10 @@ export function buildCompodocArgs(
     args.push('--silent');
   }
 
+  if (options.unitTestCoverage) {
+    const coveragePath = resolve(workspaceRoot, options.unitTestCoverage);
+    args.push(`--unitTestCoverage=${coveragePath}`);
+  }
+
   return args;
 }
