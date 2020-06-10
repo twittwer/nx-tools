@@ -1,3 +1,13 @@
+# [1.3.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.2.0...compodoc/v1.3.0) (2020-06-10)
+
+### Features
+
+- **compodoc:** add --unitTestCoverage flag support ([0f298e2](https://github.com/twittwer/nx-tools/commit/0f298e2ab15c9a6de98f69055f4775609293d956))
+
+### Miscellaneous
+
+- Merge pull request #14 from StalkAltan/as/feat/add-unit-test-coverage-option ([b4f4bd0](https://github.com/twittwer/nx-tools/commit/b4f4bd093a912c6e61a7727931be3172eb410e56)), closes [#14](https://github.com/twittwer/nx-tools/issues/14)
+
 # [1.2.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.1.1...compodoc/v1.2.0) (2020-05-13)
 
 ### Build System
