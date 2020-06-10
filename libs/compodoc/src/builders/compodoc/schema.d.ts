@@ -55,4 +55,6 @@ export interface CompodocBuilderSchema extends JsonObject {
   port: number;
 
   silent: boolean;
+
+  unitTestCoverage?: string;
 }
