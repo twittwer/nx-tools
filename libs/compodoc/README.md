@@ -102,6 +102,8 @@ Additional options (used by the builder only) are indicated by an italic written
 |                       |                               |                                                                                                               |
 | silent                | `true`                        | Suppress verbose build output.                                                                                |
 
+> All paths should be relative to workspace root
+
 <details>
     <summary>How to configure the builder?</summary>
     

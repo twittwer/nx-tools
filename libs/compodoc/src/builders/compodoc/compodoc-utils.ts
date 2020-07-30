@@ -92,12 +92,28 @@ function buildDisableArgs(
   return args;
 }
 
+function getRelativePath(
+  workspacePath: string,
+  {
+    workspaceRoot,
+    projectRoot,
+    workspaceDocs,
+  }: { workspaceRoot: string; projectRoot: string } & Pick<
+    CompodocBuilderSchema,
+    'workspaceDocs'
+  >,
+) {
+  const absolutePath = resolve(workspaceRoot, workspacePath);
+  return relative(workspaceDocs ? workspaceRoot : projectRoot, absolutePath);
+}
+
 export function buildCompodocArgs(
   options: CompodocBuilderSchema,
-  context: BuilderContext,
+  context: BuilderContext & { projectRoot: string },
 ): string[] {
   const {
     workspaceRoot,
+    projectRoot,
     target: { project },
   } = context;
 
@@ -129,7 +145,11 @@ export function buildCompodocArgs(
     args.push(`--includesName=${options.includesName ?? 'Projects'}`);
   } else {
     if (options.includes) {
-      const includesPath = resolve(workspaceRoot, options.includes);
+      const includesPath = getRelativePath(options.includes, {
+        workspaceRoot,
+        projectRoot,
+        workspaceDocs: options.workspaceDocs,
+      });
       args.push(`--includes=${includesPath}`);
     }
     if (options.includesName) {
@@ -145,24 +165,44 @@ export function buildCompodocArgs(
     args.push('--hideGenerator');
   }
   if (options.customLogo) {
-    const customLogoPath = resolve(workspaceRoot, options.customLogo);
+    const customLogoPath = getRelativePath(options.customLogo, {
+      workspaceRoot,
+      projectRoot,
+      workspaceDocs: options.workspaceDocs,
+    });
     args.push(`--customLogo=${customLogoPath}`);
   }
   if (options.customFavicon) {
-    const customFaviconPath = resolve(workspaceRoot, options.customFavicon);
+    const customFaviconPath = getRelativePath(options.customFavicon, {
+      workspaceRoot,
+      projectRoot,
+      workspaceDocs: options.workspaceDocs,
+    });
     args.push(`--customFavicon=${customFaviconPath}`);
   }
   if (options.extTheme) {
-    const extThemePath = resolve(workspaceRoot, options.extTheme);
+    const extThemePath = getRelativePath(options.extTheme, {
+      workspaceRoot,
+      projectRoot,
+      workspaceDocs: options.workspaceDocs,
+    });
     args.push(`--extTheme=${extThemePath}`);
   }
   if (options.templates) {
-    const templatesPath = resolve(workspaceRoot, options.templates);
+    const templatesPath = getRelativePath(options.templates, {
+      workspaceRoot,
+      projectRoot,
+      workspaceDocs: options.workspaceDocs,
+    });
     args.push(`--templates=${templatesPath}`);
   }
   // TODO: maybe use `<projectRoot>/src/assets` as default
   if (options.assetsFolder) {
-    const assetsFolderPath = resolve(workspaceRoot, options.assetsFolder);
+    const assetsFolderPath = getRelativePath(options.assetsFolder, {
+      workspaceRoot,
+      projectRoot,
+      workspaceDocs: options.workspaceDocs,
+    });
     args.push(`--assetsFolder=${assetsFolderPath}`);
   }
 
@@ -175,7 +215,11 @@ export function buildCompodocArgs(
   }
 
   if (options.unitTestCoverage) {
-    const coveragePath = resolve(workspaceRoot, options.unitTestCoverage);
+    const coveragePath = getRelativePath(options.unitTestCoverage, {
+      workspaceRoot,
+      projectRoot,
+      workspaceDocs: options.workspaceDocs,
+    });
     args.push(`--unitTestCoverage=${coveragePath}`);
   }
 

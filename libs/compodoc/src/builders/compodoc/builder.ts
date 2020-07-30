@@ -33,7 +33,7 @@ async function runBuilder(
   return new Promise<BuilderOutput>(res => {
     const childProcess = spawn(
       buildCompodocCmd(options, context),
-      buildCompodocArgs(options, context),
+      buildCompodocArgs(options, { ...context, projectRoot }),
       {
         cwd: options.workspaceDocs ? workspaceRoot : projectRoot,
         shell: true,
