@@ -1,3 +1,13 @@
+## [1.3.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.1...compodoc/v1.3.2) (2020-07-30)
+
+### Bug Fixes
+
+- **compodoc:** ensure paths relative to execution directory ([1e41a1e](https://github.com/twittwer/nx-tools/commit/1e41a1eae0000567c776fa015b88e7e2e119c664)), closes [#16](https://github.com/twittwer/nx-tools/issues/16)
+
+### Documentation
+
+- **compodoc:** document unitTestCoverage option ([0a32747](https://github.com/twittwer/nx-tools/commit/0a32747a44e19e9e4dae8197ee3d83fc6d630567))
+
 ## [1.3.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.0...compodoc/v1.3.1) (2020-06-10)
 
 ### Bug Fixes
