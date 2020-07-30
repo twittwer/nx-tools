@@ -95,6 +95,8 @@ Additional options (used by the builder only) are indicated by an italic written
 | templates             |                               | Path to directory of Handlebars templates to override built-in templates.                                     |
 | assetsFolder          |                               | External assets folder to copy in generated documentation folder.                                             |
 |                       |                               |                                                                                                               |
+| unitTestCoverage      |                               | Path to unit test coverage in json-summary format.                                                            |
+|                       |                               |                                                                                                               |
 | serve                 | `false`                       | Serve generated documentation.                                                                                |
 | port                  | `8080`                        | Port for serving of documentation (default: 8080).                                                            |
 |                       |                               |                                                                                                               |

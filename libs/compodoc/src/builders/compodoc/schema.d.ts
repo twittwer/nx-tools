@@ -51,10 +51,10 @@ export interface CompodocBuilderSchema extends JsonObject {
   templates?: string;
   assetsFolder?: string;
 
+  unitTestCoverage?: string;
+
   serve: boolean;
   port: number;
 
   silent: boolean;
-
-  unitTestCoverage?: string;
 }
