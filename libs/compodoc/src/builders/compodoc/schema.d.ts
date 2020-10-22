@@ -56,5 +56,7 @@ export interface CompodocBuilderSchema extends JsonObject {
   serve: boolean;
   port: number;
 
+  watch: boolean;
+
   silent: boolean;
 }

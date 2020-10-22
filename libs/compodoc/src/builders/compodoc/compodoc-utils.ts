@@ -4,17 +4,32 @@ import { CompodocBuilderSchema } from './schema';
 import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { tmpdir } from 'os';
-import { copyFileSync, existsSync, mkdtempSync, writeFileSync } from 'fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  writeFileSync,
+} from 'fs';
+import { ChildProcess, spawn } from 'child_process';
 
-export function buildCompodocCmd(
+function buildCompodocCmd(
   options: CompodocBuilderSchema,
   context: BuilderContext,
-) {
+): string {
   const { workspaceRoot } = context;
   return resolve(workspaceRoot, 'node_modules', '.bin', 'compodoc');
 }
 
-function buildIncludesFolderForWorkspace(
+function buildNodemonCmd(
+  options: CompodocBuilderSchema,
+  context: BuilderContext,
+): string {
+  const { workspaceRoot } = context;
+  return resolve(workspaceRoot, 'node_modules', '.bin', 'nodemon');
+}
+
+function createIncludesFolderForWorkspace(
   options: CompodocBuilderSchema,
   context: BuilderContext,
 ): string {
@@ -107,7 +122,7 @@ function getRelativePath(
   return relative(workspaceDocs ? workspaceRoot : projectRoot, absolutePath);
 }
 
-export function buildCompodocArgs(
+function buildCompodocArgs(
   options: CompodocBuilderSchema,
   context: BuilderContext & { projectRoot: string },
 ): string[] {
@@ -140,7 +155,7 @@ export function buildCompodocArgs(
   }
 
   if (options.workspaceDocs) {
-    const includesPath = buildIncludesFolderForWorkspace(options, context);
+    const includesPath = createIncludesFolderForWorkspace(options, context);
     args.push(`--includes=${includesPath}`);
     args.push(`--includesName=${options.includesName ?? 'Projects'}`);
   } else {
@@ -206,14 +221,6 @@ export function buildCompodocArgs(
     args.push(`--assetsFolder=${assetsFolderPath}`);
   }
 
-  if (options.serve) {
-    args.push('--serve', `--port=${options.port}`);
-  }
-
-  if (options.silent) {
-    args.push('--silent');
-  }
-
   if (options.unitTestCoverage) {
     const coveragePath = getRelativePath(options.unitTestCoverage, {
       workspaceRoot,
@@ -223,5 +230,75 @@ export function buildCompodocArgs(
     args.push(`--unitTestCoverage=${coveragePath}`);
   }
 
+  if (options.serve) {
+    args.push('--serve', `--port=${options.port}`);
+  }
+
+  if (options.watch) {
+    args.push('--watch');
+  }
+
+  if (options.silent) {
+    args.push('--silent');
+  }
+
   return args;
+}
+
+function createEmptyCompodocJson(
+  options: CompodocBuilderSchema,
+  { workspaceRoot }: BuilderContext,
+) {
+  mkdirSync(resolve(workspaceRoot, options.outputPath), {
+    recursive: true,
+  });
+  writeFileSync(
+    resolve(workspaceRoot, join(options.outputPath, 'documentation.json')),
+    JSON.stringify({
+      pipes: [],
+      interfaces: [],
+      injectables: [],
+      classes: [],
+      directives: [],
+      components: [],
+      modules: [],
+      miscellaneous: {
+        variables: [],
+        functions: [],
+        typealiases: [],
+        enumerations: [],
+        groupedVariables: {},
+        groupedFunctions: {},
+        groupedEnumerations: {},
+        groupedTypeAliases: {},
+      },
+    }),
+  );
+}
+
+export function spawnCompodocProcess(
+  options: CompodocBuilderSchema,
+  context: BuilderContext & { projectRoot: string },
+): ChildProcess {
+  const processOptions = {
+    cwd: options.workspaceDocs ? context.workspaceRoot : context.projectRoot,
+    shell: true,
+  };
+
+  const compodocCmd = buildCompodocCmd(options, context);
+  const compodocArgs = buildCompodocArgs(options, context);
+
+  if (options.watch && options.exportFormat === 'json') {
+    createEmptyCompodocJson(options, context);
+
+    const nodemonCmd = buildNodemonCmd(options, context);
+    const nodemonArgs = [
+      '--ignore dist',
+      '--ext ts',
+      `--exec "${compodocCmd} ${compodocArgs.join(' ')}"`,
+    ];
+    return spawn(nodemonCmd, nodemonArgs, processOptions);
+  }
+
+  return spawn(compodocCmd, compodocArgs, processOptions);
 }

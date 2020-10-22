@@ -15,6 +15,7 @@
 - [Builder](#builder)
 - [Recipes](#recipes)
   - [Workspace Docs](#workspace-docs)
+  - [Watch Mode](#watch-mode)
 
 ## Installation
 
@@ -34,7 +35,7 @@ ng g @twittwer/compodoc:config <project>
 
 ## Schematics
 
-Add compodoc target to a project:
+Add Compodoc target to a project:
 
 ```
 ng g @twittwer/compodoc:config <project> [options]
@@ -100,6 +101,8 @@ Additional options (used by the builder only) are indicated by an italic written
 | serve                 | `false`                       | Serve generated documentation.                                                                                |
 | port                  | `8080`                        | Port for serving of documentation (default: 8080).                                                            |
 |                       |                               |                                                                                                               |
+| watch                 | `false`                       | Watch for source files changes to automatically rebuild documentation.                                        |
+|                       |                               |                                                                                                               |
 | silent                | `true`                        | Suppress verbose build output.                                                                                |
 
 > All paths should be relative to workspace root
@@ -137,7 +140,7 @@ Additional options (used by the builder only) are indicated by an italic written
 
 ### Workspace Docs
 
-This recipe will describe how to create a Compodoc documentation including your whole workspace and listing the Readme files of all projects.
+> Compodoc of the whole workspace incl. all project READMEs (apps/libs) as additional documentation.
 
 1. Create a library for shared/workspace wide tooling (e.g. `tools`)  
    `ng g @nrwl/(workspace|angular):library <project> [--unitTestRunner=none]`  
@@ -149,3 +152,34 @@ This recipe will describe how to create a Compodoc documentation including your 
 4. Generate your docs:  
    `ng run <project>:compodoc`  
    `ng run tools:compodoc`
+
+### Watch Mode
+
+> Rebuild your documentation on file changes during development.
+
+The watch mode can be activated via argument:
+
+```shell script
+ng run <project>:compodoc --watch
+ng run <project>:compodoc:json --watch
+```
+
+or via additional connfiguration:
+
+```json5
+configurations: {
+  "json": {
+    "exportFormat": "json"
+  },
+  "watch": {
+    "watch": true
+  },
+  "json-watch": {
+    "exportFormat": "json",
+    "watch": true
+  }
+}
+```
+
+> Compodoc doesn't support watch mode while using JSON as export format ([#862](https://github.com/compodoc/compodoc/issues/862)).
+> This scenario is handled by the use of [nodemon](https://github.com/remy/nodemon) to watch source files and rerun Compodoc on changes.
