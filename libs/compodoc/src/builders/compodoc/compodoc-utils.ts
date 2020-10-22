@@ -4,7 +4,13 @@ import { CompodocBuilderSchema } from './schema';
 import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { tmpdir } from 'os';
-import { copyFileSync, existsSync, mkdtempSync, writeFileSync } from 'fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  writeFileSync,
+} from 'fs';
 
 export function buildCompodocCmd(
   options: CompodocBuilderSchema,
@@ -206,14 +212,6 @@ export function buildCompodocArgs(
     args.push(`--assetsFolder=${assetsFolderPath}`);
   }
 
-  if (options.serve) {
-    args.push('--serve', `--port=${options.port}`);
-  }
-
-  if (options.silent) {
-    args.push('--silent');
-  }
-
   if (options.unitTestCoverage) {
     const coveragePath = getRelativePath(options.unitTestCoverage, {
       workspaceRoot,
@@ -223,5 +221,48 @@ export function buildCompodocArgs(
     args.push(`--unitTestCoverage=${coveragePath}`);
   }
 
+  if (options.serve) {
+    args.push('--serve', `--port=${options.port}`);
+  }
+
+  if (options.watch) {
+    args.push('--watch');
+  }
+
+  if (options.silent) {
+    args.push('--silent');
+  }
+
   return args;
+}
+
+export function createEmptyCompodocJson(
+  workspaceRoot: string,
+  options: CompodocBuilderSchema,
+) {
+  mkdirSync(resolve(workspaceRoot, options.outputPath), {
+    recursive: true,
+  });
+  writeFileSync(
+    resolve(workspaceRoot, join(options.outputPath, 'documentation.json')),
+    JSON.stringify({
+      pipes: [],
+      interfaces: [],
+      injectables: [],
+      classes: [],
+      directives: [],
+      components: [],
+      modules: [],
+      miscellaneous: {
+        variables: [],
+        functions: [],
+        typealiases: [],
+        enumerations: [],
+        groupedVariables: {},
+        groupedFunctions: {},
+        groupedEnumerations: {},
+        groupedTypeAliases: {},
+      },
+    }),
+  );
 }

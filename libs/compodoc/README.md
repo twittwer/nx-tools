@@ -100,6 +100,8 @@ Additional options (used by the builder only) are indicated by an italic written
 | serve                 | `false`                       | Serve generated documentation.                                                                                |
 | port                  | `8080`                        | Port for serving of documentation (default: 8080).                                                            |
 |                       |                               |                                                                                                               |
+| watch                 | `false`                       | Watch for source files changes to automatically rebuild documentation.                                        |
+|                       |                               |                                                                                                               |
 | silent                | `true`                        | Suppress verbose build output.                                                                                |
 
 > All paths should be relative to workspace root
