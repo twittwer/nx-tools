@@ -1,3 +1,18 @@
+# [1.4.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.2...compodoc/v1.4.0) (2020-10-22)
+
+### Chores
+
+- update @type/node to latest LTS 12.19.1 ([#20](https://github.com/twittwer/nx-tools/issues/20)) ([cbb00b1](https://github.com/twittwer/nx-tools/commit/cbb00b1ffdc93a27395e09d4e761d595aba45cf7))
+
+### Features
+
+- **compodoc:** add watch mode ([#21](https://github.com/twittwer/nx-tools/issues/21)) ([2c3c94b](https://github.com/twittwer/nx-tools/commit/2c3c94bafc3c4dd2d73849a98440ea5007be01e5))
+
+### Miscellaneous
+
+- Merge pull request #18 from twittwer/dependabot/npm_and_yarn/http-proxy-1.18.1 ([d96fb0b](https://github.com/twittwer/nx-tools/commit/d96fb0be0ac29ed034d278dccc16f9c01810ac46)), closes [#18](https://github.com/twittwer/nx-tools/issues/18)
+- Merge pull request #17 from twittwer/dependabot/npm_and_yarn/elliptic-6.5.3 ([a9a82f5](https://github.com/twittwer/nx-tools/commit/a9a82f5277d249e9d5f63cb249c21c0e6599e464)), closes [#17](https://github.com/twittwer/nx-tools/issues/17)
+
 ## [1.3.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.1...compodoc/v1.3.2) (2020-07-30)
 
 ### Bug Fixes
