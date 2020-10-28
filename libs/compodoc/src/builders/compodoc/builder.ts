@@ -4,9 +4,8 @@ import {
   createBuilder,
 } from '@angular-devkit/architect';
 import { CompodocBuilderSchema } from './schema';
-import { spawn } from 'child_process';
 import { resolve } from 'path';
-import { buildCompodocArgs, buildCompodocCmd } from './compodoc-utils';
+import { spawnCompodocProcess } from './compodoc-utils';
 import { ProjectType } from '@nrwl/workspace';
 
 async function runBuilder(
@@ -31,14 +30,10 @@ async function runBuilder(
     options.outputPath ?? resolve('dist', 'compodoc', project);
 
   return new Promise<BuilderOutput>(res => {
-    const childProcess = spawn(
-      buildCompodocCmd(options, context),
-      buildCompodocArgs(options, { ...context, projectRoot }),
-      {
-        cwd: options.workspaceDocs ? workspaceRoot : projectRoot,
-        shell: true,
-      },
-    );
+    const childProcess = spawnCompodocProcess(options, {
+      ...context,
+      projectRoot,
+    });
 
     process.on('exit', () => childProcess.kill());
 

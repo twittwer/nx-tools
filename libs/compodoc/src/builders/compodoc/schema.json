@@ -193,6 +193,12 @@
       "default": 8080
     },
 
+    "watch": {
+      "description": "Watch for source files changes to automatically rebuild documentation.",
+      "type": "boolean",
+      "default": false
+    },
+
     "silent": {
       "description": "Suppress verbose build output.",
       "type": "boolean",
