@@ -108,31 +108,31 @@ Additional options (used by the builder only) are indicated by an italic written
 > All paths should be relative to workspace root
 
 <details>
-    <summary>How to configure the builder?</summary>
-    
-    The options can be defined in the `angular.json`:
+<summary>How to configure the builder?</summary>
 
-    ```json5
-    {
-      projects: {
-        '<project>': {
-          architects: {
-            compodoc: {
-              builder: '@twittwer/compodoc:compodoc',
-              options: {
-                /* Define your options here */
-              },
-              configurations: {
-                '<configuration name>': {
-                  /* or here in case they are required based on specific conditions only. */
-                },
-              },
+The options can be defined in the `angular.json`:
+
+```json5
+{
+  projects: {
+    '<project>': {
+      architects: {
+        compodoc: {
+          builder: '@twittwer/compodoc:compodoc',
+          options: {
+            /* Define your options here */
+          },
+          configurations: {
+            '<configuration name>': {
+              /* or here in case they are required based on specific conditions only. */
             },
           },
         },
       },
-    }
-    ```
+    },
+  },
+}
+```
 
 </details>
 
@@ -142,14 +142,14 @@ Additional options (used by the builder only) are indicated by an italic written
 
 > Compodoc of the whole workspace incl. all project READMEs (apps/libs) as additional documentation.
 
-1. Create a library for shared/workspace wide tooling (e.g. `tools`)  
+- Create a library for shared/workspace wide tooling (e.g. `tools`)  
    `ng g @nrwl/(workspace|angular):library <project> [--unitTestRunner=none]`  
    `ng g @nrwl/workspace:library tools --unitTestRunner=none`
-2. Optionally you can delete some unused code (you should keep at least `tsconfig.json` & `README.md`).
-3. Configure Compodoc for the created project  
+- Optionally you can delete some unused code (you should keep at least `tsconfig.json` & `README.md`).
+- Configure Compodoc for the created project  
    `ng g @twittwer/compodoc:config <project> --workspaceDocs`  
    `ng g @twittwer/compodoc:config tools --workspaceDocs`
-4. Generate your docs:  
+- Generate your docs:  
    `ng run <project>:compodoc`  
    `ng run tools:compodoc`
 
@@ -164,7 +164,7 @@ ng run <project>:compodoc --watch
 ng run <project>:compodoc:json --watch
 ```
 
-or via additional connfiguration:
+or via additional configuration:
 
 ```json5
 configurations: {
@@ -183,3 +183,64 @@ configurations: {
 
 > Compodoc doesn't support watch mode while using JSON as export format ([#862](https://github.com/compodoc/compodoc/issues/862)).
 > This scenario is handled by the use of [nodemon](https://github.com/remy/nodemon) to watch source files and rerun Compodoc on changes.
+
+<details>
+<summary>How to integrate with `@nrwl/storybook`?</summary>
+
+Configure `storybook-watch` & `storybook-build` targets in `angular.json`:
+
+```json5
+{
+  projects: {
+    '<project>': {
+      architects: {
+        storybook: {
+          /* @nrwl/storybook */
+        },
+        'build-storybook': {
+          /* @nrwl/storybook */
+        },
+        compodoc: {
+          /* @twittwer/compodoc */
+        },
+        'storybook-watch': {
+          builder: '@nrwl/workspace:run-commands',
+          options: {
+            commands: [
+              'npx ng run <project>:compodoc:json-watch',
+              'npx ng run <project>:storybook',
+            ],
+          },
+        },
+        'storybook-build': {
+          builder: '@nrwl/workspace:run-commands',
+          options: {
+            commands: [
+              'npx ng run <project>:compodoc:json',
+              'npx ng run <project>:build-storybook',
+            ],
+          },
+        },
+      },
+    },
+  },
+}
+```
+
+Configure Storybook Docs in `libs/<project>/.storybook/preview.js`:
+
+```js
+import { setCompodocJson } from '@storybook/addon-docs/angular';
+import compodocJson from '../../../dist/compodoc/<project>/documentation.json';
+
+setCompodocJson(compodocJson);
+```
+
+Run or build it:
+
+```shell script
+ng run <project>:storybook-watch
+ng run <project>:storybook-build
+```
+
+</details>
