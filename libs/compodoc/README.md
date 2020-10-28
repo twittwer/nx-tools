@@ -22,14 +22,14 @@
 Add the plugin to your Nx workspace:
 
 ```
-ng add @twittwer/compodoc
+nx add @twittwer/compodoc
 // adds `@compdoc/compodoc` & `@twittwer/compodoc` as devDependencies
 ```
 
 Configure Compodoc for a project:
 
 ```
-ng g @twittwer/compodoc:config <project>
+nx g @twittwer/compodoc:config <project>
 // adds a `compodoc` target to the specified project in your `angular.json`
 ```
 
@@ -38,7 +38,7 @@ ng g @twittwer/compodoc:config <project>
 Add Compodoc target to a project:
 
 ```
-ng g @twittwer/compodoc:config <project> [options]
+nx g @twittwer/compodoc:config <project> [options]
 ```
 
 | Option        | Default | Description                                                                                                       |
@@ -51,9 +51,9 @@ Generate Compodoc documentation for a project:
 
 ```
 // HTML Format
-ng run <project>:compodoc
+nx run <project>:compodoc
 // JSON Format
-ng run <project>:compodoc:json
+nx run <project>:compodoc:json
 ```
 
 The builder supports several configuration options which are passed to the Compodoc command.  
@@ -143,15 +143,15 @@ The options can be defined in the `angular.json`:
 > Compodoc of the whole workspace incl. all project READMEs (apps/libs) as additional documentation.
 
 - Create a library for shared/workspace wide tooling (e.g. `tools`)  
-   `ng g @nrwl/(workspace|angular):library <project> [--unitTestRunner=none]`  
-   `ng g @nrwl/workspace:library tools --unitTestRunner=none`
+   `nx g @nrwl/(workspace|angular):library <project> [--unitTestRunner=none]`  
+   `nx g @nrwl/workspace:library tools --unitTestRunner=none`
 - Optionally you can delete some unused code (you should keep at least `tsconfig.json` & `README.md`).
 - Configure Compodoc for the created project  
-   `ng g @twittwer/compodoc:config <project> --workspaceDocs`  
-   `ng g @twittwer/compodoc:config tools --workspaceDocs`
+   `nx g @twittwer/compodoc:config <project> --workspaceDocs`  
+   `nx g @twittwer/compodoc:config tools --workspaceDocs`
 - Generate your docs:  
-   `ng run <project>:compodoc`  
-   `ng run tools:compodoc`
+   `nx run <project>:compodoc`  
+   `nx run tools:compodoc`
 
 ### Watch Mode
 
@@ -160,8 +160,8 @@ The options can be defined in the `angular.json`:
 The watch mode can be activated via argument:
 
 ```shell script
-ng run <project>:compodoc --watch
-ng run <project>:compodoc:json --watch
+nx run <project>:compodoc --watch
+nx run <project>:compodoc:json --watch
 ```
 
 or via additional configuration:
@@ -207,8 +207,8 @@ Configure `storybook-watch` & `storybook-build` targets in `angular.json`:
           builder: '@nrwl/workspace:run-commands',
           options: {
             commands: [
-              'npx ng run <project>:compodoc:json-watch',
-              'npx ng run <project>:storybook',
+              'npx nx run <project>:compodoc:json-watch',
+              'npx nx run <project>:storybook',
             ],
           },
         },
@@ -216,8 +216,8 @@ Configure `storybook-watch` & `storybook-build` targets in `angular.json`:
           builder: '@nrwl/workspace:run-commands',
           options: {
             commands: [
-              'npx ng run <project>:compodoc:json',
-              'npx ng run <project>:build-storybook',
+              'npx nx run <project>:compodoc:json',
+              'npx nx run <project>:build-storybook',
             ],
           },
         },
@@ -239,8 +239,8 @@ setCompodocJson(compodocJson);
 Run or build it:
 
 ```shell script
-ng run <project>:storybook-watch
-ng run <project>:storybook-build
+nx run <project>:storybook-watch
+nx run <project>:storybook-build
 ```
 
 </details>
