@@ -1,3 +1,14 @@
+# [1.5.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.4.0...compodoc/v1.5.0) (2020-10-28)
+
+### Documentation
+
+- **compodoc:** add watch mode recipe with storybook integration ([479e45b](https://github.com/twittwer/nx-tools/commit/479e45bdbf84476b576324010b884d9cac94a72d)), closes [#21](https://github.com/twittwer/nx-tools/issues/21)
+- **compodoc:** replace ng with nx command ([80e3715](https://github.com/twittwer/nx-tools/commit/80e371597645a125466cb087fc8dffbbd45cfc03))
+
+### Features
+
+- **compodoc:** add watch mode ([#21](https://github.com/twittwer/nx-tools/issues/21)) ([427e317](https://github.com/twittwer/nx-tools/commit/427e31761210bd55dde684e41abc64a5ef7c3649))
+
 # [1.4.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.3.2...compodoc/v1.4.0) (2020-10-22)
 
 ### Chores
