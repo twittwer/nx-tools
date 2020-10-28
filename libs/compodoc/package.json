@@ -24,6 +24,9 @@
   "main": "src/index.js",
   "schematics": "./collection.json",
   "builders": "./builders.json",
+  "dependencies": {
+    "nodemon": "^2.0.6"
+  },
   "peerDependencies": {
     "@nrwl/workspace": "*",
     "@compodoc/compodoc": "^1.1.11"

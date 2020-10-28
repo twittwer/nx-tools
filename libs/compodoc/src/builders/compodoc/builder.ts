@@ -4,13 +4,8 @@ import {
   createBuilder,
 } from '@angular-devkit/architect';
 import { CompodocBuilderSchema } from './schema';
-import { ChildProcess, spawn } from 'child_process';
 import { resolve } from 'path';
-import {
-  buildCompodocArgs,
-  buildCompodocCmd,
-  createEmptyCompodocJson,
-} from './compodoc-utils';
+import { spawnCompodocProcess } from './compodoc-utils';
 import { ProjectType } from '@nrwl/workspace';
 
 async function runBuilder(
@@ -35,25 +30,10 @@ async function runBuilder(
     options.outputPath ?? resolve('dist', 'compodoc', project);
 
   return new Promise<BuilderOutput>(res => {
-    const command = buildCompodocCmd(options, context);
-    const args = buildCompodocArgs(options, { ...context, projectRoot });
-
-    let childProcess: ChildProcess;
-    if (options.watch && options.exportFormat === 'json') {
-      createEmptyCompodocJson(workspaceRoot, options);
-
-      const compodocCommand = `${command} ${args.join(' ')}`;
-      const nodemonCommand = `npx nodemon --ignore dist --ext ts --exec "${compodocCommand}"`;
-      childProcess = spawn(nodemonCommand, [], {
-        cwd: options.workspaceDocs ? workspaceRoot : projectRoot,
-        shell: true,
-      });
-    } else {
-      childProcess = spawn(command, args, {
-        cwd: options.workspaceDocs ? workspaceRoot : projectRoot,
-        shell: true,
-      });
-    }
+    const childProcess = spawnCompodocProcess(options, {
+      ...context,
+      projectRoot,
+    });
 
     process.on('exit', () => childProcess.kill());
 
