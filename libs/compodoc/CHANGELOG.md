@@ -1,3 +1,13 @@
+## [1.5.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.0...compodoc/v1.5.1) (2020-10-29)
+
+### Bug Fixes
+
+- disable next distribution channel ([7783a45](https://github.com/twittwer/nx-tools/commit/7783a45c64f8e7d273737d9973d911ea81654313))
+
+### Miscellaneous
+
+- Merge pull request #24 from twittwer/next ([7120c5c](https://github.com/twittwer/nx-tools/commit/7120c5c4cbbd152a145cea31711098f09c18024c)), closes [#24](https://github.com/twittwer/nx-tools/issues/24)
+
 # [1.5.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.4.0...compodoc/v1.5.0) (2020-10-28)
 
 ### Documentation
