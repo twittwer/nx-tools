@@ -23,7 +23,7 @@ Add the plugin to your Nx workspace:
 
 ```
 nx add @twittwer/compodoc
-// adds `@compdoc/compodoc` & `@twittwer/compodoc` as devDependencies
+// adds `@compodoc/compodoc` & `@twittwer/compodoc` as devDependencies
 ```
 
 Configure Compodoc for a project:
