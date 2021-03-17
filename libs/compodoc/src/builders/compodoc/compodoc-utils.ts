@@ -48,9 +48,7 @@ function createIncludesFolderForWorkspace(
   return relative(workspaceRoot, tmpFolder);
 }
 
-function buildDisableArgs(
-  options: CompodocBuilderSchema
-): string[] {
+function buildDisableArgs(options: CompodocBuilderSchema): string[] {
   const args = [];
 
   if (options.disableCoverage) {
@@ -113,13 +111,9 @@ function getRelativePath(
 
 function buildCompodocArgs(
   options: CompodocBuilderSchema,
-  context: {workspaceRoot: string, project: string, projectRoot: string },
+  context: { workspaceRoot: string; project: string; projectRoot: string },
 ): string[] {
-  const {
-    workspaceRoot,
-    projectRoot,
-    project
-  } = context;
+  const { workspaceRoot, projectRoot, project } = context;
 
   const args: string[] = [];
 
@@ -144,7 +138,10 @@ function buildCompodocArgs(
   }
 
   if (options.workspaceDocs) {
-    const includesPath = createIncludesFolderForWorkspace(options, workspaceRoot);
+    const includesPath = createIncludesFolderForWorkspace(
+      options,
+      workspaceRoot,
+    );
     args.push(`--includes=${includesPath}`);
     args.push(`--includesName=${options.includesName ?? 'Projects'}`);
   } else {
@@ -267,7 +264,7 @@ function createEmptyCompodocJson(
 
 export function spawnCompodocProcess(
   options: CompodocBuilderSchema,
-  context: {workspaceRoot: string, project: string, projectRoot: string }
+  context: { workspaceRoot: string; project: string; projectRoot: string },
 ): ChildProcess {
   const processOptions = {
     cwd: options.workspaceDocs ? context.workspaceRoot : context.projectRoot,

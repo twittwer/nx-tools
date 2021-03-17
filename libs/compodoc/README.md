@@ -46,6 +46,7 @@ nx g @twittwer/compodoc:config <project> [options]
 | workspaceDocs | `false` | Will add a "tsconfig.compodoc.json" to the project that includes the whole workspace. ([Recipe](#workspace-docs)) |
 
 Automatically generate Compodoc documentation for all available projects
+
 ```
 // Build Compodoc for all projects available in angular.json
 nx g @twittwer/compodoc:workspace-docs-html --all

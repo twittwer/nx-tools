@@ -24,31 +24,44 @@ import { generateCompodocDocsForProjects, getProjects } from './utils';
  * @param {WorkspaceCompodocStaticHtmlGeneratorSchema} schema
  * @returns {Rule}
  */
-function addWorkspaceCompodocWebsite(schema: WorkspaceCompodocStaticHtmlGeneratorSchema): Rule {
+function addWorkspaceCompodocWebsite(
+  schema: WorkspaceCompodocStaticHtmlGeneratorSchema,
+): Rule {
   return async (tree, context) => {
     const { projects, all, outputPath } = schema;
-    const projectList: string[] = await getProjects(tree, context, projects, all);
+    const projectList: string[] = await getProjects(
+      tree,
+      context,
+      projects,
+      all,
+    );
 
     if (projectList?.length) {
-      const projectConfigs: Array<{ projectName: string } & ProjectConfig> = projectList.map(project => ({
-        ...getProjectConfig(
-          tree,
-          project,
-        ), projectName: project,
+      const projectConfigs: Array<{
+        projectName: string;
+      } & ProjectConfig> = projectList.map(project => ({
+        ...getProjectConfig(tree, project),
+        projectName: project,
       }));
 
       // this wil group all projects based on project type.
       // This makes it much easier to loop over and construct the html template for the workspace docs static website
-      const groupedProjects = mapValues(groupBy(projectConfigs, 'projectType'), configs => configs.map(config => omit(config, 'projectType')));
+      const groupedProjects = mapValues(
+        groupBy(projectConfigs, 'projectType'),
+        configs => configs.map(config => omit(config, 'projectType')),
+      );
 
       return mergeWith(
         apply(url('./files'), [
           template({
             groupedProjects,
-            workspaceName: process.cwd().substring(process.cwd().lastIndexOf('/') + 1),
+            workspaceName: process
+              .cwd()
+              .substring(process.cwd().lastIndexOf('/') + 1),
           }),
           move(outputPath ?? join('dist', 'compodoc')),
-        ]));
+        ]),
+      );
     }
 
     return noop();
@@ -60,7 +73,9 @@ function addWorkspaceCompodocWebsite(schema: WorkspaceCompodocStaticHtmlGenerato
  * @param {WorkspaceCompodocStaticHtmlGeneratorSchema} schema
  * @returns {Rule}
  */
-function buildCompodocForProjects(schema: WorkspaceCompodocStaticHtmlGeneratorSchema): Rule {
+function buildCompodocForProjects(
+  schema: WorkspaceCompodocStaticHtmlGeneratorSchema,
+): Rule {
   return async (tree: Tree, context: SchematicContext) => {
     const { projects, all, ...compodocOptions } = schema;
 
@@ -69,12 +84,24 @@ function buildCompodocForProjects(schema: WorkspaceCompodocStaticHtmlGeneratorSc
       return noop();
     } else {
       context.logger.info('Starting automated Compodoc build process...');
-      const configuredProjects: string[] = await getProjects(tree, context, projects, all);
+      const configuredProjects: string[] = await getProjects(
+        tree,
+        context,
+        projects,
+        all,
+      );
       const operationRules: Rule[] = [];
-      
-      if(configuredProjects) {
+
+      if (configuredProjects) {
         for (const project of configuredProjects) {
-          operationRules.push(await generateCompodocDocsForProjects(tree, context, compodocOptions, project));
+          operationRules.push(
+            await generateCompodocDocsForProjects(
+              tree,
+              context,
+              compodocOptions,
+              project,
+            ),
+          );
         }
       }
 
@@ -83,7 +110,9 @@ function buildCompodocForProjects(schema: WorkspaceCompodocStaticHtmlGeneratorSc
   };
 }
 
-export default function(schema: WorkspaceCompodocStaticHtmlGeneratorSchema): Rule {
+export default function(
+  schema: WorkspaceCompodocStaticHtmlGeneratorSchema,
+): Rule {
   return chain([
     schematic('ng-add', {}),
     buildCompodocForProjects(schema),

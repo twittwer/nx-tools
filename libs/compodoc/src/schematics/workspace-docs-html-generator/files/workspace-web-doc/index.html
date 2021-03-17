@@ -1,104 +1,130 @@
-<!doctype html>
-<html class='no-js' lang=''>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='x-ua-compatible' content='ie=edge'>
-  <title>WORKSPACE <%= workspaceName %> DOCS</title>
-  <meta name='description' content=''>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>WORKSPACE <%= workspaceName %> DOCS</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <link rel='icon' type='image/x-icon' href='./images/favicon.ico'>
-  <link rel='stylesheet' href='./styles/style.css'>
-</head>
-<body style='display: flex'>
-<div class='hidden-xs menu'>
-  <nav>
-    <ul class='list'>
-      <li class='title'>
-        <a href='./index.html' data-type='index-link'><span class='text-uppercase'><%= workspaceName %></span>
-          Documentation</a>
-      </li>
-      <li class='divider'></li>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico" />
+    <link rel="stylesheet" href="./styles/style.css" />
+  </head>
+  <body style="display: flex">
+    <div class="hidden-xs menu">
+      <nav>
+        <ul class="list">
+          <li class="title">
+            <a href="./index.html" data-type="index-link"
+              ><span class="text-uppercase"><%= workspaceName %></span>
+              Documentation</a
+            >
+          </li>
+          <li class="divider"></li>
 
+          <% if(groupedProjects['application']) { %>
+          <li class="chapter">
+            <div
+              class="simple menu-toggler"
+              data-toggle="collapse"
+              data-target="#applications-links"
+            >
+              <span class="icon ion-md-laptop"></span>
+              <span>Applications</span>
+              <span class="icon ion-ios-arrow-down"></span>
+            </div>
+            <ul class="links collapse " id="applications-links">
+              <% for(let project of groupedProjects['application']) { %>
+              <li class="link">
+                <a
+                  href="../<%= project.projectName %>/index.html"
+                  data-type="entity-link"
+                  ><%= project.projectName %></a
+                >
+              </li>
+              <% } %>
+            </ul>
+          </li>
+          <% } %> <% if(groupedProjects['library']) { %>
+          <li class="chapter">
+            <div
+              class="simple menu-toggler"
+              data-toggle="collapse"
+              data-target="#libraries-links"
+            >
+              <span class="icon ion-md-book"></span>
+              <span>Libraries</span>
+              <span class="icon ion-ios-arrow-down"></span>
+            </div>
+            <ul class="links collapse " id="libraries-links">
+              <% for(let project of groupedProjects['library']) { %>
+              <li class="link">
+                <a
+                  href="../<%= project.projectName %>/index.html"
+                  data-type="entity-link"
+                  ><%= project.projectName %></a
+                >
+              </li>
+              <% } %>
+            </ul>
+          </li>
+          <% } %>
+
+          <li class="divider"></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container-fluid overview">
       <% if(groupedProjects['application']) { %>
-      <li class='chapter'>
-        <div class='simple menu-toggler' data-toggle='collapse' data-target='#applications-links'>
-          <span class='icon ion-md-laptop'></span>
-          <span>Applications</span>
-          <span class='icon ion-ios-arrow-down'></span>
-        </div>
-        <ul class='links collapse ' id='applications-links'>
-
+      <div class="row">
+        <h2 class="title">Applications</h2>
+        <div class="column-grouper">
           <% for(let project of groupedProjects['application']) { %>
-          <li class='link'>
-            <a href='../<%= project.projectName %>/index.html' data-type='entity-link'><%= project.projectName %></a>
-          </li>
+          <div class="col-sm-3">
+            <div class="card text-center">
+              <div class="card-block">
+                <h4 class="card-title">
+                  <span class="icon ion-md-laptop"></span>
+                </h4>
+                <p class="card-text">
+                  <a
+                    href="../<%= project.projectName %>/index.html"
+                    data-type="entity-link"
+                    ><%= project.projectName %></a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
           <% } %>
-        </ul>
-      </li>
-      <% } %>
-      <% if(groupedProjects['library']) { %>
-      <li class='chapter'>
-        <div class='simple menu-toggler' data-toggle='collapse' data-target='#libraries-links'>
-          <span class='icon ion-md-book'></span>
-          <span>Libraries</span>
-          <span class='icon ion-ios-arrow-down'></span>
         </div>
-        <ul class='links collapse ' id='libraries-links'>
-
+      </div>
+      <% } %> <% if(groupedProjects['library']) { %>
+      <div class="row">
+        <h2 class="title">Libraries</h2>
+        <div class="column-grouper">
           <% for(let project of groupedProjects['library']) { %>
-          <li class='link'>
-            <a href='../<%= project.projectName %>/index.html' data-type='entity-link'><%= project.projectName %></a>
-          </li>
+          <div class="col-sm-3">
+            <div class="card text-center">
+              <div class="card-block">
+                <h4 class="card-title">
+                  <span class="icon ion-md-book"></span>
+                </h4>
+                <p class="card-text">
+                  <a
+                    href="../<%= project.projectName %>/index.html"
+                    data-type="entity-link"
+                    ><%= project.projectName %></a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
           <% } %>
-        </ul>
-      </li>
-      <% } %>
-
-      <li class='divider'></li>
-    </ul>
-  </nav>
-</div>
-<div class='container-fluid overview'>
-  <% if(groupedProjects['application']) { %>
-  <div class='row'>
-    <h2 class='title'>Applications</h2>
-    <div class='column-grouper'>
-      <% for(let project of groupedProjects['application']) { %>
-      <div class='col-sm-3'>
-        <div class='card text-center'>
-          <div class='card-block'>
-            <h4 class='card-title'><span class='icon ion-md-laptop'></span></h4>
-            <p class='card-text'><a href='../<%= project.projectName %>/index.html' data-type='entity-link'><%=
-              project.projectName %></a>
-            </p>
-          </div>
         </div>
       </div>
       <% } %>
     </div>
-  </div>
-  <% } %>
-  <% if(groupedProjects['library']) { %>
-  <div class='row'>
-    <h2 class='title'>Libraries</h2>
-    <div class='column-grouper'>
-      <% for(let project of groupedProjects['library']) { %>
-      <div class='col-sm-3'>
-        <div class='card text-center'>
-          <div class='card-block'>
-            <h4 class='card-title'><span class='icon ion-md-book'></span></h4>
-            <p class='card-text'><a href='../<%= project.projectName %>/index.html' data-type='entity-link'><%=
-              project.projectName %></a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <% } %>
-    </div>
-  </div>
-  <% } %>
-</div>
-<script src='./js/bootstrap-native.js'></script>
-</body>
+    <script src="./js/bootstrap-native.js"></script>
+  </body>
 </html>

@@ -9,17 +9,25 @@ import { getWorkspace } from '@nrwl/workspace';
  * @param {boolean} all
  * @returns {Promise<string[]>}
  */
-export async function getProjects(tree: Tree, context: SchematicContext, projects: string, all: boolean): Promise<string[]> {
+export async function getProjects(
+  tree: Tree,
+  context: SchematicContext,
+  projects: string,
+  all: boolean,
+): Promise<string[]> {
   const workspace = await getWorkspace(tree);
-  const workspaceProjects: string [] = Array.from(workspace.projects.keys());
+  const workspaceProjects: string[] = Array.from(workspace.projects.keys());
 
   if (projects) {
     return projects.split(',').reduce((acc, curr) => {
-      workspaceProjects.includes(curr) ? acc.push(curr) : context.logger.error(`${curr} does not exist in angular.json`)
+      workspaceProjects.includes(curr)
+        ? acc.push(curr)
+        : context.logger.error(`${curr} does not exist in angular.json`);
       return acc;
     }, []);
   } else if (all) {
-    process.getMaxListeners() < workspaceProjects.length && process.setMaxListeners(workspaceProjects.length + 1);
+    process.getMaxListeners() < workspaceProjects.length &&
+      process.setMaxListeners(workspaceProjects.length + 1);
     return workspaceProjects;
   }
 }

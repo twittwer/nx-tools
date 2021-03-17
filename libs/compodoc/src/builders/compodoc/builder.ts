@@ -9,12 +9,10 @@ async function runBuilder(
   context: BuilderContext,
 ): Promise<BuilderOutput> {
   const {
-    workspaceRoot,
-    currentDirectory,
-    target: { project, target, configuration },
+    target: { project },
   } = context;
   const projectMetadata = await context.getProjectMetadata(project);
-  const { root: projectRoot, projectType } = projectMetadata as {
+  const { root: projectRoot } = projectMetadata as {
     root: string;
     projectType: ProjectType;
     target: string;
