@@ -29,25 +29,29 @@ function addWorkspaceCompodocWebsite(schema: WorkspaceCompodocStaticHtmlGenerato
     const { projects, all, outputPath } = schema;
     const projectList: string[] = await getProjects(tree, context, projects, all);
 
-    const projectConfigs: Array<{ projectName: string } & ProjectConfig> = projectList.map(project => ({
-      ...getProjectConfig(
-        tree,
-        project,
-      ), projectName: project,
-    }));
+    if (projectList?.length) {
+      const projectConfigs: Array<{ projectName: string } & ProjectConfig> = projectList.map(project => ({
+        ...getProjectConfig(
+          tree,
+          project,
+        ), projectName: project,
+      }));
 
-    // this wil group all projects based on project type.
-    // This makes it much easier to loop over and construct the html template for the workspace docs static website
-    const groupedProjects = mapValues(groupBy(projectConfigs, 'projectType'), configs => configs.map(config => omit(config, 'projectType')));
+      // this wil group all projects based on project type.
+      // This makes it much easier to loop over and construct the html template for the workspace docs static website
+      const groupedProjects = mapValues(groupBy(projectConfigs, 'projectType'), configs => configs.map(config => omit(config, 'projectType')));
 
-    return mergeWith(
-      apply(url('./files'), [
-        template({
-          groupedProjects,
-          workspaceName: process.cwd().substring(process.cwd().lastIndexOf('/') + 1),
-        }),
-        move(outputPath ?? join('dist', 'compodoc')),
-      ]));
+      return mergeWith(
+        apply(url('./files'), [
+          template({
+            groupedProjects,
+            workspaceName: process.cwd().substring(process.cwd().lastIndexOf('/') + 1),
+          }),
+          move(outputPath ?? join('dist', 'compodoc')),
+        ]));
+    }
+
+    return noop();
   };
 }
 
@@ -67,9 +71,11 @@ function buildCompodocForProjects(schema: WorkspaceCompodocStaticHtmlGeneratorSc
       context.logger.info('Starting automated Compodoc build process...');
       const configuredProjects: string[] = await getProjects(tree, context, projects, all);
       const operationRules: Rule[] = [];
-
-      for (const project of configuredProjects) {
-        operationRules.push(await generateCompodocDocsForProjects(tree, context, compodocOptions, project));
+      
+      if(configuredProjects) {
+        for (const project of configuredProjects) {
+          operationRules.push(await generateCompodocDocsForProjects(tree, context, compodocOptions, project));
+        }
       }
 
       return chain(operationRules);
