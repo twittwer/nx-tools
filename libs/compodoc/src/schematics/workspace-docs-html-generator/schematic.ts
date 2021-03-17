@@ -12,7 +12,10 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import { WorkspaceCompodocStaticHtmlGeneratorSchema } from './schema';
-import { getProjectConfig, ProjectConfig } from '../config/utils/workspace.utils';
+import {
+  getProjectConfig,
+  ProjectConfig,
+} from '../config/utils/workspace.utils';
 import { join } from 'path';
 import { groupBy, mapValues, omit } from 'lodash';
 import { generateCompodocDocsForProjects, getProjects } from './utils';

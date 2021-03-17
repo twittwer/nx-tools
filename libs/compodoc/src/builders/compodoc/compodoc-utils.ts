@@ -3,7 +3,13 @@ import { CompodocBuilderSchema } from './schema';
 import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { tmpdir } from 'os';
-import { copyFileSync, existsSync, mkdirSync, mkdtempSync, writeFileSync } from 'fs';
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  writeFileSync,
+} from 'fs';
 import { ChildProcess, spawn } from 'child_process';
 
 function buildCompodocCmd(

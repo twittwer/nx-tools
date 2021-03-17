@@ -1,4 +1,8 @@
-import { BuilderContext, BuilderOutput, createBuilder } from '@angular-devkit/architect';
+import {
+  BuilderContext,
+  BuilderOutput,
+  createBuilder,
+} from '@angular-devkit/architect';
 import { CompodocBuilderSchema } from './schema';
 import { resolve } from 'path';
 import { spawnCompodocProcess } from './compodoc-utils';

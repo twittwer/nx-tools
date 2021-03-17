@@ -1,9 +1,24 @@
-import { apply, chain, mergeWith, move, Rule, schematic, template, url } from '@angular-devkit/schematics';
+import {
+  apply,
+  chain,
+  mergeWith,
+  move,
+  Rule,
+  schematic,
+  template,
+  url,
+} from '@angular-devkit/schematics';
 import { getWorkspace, offsetFromRoot, updateWorkspace } from '@nrwl/workspace';
 import { CompodocConfigSchema } from './schema';
-import { getProjectConfig, getProjectDefinition } from './utils/workspace.utils';
+import {
+  getProjectConfig,
+  getProjectDefinition,
+} from './utils/workspace.utils';
 import { TargetDefinition } from '@angular-devkit/core/src/workspace';
-import { buildCompodocConfigurations, buildCompodocOptions } from './utils/target.utils';
+import {
+  buildCompodocConfigurations,
+  buildCompodocOptions,
+} from './utils/target.utils';
 import { getTsConfigForProject } from './utils/compodoc.utils';
 
 function addCompodocTarget(schema: CompodocConfigSchema): Rule {
