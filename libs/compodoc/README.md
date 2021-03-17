@@ -45,6 +45,17 @@ nx g @twittwer/compodoc:config <project> [options]
 | ------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
 | workspaceDocs | `false` | Will add a "tsconfig.compodoc.json" to the project that includes the whole workspace. ([Recipe](#workspace-docs)) |
 
+Automatically generate Compodoc documentation for all available projects
+```
+// Build Compodoc for all projects available in angular.json
+nx g @twittwer/compodoc:workspace-docs-html --all
+
+// Build Compodoc for a specific list of projects. 1 or more comma separated projects need to be provided
+nx g @twittwer/compodoc:workspace-docs-html --projects=MY-PROJECT,MY-OTHER-PROJECT
+```
+
+All other builder options ([Recipe](#workspace-docs)) are also available for the website generated out of this schematic. The HTML is based on the Compodoc generated website.
+
 ## Builder
 
 Generate Compodoc documentation for a project:

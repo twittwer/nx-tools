@@ -1,39 +1,29 @@
-import { BuilderContext } from '@angular-devkit/architect';
 import { join, relative, resolve, sep } from 'path';
 import { CompodocBuilderSchema } from './schema';
 import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { tmpdir } from 'os';
-import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  mkdtempSync,
-  writeFileSync,
-} from 'fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, writeFileSync } from 'fs';
 import { ChildProcess, spawn } from 'child_process';
 
 function buildCompodocCmd(
   options: CompodocBuilderSchema,
-  context: BuilderContext,
+  workspaceRoot: string,
 ): string {
-  const { workspaceRoot } = context;
   return resolve(workspaceRoot, 'node_modules', '.bin', 'compodoc');
 }
 
 function buildNodemonCmd(
   options: CompodocBuilderSchema,
-  context: BuilderContext,
+  workspaceRoot: string,
 ): string {
-  const { workspaceRoot } = context;
   return resolve(workspaceRoot, 'node_modules', '.bin', 'nodemon');
 }
 
 function createIncludesFolderForWorkspace(
   options: CompodocBuilderSchema,
-  context: BuilderContext,
+  workspaceRoot: string,
 ): string {
-  const { workspaceRoot } = context;
   const { projects } = readWorkspaceJson() as WorkspaceSchema;
 
   const tmpFolder = mkdtempSync(`${tmpdir()}${sep}`);
@@ -59,8 +49,7 @@ function createIncludesFolderForWorkspace(
 }
 
 function buildDisableArgs(
-  options: CompodocBuilderSchema,
-  context: BuilderContext,
+  options: CompodocBuilderSchema
 ): string[] {
   const args = [];
 
@@ -124,12 +113,12 @@ function getRelativePath(
 
 function buildCompodocArgs(
   options: CompodocBuilderSchema,
-  context: BuilderContext & { projectRoot: string },
+  context: {workspaceRoot: string, project: string, projectRoot: string },
 ): string[] {
   const {
     workspaceRoot,
     projectRoot,
-    target: { project },
+    project
   } = context;
 
   const args: string[] = [];
@@ -155,7 +144,7 @@ function buildCompodocArgs(
   }
 
   if (options.workspaceDocs) {
-    const includesPath = createIncludesFolderForWorkspace(options, context);
+    const includesPath = createIncludesFolderForWorkspace(options, workspaceRoot);
     args.push(`--includes=${includesPath}`);
     args.push(`--includesName=${options.includesName ?? 'Projects'}`);
   } else {
@@ -172,7 +161,7 @@ function buildCompodocArgs(
     }
   }
 
-  args.push(...buildDisableArgs(options, context));
+  args.push(...buildDisableArgs(options));
 
   args.push(`--language=${options.language}`);
   args.push(`--theme=${options.theme}`);
@@ -247,7 +236,7 @@ function buildCompodocArgs(
 
 function createEmptyCompodocJson(
   options: CompodocBuilderSchema,
-  { workspaceRoot }: BuilderContext,
+  workspaceRoot: string,
 ) {
   mkdirSync(resolve(workspaceRoot, options.outputPath), {
     recursive: true,
@@ -278,20 +267,20 @@ function createEmptyCompodocJson(
 
 export function spawnCompodocProcess(
   options: CompodocBuilderSchema,
-  context: BuilderContext & { projectRoot: string },
+  context: {workspaceRoot: string, project: string, projectRoot: string }
 ): ChildProcess {
   const processOptions = {
     cwd: options.workspaceDocs ? context.workspaceRoot : context.projectRoot,
     shell: true,
   };
 
-  const compodocCmd = buildCompodocCmd(options, context);
+  const compodocCmd = buildCompodocCmd(options, context.workspaceRoot);
   const compodocArgs = buildCompodocArgs(options, context);
 
   if (options.watch && options.exportFormat === 'json') {
-    createEmptyCompodocJson(options, context);
+    createEmptyCompodocJson(options, context.workspaceRoot);
 
-    const nodemonCmd = buildNodemonCmd(options, context);
+    const nodemonCmd = buildNodemonCmd(options, context.workspaceRoot);
     const nodemonArgs = [
       '--ignore dist',
       '--ext ts',

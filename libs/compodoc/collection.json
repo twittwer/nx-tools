@@ -11,6 +11,11 @@
       "schema": "./src/schematics/config/schema.json",
       "description": "Configure compodoc target for a project.",
       "aliases": ["configuration"]
+    },
+    "workspace-docs-html": {
+      "factory": "./src/schematics/workspace-docs-html-generator/schematic",
+      "schema": "./src/schematics/workspace-docs-html-generator/schema.json",
+      "description": "Generate a HTML website which holds all libs/apps documentations in a clear overview."
     }
   }
 }

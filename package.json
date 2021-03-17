@@ -87,6 +87,8 @@
     "eslint-config-prettier": "6.0.0",
     "husky": "4.2.5",
     "jest": "25.2.3",
+    "lodash": "^4.17.21",
+    "@types/lodash": "^4.14.168",
     "prettier": "1.19.1",
     "semantic-release": "17.0.7",
     "ts-jest": "25.2.1",
