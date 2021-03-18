@@ -42,9 +42,13 @@ function addWorkspaceCompodocWebsite(
     if (projectList?.length) {
       const projectConfigs: Array<{
         projectName: string;
+        projectLinkUrl: string;
       } & ProjectConfig> = projectList.map(project => ({
         ...getProjectConfig(tree, project),
         projectName: project,
+        projectLinkUrl: `${
+          schema.atRootOfOutputPath ? './' : '../'
+        }${project}/index.html`,
       }));
 
       // this wil group all projects based on project type.
@@ -54,16 +58,28 @@ function addWorkspaceCompodocWebsite(
         configs => configs.map(config => omit(config, 'projectType')),
       );
 
+      const workspaceSubstring: number = process.cwd().lastIndexOf('/');
+      const workspaceName: string = process
+        .cwd()
+        .substring(
+          workspaceSubstring !== -1
+            ? workspaceSubstring + 1
+            : process.cwd().lastIndexOf('\\') + 1,
+        );
+
       return mergeWith(
-        apply(url('./files'), [
-          template({
-            groupedProjects,
-            workspaceName: process
-              .cwd()
-              .substring(process.cwd().lastIndexOf('/') + 1),
-          }),
-          move(outputPath ?? join('dist', 'compodoc')),
-        ]),
+        apply(
+          url(
+            schema.atRootOfOutputPath ? './files/workspace-web-doc' : './files',
+          ),
+          [
+            template({
+              groupedProjects,
+              workspaceName,
+            }),
+            move(outputPath ?? join('dist', 'compodoc')),
+          ],
+        ),
       );
     }
 
@@ -86,7 +102,7 @@ function buildCompodocForProjects(
       context.logger.error('You should provide at least one project');
       return noop();
     } else {
-      context.logger.info('Starting automated Compodoc build process...');
+      context.logger.info('Starting automated Compodoc build process...\n');
       const configuredProjects: string[] = await getProjects(
         tree,
         context,

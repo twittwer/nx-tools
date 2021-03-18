@@ -35,7 +35,7 @@ nx g @twittwer/compodoc:config <project>
 
 ## Schematics
 
-Add Compodoc target to a project:
+###Add Compodoc target to a project:
 
 ```
 nx g @twittwer/compodoc:config <project> [options]
@@ -45,7 +45,7 @@ nx g @twittwer/compodoc:config <project> [options]
 | ------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
 | workspaceDocs | `false` | Will add a "tsconfig.compodoc.json" to the project that includes the whole workspace. ([Recipe](#workspace-docs)) |
 
-Automatically generate Compodoc documentation for all available projects
+###Automatically generate Compodoc documentation for all available projects:
 
 ```
 // Build Compodoc for all projects available in angular.json
@@ -54,6 +54,12 @@ nx g @twittwer/compodoc:workspace-docs-html --all
 // Build Compodoc for a specific list of projects. 1 or more comma separated projects need to be provided
 nx g @twittwer/compodoc:workspace-docs-html --projects=MY-PROJECT,MY-OTHER-PROJECT
 ```
+
+| Option             | Default  | Description                                                                                                          |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------- |
+| all                | `false`  | Will build all available projects in your workspace and generate Compodoc HTML files                                 |
+| atRootOfOutputPath | `false`  | This flag will not create a separate directory which includes the workspace docs generated html files if set to true |
+| projects           | `string` | Projects name to generate HTML Compodoc. Use this is you want one or more projects build. (comma separated)          |
 
 All other builder options ([Recipe](#workspace-docs)) are also available for the website generated out of this schematic. The HTML is based on the Compodoc generated website.
 

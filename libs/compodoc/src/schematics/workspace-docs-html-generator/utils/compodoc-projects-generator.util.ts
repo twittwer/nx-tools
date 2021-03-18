@@ -44,7 +44,7 @@ export function generateCompodocDocsForProjects(
 
     childProcess.on('close', () => {
       context.logger.info(
-        `${project} Compodoc documentaion has succesfully build`,
+        `${project} Compodoc documentation has successfully build\n====================================\n`,
       );
       res(noop());
     });

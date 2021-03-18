@@ -36,9 +36,7 @@
             <ul class="links collapse " id="applications-links">
               <% for(let project of groupedProjects['application']) { %>
               <li class="link">
-                <a
-                  href="../<%= project.projectName %>/index.html"
-                  data-type="entity-link"
+                <a href="<%= project.projectLinkUrl %>" data-type="entity-link"
                   ><%= project.projectName %></a
                 >
               </li>
@@ -59,9 +57,7 @@
             <ul class="links collapse " id="libraries-links">
               <% for(let project of groupedProjects['library']) { %>
               <li class="link">
-                <a
-                  href="../<%= project.projectName %>/index.html"
-                  data-type="entity-link"
+                <a href="<%= project.projectLinkUrl %>" data-type="entity-link"
                   ><%= project.projectName %></a
                 >
               </li>
@@ -88,7 +84,7 @@
                 </h4>
                 <p class="card-text">
                   <a
-                    href="../<%= project.projectName %>/index.html"
+                    href="<%= project.projectLinkUrl %>"
                     data-type="entity-link"
                     ><%= project.projectName %></a
                   >
@@ -112,7 +108,7 @@
                 </h4>
                 <p class="card-text">
                   <a
-                    href="../<%= project.projectName %>/index.html"
+                    href="<%= project.projectLinkUrl %>"
                     data-type="entity-link"
                     ><%= project.projectName %></a
                   >

@@ -5,6 +5,11 @@
   "description": "Generate a HTML solution which encapsulates all Compodoc generated documentation",
   "type": "object",
   "properties": {
+    "atRootOfOutputPath": {
+      "description": "This flag will not create a separate directory which includes the workspace docs generated html files if set to true",
+      "type": "boolean",
+      "default": false
+    },
     "projects": {
       "description": "Projects name to generate HTML Compodoc. Use this is you want one or more projects build. (comma separated)",
       "type": "string"
