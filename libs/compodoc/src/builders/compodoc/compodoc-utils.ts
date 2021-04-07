@@ -1,9 +1,8 @@
 import { BuilderContext } from '@angular-devkit/architect';
-import { join, relative, resolve, sep } from 'path';
+import { join, relative, resolve } from 'path';
 import { CompodocBuilderSchema } from './schema';
 import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
 import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
-import { tmpdir } from 'os';
 import {
   copyFileSync,
   existsSync,
@@ -36,7 +35,7 @@ function createIncludesFolderForWorkspace(
   const { workspaceRoot } = context;
   const { projects } = readWorkspaceJson() as WorkspaceSchema;
 
-  const tmpFolder = mkdtempSync(`${tmpdir()}${sep}`);
+  const tmpFolder = mkdtempSync('compodoc_');
 
   const summary = Object.entries(projects)
     .map(([projectName, project]) => {
