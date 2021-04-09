@@ -1,6 +1,6 @@
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner } from '@angular-devkit/schematics/testing';
-import { join, sep } from 'path';
+import { join } from 'path';
 import { createEmptyWorkspace, getFileContent } from '@nrwl/workspace/testing';
 import { CompodocConfigSchema } from './schema';
 import { getProjectConfig } from './utils/workspace.utils';
@@ -38,8 +38,8 @@ describe('Compodoc "config" Schematic', () => {
         ? `${directory}-${testProjectName}`
         : testProjectName;
       const testProjectRoot = directory
-        ? `${projectTypeRoot}${sep}${directory}${sep}${testProjectName}`
-        : `${projectTypeRoot}${sep}${testProjectName}`;
+        ? `${projectTypeRoot}/${directory}/${testProjectName}`
+        : `${projectTypeRoot}/${testProjectName}`;
 
       beforeEach(async () => {
         testTree = await testRunner
@@ -67,8 +67,8 @@ describe('Compodoc "config" Schematic', () => {
         expect(projectConfig.architect['compodoc']).toEqual({
           builder: '@twittwer/compodoc:compodoc',
           options: {
-            outputPath: `dist${sep}compodoc${sep}${testProject}`,
-            tsConfig: `${testProjectRoot}${sep}tsconfig.${projectTypeSuffix}.json`,
+            outputPath: `dist/compodoc/${testProject}`,
+            tsConfig: `${testProjectRoot}/tsconfig.${projectTypeSuffix}.json`,
           },
           configurations: {
             json: {
@@ -80,9 +80,9 @@ describe('Compodoc "config" Schematic', () => {
 
       describe('should prefer more specific tsconfig files', () => {
         const possibleTsConfigFiles = [
-          `${testProjectRoot}${sep}tsconfig.compodoc.json`,
-          `${testProjectRoot}${sep}tsconfig.${projectTypeSuffix}.json`,
-          `${testProjectRoot}${sep}tsconfig.json`,
+          `${testProjectRoot}/tsconfig.compodoc.json`,
+          `${testProjectRoot}/tsconfig.${projectTypeSuffix}.json`,
+          `${testProjectRoot}/tsconfig.json`,
         ];
         const tsConfigCombinations = [
           possibleTsConfigFiles.slice(0),
@@ -131,8 +131,8 @@ describe('Compodoc "config" Schematic', () => {
           expect(projectConfig.architect['compodoc']).toEqual({
             builder: '@twittwer/compodoc:compodoc',
             options: {
-              outputPath: `dist${sep}compodoc${sep}${testProject}`,
-              tsConfig: `${testProjectRoot}${sep}tsconfig.compodoc.json`,
+              outputPath: `dist/compodoc/${testProject}`,
+              tsConfig: `${testProjectRoot}/tsconfig.compodoc.json`,
               workspaceDocs: true,
             },
             configurations: {
@@ -144,7 +144,7 @@ describe('Compodoc "config" Schematic', () => {
         });
 
         describe('tsconfig.compodoc.json', () => {
-          const tsConfigCompodoc = `${testProjectRoot}${sep}tsconfig.compodoc.json`;
+          const tsConfigCompodoc = `${testProjectRoot}/tsconfig.compodoc.json`;
 
           it('should create a compodoc specific tsconfig file', async () => {
             const options: Partial<CompodocConfigSchema> = {
@@ -181,7 +181,7 @@ describe('Compodoc "config" Schematic', () => {
             ];
             it.each(tsConfigCombinations)('%s', async (...tsConfigFiles) => {
               possibleTsConfigFiles.forEach(file => {
-                const filePath = `${testProjectRoot}${sep}${file}`;
+                const filePath = `${testProjectRoot}/${file}`;
 
                 const isPartOfTestCase = tsConfigFiles.includes(file);
                 const existsInSetup = testTree.exists(filePath);
