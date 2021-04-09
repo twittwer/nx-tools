@@ -35,7 +35,7 @@ function createIncludesFolderForWorkspace(
   const { workspaceRoot } = context;
   const { projects } = readWorkspaceJson() as WorkspaceSchema;
 
-  const tmpFolder = mkdtempSync('compodoc_');
+  const tmpFolder = mkdtempSync('tmp/compodoc_');
 
   const summary = Object.entries(projects)
     .map(([projectName, project]) => {
