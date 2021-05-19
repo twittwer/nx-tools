@@ -21,7 +21,7 @@ describe('Compodoc "config" Schematic', () => {
 
   it.todo('Test nested apps/libs when generated with --directory flag');
 
-  describe.each`
+  describe.skip.each`
     projectType                | directory
     ${ProjectType.Application} | ${undefined}
     ${ProjectType.Library}     | ${undefined}
