@@ -6,7 +6,7 @@ interface TaskRunnerOptions {
 }
 
 export function addCacheableOperation(operation: string): Rule {
-  return tree => {
+  return (tree) => {
     const nxJson = readNxJsonInTree(tree);
     const defaultTaskRunnerOptions = nxJson.tasksRunnerOptions?.default
       ?.options as TaskRunnerOptions | undefined;
@@ -18,7 +18,7 @@ export function addCacheableOperation(operation: string): Rule {
       return;
     }
 
-    return updateJsonInTree('nx.json', nxJson => {
+    return updateJsonInTree('nx.json', (nxJson) => {
       nxJson.tasksRunnerOptions.default.options.cacheableOperations.push(
         operation,
       );

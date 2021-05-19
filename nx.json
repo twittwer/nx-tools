@@ -6,9 +6,10 @@
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tsconfig.json": "*",
     "tslint.json": "*",
-    "nx.json": "*"
+    "nx.json": "*",
+    "tsconfig.base.json": "*",
+    ".eslintrc.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -26,5 +27,8 @@
       "tags": [],
       "implicitDependencies": ["compodoc"]
     }
+  },
+  "affected": {
+    "defaultBase": "master"
   }
 }

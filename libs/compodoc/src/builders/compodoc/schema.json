@@ -1,6 +1,5 @@
 {
-  "$schema": "https://json-schema.org/draft-07/schema",
-  "$id": "https://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/schema",
   "title": "Compodoc Builder",
   "description": "Build Compodoc documentation.",
   "type": "object",
@@ -21,7 +20,9 @@
         {
           "enum": ["html", "json"]
         },
-        { "minLength": 1 }
+        {
+          "minLength": 1
+        }
       ]
     },
     "workspaceDocs": {
@@ -29,12 +30,10 @@
       "type": "boolean",
       "default": false
     },
-
     "name": {
       "description": "Title of the documentation. (`workspaceDocs` uses workspace name as default - defined in `package.json`)",
       "type": "string"
     },
-
     "includes": {
       "description": "Path to external markdown files, folder should contain a summary.json. (`workspaceDocs` will override this)",
       "type": "string"
@@ -43,7 +42,6 @@
       "description": "Name of menu item containing external markdown files. (workspaceDocs uses \"Projects\" as default)",
       "type": "string"
     },
-
     "disableCoverage": {
       "description": "Do not add the documentation coverage report.",
       "type": "boolean",
@@ -109,7 +107,6 @@
       "type": "boolean",
       "default": false
     },
-
     "language": {
       "description": "Language used for generated documentation.",
       "type": "string",
@@ -128,7 +125,9 @@
             "zh-CN"
           ]
         },
-        { "minLength": 1 }
+        {
+          "minLength": 1
+        }
       ]
     },
     "theme": {
@@ -148,7 +147,9 @@
             "vagrant"
           ]
         },
-        { "minLength": 1 }
+        {
+          "minLength": 1
+        }
       ]
     },
     "hideGenerator": {
@@ -176,12 +177,10 @@
       "description": "External assets folder to copy in generated documentation folder.",
       "type": "string"
     },
-
     "unitTestCoverage": {
       "description": "Path to unit test coverage in json-summary format.",
       "type": "string"
     },
-
     "serve": {
       "description": "Serve generated documentation.",
       "type": "boolean",
@@ -192,13 +191,11 @@
       "type": "number",
       "default": 8080
     },
-
     "watch": {
       "description": "Watch for source files changes to automatically rebuild documentation.",
       "type": "boolean",
       "default": false
     },
-
     "silent": {
       "description": "Suppress verbose build output.",
       "type": "boolean",

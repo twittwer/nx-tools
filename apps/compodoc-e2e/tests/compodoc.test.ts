@@ -7,7 +7,7 @@ import {
 } from '@nrwl/nx-plugin/testing';
 
 describe('compodoc e2e', () => {
-  it('should create compodoc', async done => {
+  it('should create compodoc', async (done) => {
     const plugin = uniq('compodoc');
     ensureNxProject('@twittwer/compodoc', 'dist/libs/compodoc');
     await runNxCommandAsync(`generate @twittwer/compodoc:compodoc ${plugin}`);
@@ -19,7 +19,7 @@ describe('compodoc e2e', () => {
   });
 
   describe('--directory', () => {
-    it('should create src in the specified directory', async done => {
+    it('should create src in the specified directory', async (done) => {
       const plugin = uniq('compodoc');
       ensureNxProject('@twittwer/compodoc', 'dist/libs/compodoc');
       await runNxCommandAsync(
@@ -33,7 +33,7 @@ describe('compodoc e2e', () => {
   });
 
   describe('--tags', () => {
-    it('should add tags to nx.json', async done => {
+    it('should add tags to nx.json', async (done) => {
       const plugin = uniq('compodoc');
       ensureNxProject('@twittwer/compodoc', 'dist/libs/compodoc');
       await runNxCommandAsync(
