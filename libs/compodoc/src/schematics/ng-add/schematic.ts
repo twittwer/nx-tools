@@ -9,7 +9,7 @@ import { versions } from '../../utils/versions';
 const addVersions = (packages: string[]) =>
   packages.reduce((acc, pkg) => ({ ...acc, [pkg]: versions[pkg] }), {});
 
-export default function(): Rule {
+export default function (): Rule {
   return chain([
     ensureDependencies({
       devDependencies: addVersions([

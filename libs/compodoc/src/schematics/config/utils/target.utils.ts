@@ -1,6 +1,6 @@
 import { Tree } from '@angular-devkit/schematics';
 import { CompodocConfigSchema } from '../schema';
-import { CompodocBuilderSchema } from '@twittwer/compodoc';
+import { CompodocBuilderSchema } from '../../../builders/compodoc/schema';
 import { getProjectConfig } from './workspace.utils';
 import { join } from 'path';
 import { getTsConfigForProject } from './compodoc.utils';
