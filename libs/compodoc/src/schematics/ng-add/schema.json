@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "compodoc-add",
+  "$id": "compodoc-add",
   "title": "Add Compodoc",
   "description": "Install compodoc plugin."
 }
