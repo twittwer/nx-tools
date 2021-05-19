@@ -1,3 +1,9 @@
+## [1.5.2-beta.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.2-beta.1...compodoc/v1.5.2-beta.2) (2021-05-19)
+
+### Bug Fixes
+
+- **compodoc:** prefer app's tsconfig.editor in favour of tsconfig.app ([7d31809](https://github.com/twittwer/nx-tools/commit/7d31809ec320d1d84b07bb77b7bcb48d243d45ca))
+
 ## [1.5.2-beta.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.1...compodoc/v1.5.2-beta.1) (2021-05-19)
 
 ### Bug Fixes
