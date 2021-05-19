@@ -1,3 +1,19 @@
+## [1.5.2-beta.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.1...compodoc/v1.5.2-beta.1) (2021-05-19)
+
+### Bug Fixes
+
+- **compodoc:** replace deprecated id property with $id ([ca24a9e](https://github.com/twittwer/nx-tools/commit/ca24a9eda8dff25220ae0dfd6430324dc5ec9091))
+
+### Chores
+
+- migrate to Nx 12 & update other dependencies ([2233dac](https://github.com/twittwer/nx-tools/commit/2233dac9cdf362cb04fdc3f9e22c4a8aaae5f758))
+
+### Miscellaneous
+
+- Skip config tests ([d1ad835](https://github.com/twittwer/nx-tools/commit/d1ad835484d3cd460120bfe54b12665111d58dd0))
+- Merge pull request #26 from HaveF/patch-1 ([897211e](https://github.com/twittwer/nx-tools/commit/897211e6fbfe776f9d00a9fef2f3cc7d080b238d)), closes [#26](https://github.com/twittwer/nx-tools/issues/26)
+- typo ([fa9441f](https://github.com/twittwer/nx-tools/commit/fa9441ff8b9fe52c7c58ed1bf5769c88172e9077))
+
 ## [1.5.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.0...compodoc/v1.5.1) (2020-10-29)
 
 ### Bug Fixes
