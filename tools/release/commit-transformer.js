@@ -1,4 +1,4 @@
-const removeWildcardScope = commit => {
+const removeWildcardScope = (commit) => {
   if (commit.scope === '*') {
     commit.scope = '';
   }
@@ -7,7 +7,7 @@ const removeWildcardScope = commit => {
 const isCommitNotAffectingScope = (commit, projectScope) =>
   commit.scope && commit.scope !== projectScope;
 
-const mapToTitleGroup = commit => {
+const mapToTitleGroup = (commit) => {
   const commitTypeMapping = {
     feat: 'Features',
     fix: 'Bug Fixes',
@@ -25,15 +25,15 @@ const mapToTitleGroup = commit => {
   commit.type = commitTypeMapping[commit.type] || commitTypeMapping['default'];
 };
 
-const checkForBreakingNote = commit => {
-  commit.notes.forEach(note => {
+const checkForBreakingNote = (commit) => {
+  commit.notes.forEach((note) => {
     if (note.title.toLowerCase().includes('breaking')) {
       note.title = `BREAKING CHANGES`;
     }
   });
 };
 
-const addShortHash = commit => {
+const addShortHash = (commit) => {
   if (typeof commit.hash === `string`) {
     commit.shortHash = commit.hash.substring(0, 7);
   }
@@ -59,7 +59,7 @@ const addIssueLinksInSubject = (commit, context) => {
   });
 
   commit.references = commit.references.filter(
-    reference => !linkedIssues.includes(reference.issue),
+    (reference) => !linkedIssues.includes(reference.issue),
   );
 };
 

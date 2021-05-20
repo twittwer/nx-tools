@@ -1,6 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
-  "id": "compodoc-configure",
+  "$schema": "http://json-schema.org/schema",
+  "$id": "compodoc-configure",
   "title": "Compodoc Configuration",
   "description": "Configure compodoc target for a project.",
   "type": "object",

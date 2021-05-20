@@ -9,17 +9,19 @@ export function getTsConfigForProject(tree: Tree, projectName: string): string {
     projectName,
   );
 
-  let tsConfig = 'tsconfig.compodoc.json';
-  if (!tree.exists(join(projectRoot, tsConfig))) {
-    tsConfig =
-      projectType === ProjectType.Application
-        ? 'tsconfig.app.json'
-        : 'tsconfig.lib.json';
-  }
-  if (!tree.exists(join(projectRoot, tsConfig))) {
-    tsConfig = 'tsconfig.json';
-  }
-  if (!tree.exists(join(projectRoot, tsConfig))) {
+  const tsConfigVariations = [
+    'tsconfig.compodoc.json',
+    ...{
+      [ProjectType.Application]: ['tsconfig.editor.json', 'tsconfig.app.json'],
+      [ProjectType.Library]: ['tsconfig.lib.json'],
+    }[projectType],
+    'tsconfig.json',
+  ];
+  const tsConfig = tsConfigVariations.find((_tsConfig) =>
+    tree.exists(join(projectRoot, _tsConfig)),
+  );
+
+  if (!tsConfig) {
     throw new Error(
       `Missing TSConfig: Cannot find a "tsconfig[.(compodoc|lib|app)].json" file in "${projectRoot}".`,
     );

@@ -2,7 +2,6 @@ import { BuilderContext } from '@angular-devkit/architect';
 import { join, relative, resolve, sep } from 'path';
 import { CompodocBuilderSchema } from './schema';
 import { readJsonFile, readWorkspaceJson } from '@nrwl/workspace';
-import { WorkspaceSchema } from '@angular-devkit/core/src/experimental/workspace';
 import { tmpdir } from 'os';
 import {
   copyFileSync,
@@ -12,6 +11,7 @@ import {
   writeFileSync,
 } from 'fs';
 import { ChildProcess, spawn } from 'child_process';
+import { WorkspaceDefinition } from '@angular-devkit/core/src/workspace/definitions';
 
 function buildCompodocCmd(
   options: CompodocBuilderSchema,
@@ -34,7 +34,7 @@ function createIncludesFolderForWorkspace(
   context: BuilderContext,
 ): string {
   const { workspaceRoot } = context;
-  const { projects } = readWorkspaceJson() as WorkspaceSchema;
+  const { projects } = readWorkspaceJson() as WorkspaceDefinition;
 
   const tmpFolder = mkdtempSync(`${tmpdir()}${sep}`);
 
@@ -58,10 +58,7 @@ function createIncludesFolderForWorkspace(
   return relative(workspaceRoot, tmpFolder);
 }
 
-function buildDisableArgs(
-  options: CompodocBuilderSchema,
-  context: BuilderContext,
-): string[] {
+function buildDisableArgs(options: CompodocBuilderSchema): string[] {
   const args = [];
 
   if (options.disableCoverage) {
@@ -172,7 +169,7 @@ function buildCompodocArgs(
     }
   }
 
-  args.push(...buildDisableArgs(options, context));
+  args.push(...buildDisableArgs(options));
 
   args.push(`--language=${options.language}`);
   args.push(`--theme=${options.theme}`);

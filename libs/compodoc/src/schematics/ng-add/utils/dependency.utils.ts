@@ -18,7 +18,7 @@ function filterExistingDependencies(
   existingDeps: PackageJson['dependencies'] | PackageJson['devDependencies'],
 ) {
   return Object.keys(requiredDeps)
-    .filter(packageName => !existingDeps[packageName])
+    .filter((packageName) => !existingDeps[packageName])
     .reduce(
       (deps, packageName) => ({
         ...deps,
@@ -32,7 +32,7 @@ export function ensureDependencies({
   dependencies = {},
   devDependencies = {},
 }: Partial<Pick<PackageJson, 'dependencies' | 'devDependencies'>>): Rule {
-  return tree => {
+  return (tree) => {
     const packageJson: PackageJson = readJsonInTree(tree, 'package.json');
 
     const filteredDependencies = filterExistingDependencies(
@@ -56,13 +56,13 @@ export function ensureDependencies({
 }
 
 export function moveToDevDependencies(packageName: string): Rule {
-  return tree => {
+  return (tree) => {
     const { dependencies }: PackageJson = readJsonInTree(tree, 'package.json');
     if (!dependencies?.[packageName]) {
       return;
     }
 
-    return updateJsonInTree('package.json', packageJson => {
+    return updateJsonInTree('package.json', (packageJson) => {
       packageJson.dependencies = packageJson.dependencies || {};
       packageJson.devDependencies = packageJson.devDependencies || {};
 

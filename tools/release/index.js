@@ -3,7 +3,7 @@ const {
 } = require('./commit-transformer');
 const { createReleaseRulesWithScopeFilter } = require('./release-rules');
 
-const buildReversePath = path =>
+const buildReversePath = (path) =>
   path
     .split('/')
     .map(() => '..')
@@ -17,9 +17,9 @@ const toolsScript = (script, ...args) =>
     ...args,
   ].join(' ');
 
-const formatFile = file => `nx format:write --files ${file}`;
+const formatFile = (file) => `nx format:write --files ${file}`;
 const copyFile = (file, dest) => `cp ${file} ${dest}`;
-const insertVersions = packageRoot =>
+const insertVersions = (packageRoot) =>
   toolsScript('release/insert-versions.ts', packageRoot);
 
 function createReleaseConfigWithScopeFilter({

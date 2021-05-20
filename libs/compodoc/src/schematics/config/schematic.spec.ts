@@ -21,7 +21,7 @@ describe('Compodoc "config" Schematic', () => {
 
   it.todo('Test nested apps/libs when generated with --directory flag');
 
-  describe.each`
+  describe.skip.each`
     projectType                | directory
     ${ProjectType.Application} | ${undefined}
     ${ProjectType.Library}     | ${undefined}
@@ -90,7 +90,7 @@ describe('Compodoc "config" Schematic', () => {
           possibleTsConfigFiles.slice(2),
         ];
         it.each(tsConfigCombinations)('%s', async (...tsConfigFiles) => {
-          possibleTsConfigFiles.forEach(file => {
+          possibleTsConfigFiles.forEach((file) => {
             const isPartOfTestCase = tsConfigFiles.includes(file);
             const existsInSetup = testTree.exists(file);
 
@@ -180,7 +180,7 @@ describe('Compodoc "config" Schematic', () => {
               possibleTsConfigFiles.slice(1),
             ];
             it.each(tsConfigCombinations)('%s', async (...tsConfigFiles) => {
-              possibleTsConfigFiles.forEach(file => {
+              possibleTsConfigFiles.forEach((file) => {
                 const filePath = `${testProjectRoot}/${file}`;
 
                 const isPartOfTestCase = tsConfigFiles.includes(file);
@@ -217,7 +217,7 @@ describe('Compodoc "config" Schematic', () => {
 
             let logMessage: string;
             testRunner.logger.subscribe(
-              logEntry => (logMessage = logEntry.message),
+              (logEntry) => (logMessage = logEntry.message),
             );
 
             const options: Partial<CompodocConfigSchema> = {

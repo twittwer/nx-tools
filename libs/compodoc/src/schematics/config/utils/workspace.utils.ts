@@ -13,7 +13,7 @@ export interface ProjectConfig {
   prefix?: string;
   projectType: ProjectType;
   architect: Record<string, TargetDefinition>;
-  schematics?: {};
+  schematics?: Record<string, unknown>;
 }
 
 export function getProjectConfig(tree: Tree, projectName: string) {

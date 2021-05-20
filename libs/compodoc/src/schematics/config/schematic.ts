@@ -22,7 +22,7 @@ import {
 import { getTsConfigForProject } from './utils/compodoc.utils';
 
 function addCompodocTarget(schema: CompodocConfigSchema): Rule {
-  return async (tree, context) => {
+  return async (tree) => {
     const workspaceDefinition = await getWorkspace(tree);
     const projectDefinition = await getProjectDefinition(
       workspaceDefinition,
@@ -45,10 +45,7 @@ function addCompodocTarget(schema: CompodocConfigSchema): Rule {
 
 function addTsConfigForWorkspaceDocs(schema: CompodocConfigSchema): Rule {
   return async (tree, context) => {
-    const { root: projectRoot, projectType } = getProjectConfig(
-      tree,
-      schema.project,
-    );
+    const { root: projectRoot } = getProjectConfig(tree, schema.project);
 
     const tsConfig = getTsConfigForProject(tree, schema.project);
     if (tsConfig === 'tsconfig.compodoc.json') {
@@ -70,7 +67,7 @@ function addTsConfigForWorkspaceDocs(schema: CompodocConfigSchema): Rule {
   };
 }
 
-export default function(schema: CompodocConfigSchema): Rule {
+export default function (schema: CompodocConfigSchema): Rule {
   return chain([
     schematic('ng-add', {}),
     ...(schema.workspaceDocs ? [addTsConfigForWorkspaceDocs(schema)] : []),

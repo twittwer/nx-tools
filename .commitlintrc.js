@@ -30,5 +30,5 @@ module.exports = {
       ],
     ],
   },
-  ignores: [message => message.toLowerCase().startsWith('wip')],
+  ignores: [(message) => message.toLowerCase().startsWith('wip')],
 };

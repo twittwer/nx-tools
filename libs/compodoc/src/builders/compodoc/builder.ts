@@ -13,12 +13,10 @@ async function runBuilder(
   context: BuilderContext,
 ): Promise<BuilderOutput> {
   const {
-    workspaceRoot,
-    currentDirectory,
-    target: { project, target, configuration },
+    target: { project },
   } = context;
   const projectMetadata = await context.getProjectMetadata(project);
-  const { root: projectRoot, projectType } = projectMetadata as {
+  const { root: projectRoot } = projectMetadata as {
     root: string;
     projectType: ProjectType;
     target: string;
@@ -29,7 +27,7 @@ async function runBuilder(
   options.outputPath =
     options.outputPath ?? resolve('dist', 'compodoc', project);
 
-  return new Promise<BuilderOutput>(res => {
+  return new Promise<BuilderOutput>((res) => {
     const childProcess = spawnCompodocProcess(options, {
       ...context,
       projectRoot,
@@ -37,14 +35,14 @@ async function runBuilder(
 
     process.on('exit', () => childProcess.kill());
 
-    childProcess.stdout.on('data', data => {
+    childProcess.stdout.on('data', (data) => {
       context.logger.info(data.toString());
     });
-    childProcess.stderr.on('data', data => {
+    childProcess.stderr.on('data', (data) => {
       context.logger.error(data.toString());
     });
 
-    childProcess.on('close', code => {
+    childProcess.on('close', (code) => {
       res({ success: code === 0 });
     });
   });
