@@ -134,8 +134,8 @@ function buildCompodocArgs(
   const tsConfigPath = resolve(workspaceRoot, options.tsConfig);
   const outputPath = resolve(workspaceRoot, options.outputPath);
   args.push(
-    `--tsconfig=${tsConfigPath}`,
-    `--output=${outputPath}`,
+    `--tsconfig="${tsConfigPath}"`,
+    `--output="${outputPath}"`,
     `--exportFormat=${options.exportFormat}`,
   );
   if (options.exportFormat === 'json') {
@@ -143,18 +143,18 @@ function buildCompodocArgs(
   }
 
   if (options.name) {
-    args.push(`--name=${options.name}`);
+    args.push(`--name="${options.name}"`);
   } else if (options.workspaceDocs) {
     const workspaceName = readJsonFile('package.json').name;
-    args.push(`--name=${workspaceName}`);
+    args.push(`--name="${workspaceName}"`);
   } else {
-    args.push(`--name=${project}`);
+    args.push(`--name="${project}"`);
   }
 
   if (options.workspaceDocs) {
     const includesPath = createIncludesFolderForWorkspace(options, context);
-    args.push(`--includes=${includesPath}`);
-    args.push(`--includesName=${options.includesName ?? 'Projects'}`);
+    args.push(`--includes="${includesPath}"`);
+    args.push(`--includesName="${options.includesName ?? 'Projects'}"`);
   } else {
     if (options.includes) {
       const includesPath = getRelativePath(options.includes, {
@@ -162,10 +162,10 @@ function buildCompodocArgs(
         projectRoot,
         workspaceDocs: options.workspaceDocs,
       });
-      args.push(`--includes=${includesPath}`);
+      args.push(`--includes="${includesPath}"`);
     }
     if (options.includesName) {
-      args.push(`--includesName=${options.includesName}`);
+      args.push(`--includesName="${options.includesName}"`);
     }
   }
 
@@ -182,7 +182,7 @@ function buildCompodocArgs(
       projectRoot,
       workspaceDocs: options.workspaceDocs,
     });
-    args.push(`--customLogo=${customLogoPath}`);
+    args.push(`--customLogo="${customLogoPath}"`);
   }
   if (options.customFavicon) {
     const customFaviconPath = getRelativePath(options.customFavicon, {
@@ -190,7 +190,7 @@ function buildCompodocArgs(
       projectRoot,
       workspaceDocs: options.workspaceDocs,
     });
-    args.push(`--customFavicon=${customFaviconPath}`);
+    args.push(`--customFavicon="${customFaviconPath}"`);
   }
   if (options.extTheme) {
     const extThemePath = getRelativePath(options.extTheme, {
@@ -198,7 +198,7 @@ function buildCompodocArgs(
       projectRoot,
       workspaceDocs: options.workspaceDocs,
     });
-    args.push(`--extTheme=${extThemePath}`);
+    args.push(`--extTheme="${extThemePath}"`);
   }
   if (options.templates) {
     const templatesPath = getRelativePath(options.templates, {
@@ -206,7 +206,7 @@ function buildCompodocArgs(
       projectRoot,
       workspaceDocs: options.workspaceDocs,
     });
-    args.push(`--templates=${templatesPath}`);
+    args.push(`--templates="${templatesPath}"`);
   }
   // TODO: maybe use `<projectRoot>/src/assets` as default
   if (options.assetsFolder) {
@@ -215,7 +215,7 @@ function buildCompodocArgs(
       projectRoot,
       workspaceDocs: options.workspaceDocs,
     });
-    args.push(`--assetsFolder=${assetsFolderPath}`);
+    args.push(`--assetsFolder="${assetsFolderPath}"`);
   }
 
   if (options.unitTestCoverage) {
@@ -224,7 +224,7 @@ function buildCompodocArgs(
       projectRoot,
       workspaceDocs: options.workspaceDocs,
     });
-    args.push(`--unitTestCoverage=${coveragePath}`);
+    args.push(`--unitTestCoverage="${coveragePath}"`);
   }
 
   if (options.serve) {
@@ -294,8 +294,8 @@ export function spawnCompodocProcess(
       '--ext ts',
       `--exec "${compodocCmd} ${compodocArgs.join(' ')}"`,
     ];
-    return spawn(nodemonCmd, nodemonArgs, processOptions);
+    return spawn(`"${nodemonCmd}"`, nodemonArgs, processOptions);
   }
 
-  return spawn(compodocCmd, compodocArgs, processOptions);
+  return spawn(`"${compodocCmd}"`, compodocArgs, processOptions);
 }
