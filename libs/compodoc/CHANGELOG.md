@@ -1,3 +1,9 @@
+## [1.5.3-beta.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.2...compodoc/v1.5.3-beta.1) (2021-05-20)
+
+### Bug Fixes
+
+- **compodoc:** escape spawn command to handle spaces in windows path ([bf67c75](https://github.com/twittwer/nx-tools/commit/bf67c759f0aac93e7b472e84b9aa26a0008ce0a5))
+
 ## [1.5.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.1...compodoc/v1.5.2) (2021-05-20)
 
 ### Bug Fixes
