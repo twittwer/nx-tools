@@ -2,8 +2,8 @@ import { Tree } from '@angular-devkit/schematics';
 import { CompodocConfigSchema } from '../schema';
 import { CompodocBuilderSchema } from '../../../builders/compodoc/schema';
 import { getProjectConfig } from './workspace.utils';
-import { join } from 'path';
 import { getTsConfigForProject } from './compodoc.utils';
+import { joinPathFragments } from '@nrwl/devkit';
 
 export function buildCompodocOptions(
   tree: Tree,
@@ -13,11 +13,11 @@ export function buildCompodocOptions(
 
   const options: Partial<CompodocBuilderSchema> = {};
 
-  options.tsConfig = join(
+  options.tsConfig = joinPathFragments(
     projectRoot,
     getTsConfigForProject(tree, schema.project),
   );
-  options.outputPath = join('dist', 'compodoc', schema.project);
+  options.outputPath = joinPathFragments('dist', 'compodoc', schema.project);
 
   if (schema.workspaceDocs) {
     options.workspaceDocs = true;
