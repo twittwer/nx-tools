@@ -113,24 +113,22 @@ Additional options (used by the builder only) are indicated by an italic written
 The options can be defined in the `angular.json`:
 
 ```json5
-{
-  projects: {
-    '<project>': {
-      architects: {
-        compodoc: {
-          builder: '@twittwer/compodoc:compodoc',
-          options: {
-            /* Define your options here */
-          },
-          configurations: {
-            '<configuration name>': {
-              /* or here in case they are required based on specific conditions only. */
-            },
-          },
+"projects": {
+  "<project>": {
+    "architects": {
+      "compodoc": {
+        "builder": "@twittwer/compodoc:compodoc",
+        "options": {
+          /* Define your options here */
         },
-      },
-    },
-  },
+        "configurations": {
+          "<configuration name>": {
+            /* or here in case they are required based on specific conditions only. */
+          }
+        }
+      }
+    }
+  }
 }
 ```
 
@@ -167,7 +165,7 @@ nx run <project>:compodoc:json --watch
 or via additional configuration:
 
 ```json5
-configurations: {
+"configurations": {
   "json": {
     "exportFormat": "json"
   },
@@ -190,40 +188,40 @@ configurations: {
 Configure `storybook-watch` & `storybook-build` targets in `angular.json`:
 
 ```json5
-{
-  projects: {
-    '<project>': {
-      architects: {
-        storybook: {
-          /* @nrwl/storybook */
-        },
-        'build-storybook': {
-          /* @nrwl/storybook */
-        },
-        compodoc: {
-          /* @twittwer/compodoc */
-        },
-        'storybook-watch': {
-          builder: '@nrwl/workspace:run-commands',
-          options: {
-            commands: [
-              'npx nx run <project>:compodoc:json-watch',
-              'npx nx run <project>:storybook',
-            ],
-          },
-        },
-        'storybook-build': {
-          builder: '@nrwl/workspace:run-commands',
-          options: {
-            commands: [
-              'npx nx run <project>:compodoc:json',
-              'npx nx run <project>:build-storybook',
-            ],
-          },
-        },
+"projects": {
+  "project>": {
+    "architects": {
+      "storybook": {
+        /* @nrwl/storybook */
       },
-    },
-  },
+      "build-storybook": {
+        /* @nrwl/storybook */
+      },
+      "compodoc": {
+        /* @twittwer/compodoc */
+      },
+      "storybook-watch": {
+        "builder": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "npx nx run <project>:compodoc:json --watch",
+            "npx nx run <project>:storybook"
+          ],
+          "parallel": true
+        }
+      },
+      "storybook-build": {
+        "builder": "@nrwl/workspace:run-commands",
+        "options": {
+          "commands": [
+            "npx nx run <project>:compodoc:json",
+            "npx nx run <project>:build-storybook"
+          ],
+          "parallel": false
+        }
+      }
+    }
+  }
 }
 ```
 
