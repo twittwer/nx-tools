@@ -1,3 +1,9 @@
+## [1.5.2-beta.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.2-beta.2...compodoc/v1.5.2-beta.3) (2021-05-20)
+
+### Bug Fixes
+
+- **compodoc:** windows path normalization ([ef3d731](https://github.com/twittwer/nx-tools/commit/ef3d7318c7c952383cd43f7632da048f52d7d5f0))
+
 ## [1.5.2-beta.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.2-beta.1...compodoc/v1.5.2-beta.2) (2021-05-19)
 
 ### Bug Fixes
