@@ -294,8 +294,8 @@ export function spawnCompodocProcess(
       '--ext ts',
       `--exec "${compodocCmd} ${compodocArgs.join(' ')}"`,
     ];
-    return spawn(nodemonCmd, nodemonArgs, processOptions);
+    return spawn(`"${nodemonCmd}"`, nodemonArgs, processOptions);
   }
 
-  return spawn(compodocCmd, compodocArgs, processOptions);
+  return spawn(`"${compodocCmd}"`, compodocArgs, processOptions);
 }
