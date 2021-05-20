@@ -1,3 +1,29 @@
+## [1.5.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.1...compodoc/v1.5.2) (2021-05-20)
+
+### Bug Fixes
+
+- **compodoc:** prefer app's tsconfig.editor in favour of tsconfig.app ([76b5f91](https://github.com/twittwer/nx-tools/commit/76b5f9162ecd170d7e5410da043d322c277189f7))
+- **compodoc:** replace deprecated id property with $id [#37](https://github.com/twittwer/nx-tools/issues/37) ([4efce80](https://github.com/twittwer/nx-tools/commit/4efce8061b0ac26dfe9ccc6a2cd5bd8b07abc8ca))
+- **compodoc:** windows path normalization [#31](https://github.com/twittwer/nx-tools/issues/31) ([7c32208](https://github.com/twittwer/nx-tools/commit/7c32208a90ed4d44e88437f22628d52d8826c650))
+
+### Chores
+
+- migrate to Nx 12 & update other dependencies ([ccf04a7](https://github.com/twittwer/nx-tools/commit/ccf04a7bcfa8fe8ab1e2c69b3336624387eb1028))
+
+### Continuous Integration
+
+- **compodoc:** temporarily disable config schematic tests ([feab415](https://github.com/twittwer/nx-tools/commit/feab415b0cb9f4b3cbc1cc717f19e079d3423443))
+
+### Documentation
+
+- **compodoc:** ensure JSON syntax in samples ([d4218c8](https://github.com/twittwer/nx-tools/commit/d4218c82066fb6a659253a331c7d6a64b105cd6c))
+
+### Miscellaneous
+
+- Merge pull request #38 from twittwer/update-nx-12 ([a846eb1](https://github.com/twittwer/nx-tools/commit/a846eb11476a8d1c679100121a9a56af33947acb)), closes [#38](https://github.com/twittwer/nx-tools/issues/38)
+- Merge pull request #26 from HaveF/patch-1 ([897211e](https://github.com/twittwer/nx-tools/commit/897211e6fbfe776f9d00a9fef2f3cc7d080b238d)), closes [#26](https://github.com/twittwer/nx-tools/issues/26)
+- typo ([fa9441f](https://github.com/twittwer/nx-tools/commit/fa9441ff8b9fe52c7c58ed1bf5769c88172e9077))
+
 ## [1.5.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.0...compodoc/v1.5.1) (2020-10-29)
 
 ### Bug Fixes
