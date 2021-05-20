@@ -71,6 +71,7 @@
     "@compodoc/compodoc": "1.1.11",
     "@nrwl/angular": "12.3.3",
     "@nrwl/cli": "12.3.3",
+    "@nrwl/devkit": "12.3.4",
     "@nrwl/eslint-plugin-nx": "12.3.3",
     "@nrwl/jest": "12.3.3",
     "@nrwl/nx-plugin": "12.3.3",
