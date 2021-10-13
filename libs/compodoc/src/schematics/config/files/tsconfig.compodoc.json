@@ -1,7 +1,0 @@
-{
-  "extends": "./<%= tsConfigBaseFile %>",
-  "include": [
-    "<%= offsetFromRoot %>apps/**/*.ts",
-    "<%= offsetFromRoot %>libs/**/*.ts"
-  ]
-}
