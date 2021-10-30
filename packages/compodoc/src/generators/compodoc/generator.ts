@@ -73,11 +73,12 @@ function determineTsconfigFile(
   }
 
   if (options.workspaceDocs && tsconfig !== 'tsconfig.compodoc.json') {
+    const includes = [...new Set([appsDir, libsDir])].map(
+      (dir) => `${offsetFromRoot(projectConfiguration.root)}${dir}/**/*.ts`,
+    );
     generateFiles(tree, join(__dirname, 'files'), projectConfiguration.root, {
-      tsConfigBaseFile: tsconfig,
-      offsetFromRoot: offsetFromRoot(projectConfiguration.root),
-      appsDir,
-      libsDir,
+      tsconfigBase: `./${tsconfig}`,
+      includes: includes,
     });
     return 'tsconfig.compodoc.json';
   }

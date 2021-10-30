@@ -1,7 +1,4 @@
 {
-  "extends": "./<%= tsConfigBaseFile %>",
-  "include": [
-    "<%= offsetFromRoot %><%= appsDir%>/**/*.ts",
-    "<%= offsetFromRoot %><%= libsDir%>/**/*.ts"
-  ]
+  "extends": "<%= tsconfigBase %>",
+  "include": [<%- includes.map(JSON.stringify).join(',') %>]
 }
