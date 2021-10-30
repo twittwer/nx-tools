@@ -1,29 +1,25 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "Compodoc",
-  "title": "",
+  "cli": "nx",
+  "title": "Configure Compodoc",
+  "description": "Generator for Compodoc targets.",
   "type": "object",
   "properties": {
-    "name": {
+    "project": {
+      "description": "Name of project compodoc should be added to.",
       "type": "string",
-      "description": "",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "Which project do you want to add compodoc to?"
     },
-    "tags": {
-      "type": "string",
-      "description": "Add tags to the project (used for linting)",
-      "alias": "t"
-    },
-    "directory": {
-      "type": "string",
-      "description": "A directory where the project is placed",
-      "alias": "d"
+    "workspaceDocs": {
+      "description": "Will add a \"tsconfig.compodoc.json\" to the project that includes the whole workspace.",
+      "type": "boolean",
+      "default": false
     }
   },
-  "required": ["name"]
+  "required": ["project"]
 }

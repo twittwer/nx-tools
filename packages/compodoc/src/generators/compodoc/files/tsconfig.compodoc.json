@@ -1,0 +1,7 @@
+{
+  "extends": "./<%= tsConfigBaseFile %>",
+  "include": [
+    "<%= offsetFromRoot %><%= appsDir%>/**/*.ts",
+    "<%= offsetFromRoot %><%= libsDir%>/**/*.ts"
+  ]
+}

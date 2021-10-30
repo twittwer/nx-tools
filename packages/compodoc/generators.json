@@ -3,10 +3,15 @@
   "name": "compodoc",
   "version": "0.0.1",
   "generators": {
-    "compodoc": {
+    "_compodoc": {
       "factory": "./src/generators/compodoc/generator",
       "schema": "./src/generators/compodoc/schema.json",
-      "description": "compodoc generator"
+      "description": "Generator for Compodoc targets."
+    },
+    "config": {
+      "factory": "./src/generators/compodoc/generator",
+      "schema": "./src/generators/compodoc/schema.json",
+      "description": "Generator for Compodoc targets."
     }
   }
 }

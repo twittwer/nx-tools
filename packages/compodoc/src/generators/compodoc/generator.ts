@@ -1,73 +1,78 @@
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
-  names,
+  joinPathFragments,
   offsetFromRoot,
+  ProjectConfiguration,
+  readProjectConfiguration,
   Tree,
+  updateProjectConfiguration,
 } from '@nrwl/devkit';
-import * as path from 'path';
+import { join } from 'path';
 import { CompodocGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends CompodocGeneratorSchema {
-  projectName: string;
-  projectRoot: string;
-  projectDirectory: string;
-  parsedTags: string[];
-}
+type WorkspaceLayout = ReturnType<typeof getWorkspaceLayout>;
 
-function normalizeOptions(
+export default async function runGenerator(
   tree: Tree,
   options: CompodocGeneratorSchema,
-): NormalizedSchema {
-  const name = names(options.name).fileName;
-  const projectDirectory = options.directory
-    ? `${names(options.directory).fileName}/${name}`
-    : name;
-  const projectName = projectDirectory.replace(new RegExp('/', 'g'), '-');
-  const projectRoot = `${getWorkspaceLayout(tree).libsDir}/${projectDirectory}`;
-  const parsedTags = options.tags
-    ? options.tags.split(',').map((s) => s.trim())
-    : [];
+) {
+  const workspaceLayout = getWorkspaceLayout(tree);
+  const projectConfiguration = readProjectConfiguration(tree, options.project);
 
-  return {
-    ...options,
-    projectName,
-    projectRoot,
-    projectDirectory,
-    parsedTags,
-  };
-}
-
-function addFiles(tree: Tree, options: NormalizedSchema) {
-  const templateOptions = {
-    ...options,
-    ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
-    template: '',
-  };
-  generateFiles(
+  const tsconfig = determineTsconfigFile(
     tree,
-    path.join(__dirname, 'files'),
-    options.projectRoot,
-    templateOptions,
+    options,
+    workspaceLayout,
+    projectConfiguration,
   );
+
+  projectConfiguration.targets.compodoc = {
+    executor: '@twittwer/compodoc:compodoc',
+    options: {
+      tsConfig: joinPathFragments(projectConfiguration.root, tsconfig),
+      outputPath: joinPathFragments('dist', 'compodoc', options.project),
+    },
+    configurations: { json: { exportFormat: 'json' } },
+  };
+  if (options.workspaceDocs) {
+    projectConfiguration.targets.compodoc.options.workspaceDocs = true;
+  }
+
+  updateProjectConfiguration(tree, options.project, projectConfiguration);
+  await formatFiles(tree);
 }
 
-export default async function (tree: Tree, options: CompodocGeneratorSchema) {
-  const normalizedOptions = normalizeOptions(tree, options);
-  addProjectConfiguration(tree, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'library',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      build: {
-        executor: '@twittwer/compodoc:build',
-      },
-    },
-    tags: normalizedOptions.parsedTags,
-  });
-  addFiles(tree, normalizedOptions);
-  await formatFiles(tree);
+function determineTsconfigFile(
+  tree: Tree,
+  options: CompodocGeneratorSchema,
+  { appsDir, libsDir }: WorkspaceLayout,
+  projectConfiguration: ProjectConfiguration,
+): string {
+  const tsconfig = [
+    'tsconfig.compodoc.json',
+    ...{
+      application: ['tsconfig.editor.json', 'tsconfig.app.json'],
+      library: ['tsconfig.lib.json'],
+    }[projectConfiguration.projectType],
+    'tsconfig.json',
+  ].find((tsconfig) => tree.exists(join(projectConfiguration.root, tsconfig)));
+  if (!tsconfig) {
+    throw new Error(
+      `Missing tsconfig: Cannot find a "tsconfig[.(compodoc|lib|editor|app)].json" file in "${projectConfiguration.root}".`,
+    );
+  }
+
+  if (options.workspaceDocs && tsconfig !== 'tsconfig.compodoc.json') {
+    generateFiles(tree, join(__dirname, 'files'), projectConfiguration.root, {
+      tsConfigBaseFile: tsconfig,
+      offsetFromRoot: offsetFromRoot(projectConfiguration.root),
+      appsDir,
+      libsDir,
+    });
+    return 'tsconfig.compodoc.json';
+  }
+
+  return tsconfig;
 }
