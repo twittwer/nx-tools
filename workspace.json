@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "compodoc": "packages/compodoc",
+    "compodoc-e2e": "packages/compodoc-e2e"
+  }
+}

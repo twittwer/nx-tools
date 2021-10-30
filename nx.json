@@ -1,0 +1,19 @@
+{
+  "extends": "@nrwl/workspace/presets/npm.json",
+  "npmScope": "twittwer",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZjI4ZjE3NWMtMDEyZi00YmJkLWIwYTMtMDcwNzQzOGNlZDAxfHJlYWQtd3JpdGU="
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
+}

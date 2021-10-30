@@ -1,0 +1,16 @@
+{
+  "root": "packages/compodoc-e2e",
+  "projectType": "application",
+  "sourceRoot": "packages/compodoc-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/nx-plugin:e2e",
+      "options": {
+        "target": "compodoc:build",
+        "jestConfig": "packages/compodoc-e2e/jest.config.js"
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["compodoc"]
+}

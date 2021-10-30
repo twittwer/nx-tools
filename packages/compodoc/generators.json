@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "compodoc",
+  "version": "0.0.1",
+  "generators": {
+    "compodoc": {
+      "factory": "./src/generators/compodoc/generator",
+      "schema": "./src/generators/compodoc/schema.json",
+      "description": "compodoc generator"
+    }
+  }
+}
