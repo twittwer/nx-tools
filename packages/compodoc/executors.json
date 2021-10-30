@@ -1,10 +1,15 @@
 {
   "$schema": "http://json-schema.org/schema",
   "executors": {
-    "build": {
+    "_build": {
       "implementation": "./src/executors/build/executor",
       "schema": "./src/executors/build/schema.json",
-      "description": "build executor"
+      "description": "Executor for documentation generation via Compodoc."
+    },
+    "compodoc": {
+      "implementation": "./src/executors/build/executor",
+      "schema": "./src/executors/build/schema.json",
+      "description": "Executor for documentation generation via Compodoc."
     }
   }
 }
