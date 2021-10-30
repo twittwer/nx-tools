@@ -1,0 +1,4 @@
+{
+  "extends": "<%= tsconfigBase %>",
+  "include": [<%- includes.map(JSON.stringify).join(',') %>]
+}
