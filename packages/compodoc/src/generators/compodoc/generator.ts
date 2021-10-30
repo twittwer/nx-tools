@@ -1,4 +1,5 @@
 import {
+  addDependenciesToPackageJson,
   formatFiles,
   generateFiles,
   getWorkspaceLayout,
@@ -18,6 +19,12 @@ export default async function runGenerator(
   tree: Tree,
   options: CompodocGeneratorSchema,
 ) {
+  const init = addDependenciesToPackageJson(
+    tree,
+    {},
+    { '@compodoc/compodoc': '^1.1.15' },
+  );
+
   const workspaceLayout = getWorkspaceLayout(tree);
   const projectConfiguration = readProjectConfiguration(tree, options.project);
 
@@ -42,6 +49,7 @@ export default async function runGenerator(
 
   updateProjectConfiguration(tree, options.project, projectConfiguration);
   await formatFiles(tree);
+  return init;
 }
 
 function determineTsconfigFile(
