@@ -13,5 +13,8 @@
       }
     }
   },
-  "projects": {}
+  "projects": {},
+  "cli": {
+    "defaultCollection": "@nrwl/workspace"
+  }
 }

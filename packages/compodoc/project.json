@@ -50,6 +50,50 @@
           }
         ]
       }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "baseBranch": "main"
+      },
+      "configurations": {
+        "local": {
+          "versionTagPrefix": "local/${target}/v"
+        },
+        "remote": {
+          "versionTagPrefix": "${target}/v",
+          "push": true,
+          "postTargets": ["compodoc:github"]
+        }
+      }
+    },
+    "github": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "${tag}"
+      }
+    },
+    "release": {
+      "builder": "@nrwl/workspace:run-commands",
+      "options": {
+        "parallel": false
+      },
+      "configurations": {
+        "local": {
+          "commands": [
+            "nx run compodoc:version:local",
+            "nx run compodoc:build",
+            "npm publish dist/packages/compodoc"
+          ]
+        },
+        "remote": {
+          "commands": [
+            "nx run compodoc:version:remote",
+            "nx run compodoc:build",
+            "npm publish dist/packages/compodoc"
+          ]
+        }
+      }
     }
   },
   "tags": []
