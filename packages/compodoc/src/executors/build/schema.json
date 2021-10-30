@@ -196,6 +196,11 @@
     "silent": {
       "description": "Suppress verbose build output.",
       "type": "boolean"
+    },
+    "debug": {
+      "description": "Show executor logs like compodoc command with arguments and working directory.",
+      "type": "boolean",
+      "default": false
     }
   },
   "required": []

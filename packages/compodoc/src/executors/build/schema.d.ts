@@ -5,6 +5,8 @@ export interface BuildExecutorSchema
 
   /** @default false */
   workspaceDocs: boolean;
+  /** @default false */
+  debug: boolean;
 }
 
 export interface CompodocOptions {

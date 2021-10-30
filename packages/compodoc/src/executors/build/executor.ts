@@ -19,7 +19,7 @@ export default async function runExecutor(
   options: BuildExecutorSchema,
   context: ExecutorContext,
 ) {
-  console.log('Building Compodoc...', options);
+  options.debug && console.log('Prepare Compodoc...\n', options);
 
   const project = context.workspace.projects[context.projectName];
 
@@ -37,8 +37,14 @@ export default async function runExecutor(
   }
 
   return new Promise<{ success: boolean }>((resolve) => {
-    console.log({ command, args, processOpts });
-    const childProcess = spawn(command, args, processOpts);
+    options.debug &&
+      console.log('Spawn Compodoc...', {
+        command: cmd,
+        arguments: cmdArgs,
+        options: cmdOpts,
+      });
+
+    const childProcess = spawn(cmd, cmdArgs, cmdOpts);
 
     process.on('exit', () => childProcess.kill());
     process.on('SIGTERM', () => childProcess.kill());
