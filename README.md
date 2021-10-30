@@ -6,3 +6,4 @@
 
 | Project                         | Description                         |
 | ------------------------------- | ----------------------------------- |
+| [Compodoc](./packages/compodoc) | Compodoc executor for Nx workspaces |
