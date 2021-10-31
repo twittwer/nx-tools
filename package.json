@@ -1,7 +1,5 @@
 {
   "name": "nx-tools",
-  "version": "0.0.0",
-  "license": "MIT",
   "scripts": {
     "prepare": "husky install",
     "cz": "cz",
@@ -9,7 +7,6 @@
     "local-registry": "./scripts/local-registry.sh",
     "local-registry:run": "npm run local-registry run"
   },
-  "private": true,
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -46,5 +43,22 @@
     "ts-jest": "27.0.7",
     "typescript": "4.4.4",
     "verdaccio": "5.2.0"
-  }
+  },
+  "version": "0.0.0",
+  "private": false,
+  "license": "MIT",
+  "author": "Tobias Wittwer <t.wittwer95@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twittwer/nx-tools.git"
+  },
+  "homepage": "https://github.com/twittwer/nx-tools#readme",
+  "bugs": {
+    "url": "https://github.com/twittwer/nx-tools/issues"
+  },
+  "keywords": [
+    "nx-plugin",
+    "compodoc",
+    "documentation"
+  ]
 }
