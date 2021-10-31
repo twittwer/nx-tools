@@ -81,16 +81,18 @@
       "configurations": {
         "local": {
           "commands": [
+            "npm run local-registry enable",
             "nx run compodoc:version:local",
             "nx run compodoc:build",
-            "npm publish dist/packages/compodoc"
+            "npm publish --access=public dist/packages/compodoc"
           ]
         },
         "remote": {
           "commands": [
+            "npm run local-registry disable",
             "nx run compodoc:version:remote",
             "nx run compodoc:build",
-            "npm publish dist/packages/compodoc"
+            "npm publish --access=public dist/packages/compodoc"
           ]
         }
       }
