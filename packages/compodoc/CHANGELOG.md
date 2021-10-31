@@ -1,3 +1,24 @@
+# Changelog
+
+This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
+
+# [1.6.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.3...compodoc/v1.6.0) (2021-10-31)
+
+
+### Bug Fixes
+
+* deduplicate includes in tsconfig of workspace docs ([bf76ae4](https://github.com/twittwer/nx-tools/commit/bf76ae43c079abbdbd3b26bac2ac687588b8652d))
+
+
+### Features
+
+* add debug option to log resulting options & compodoc command ([dd8b6de](https://github.com/twittwer/nx-tools/commit/dd8b6de8edc556b6652aebc8cae96a36e7ac2917))
+* ensure compodoc installation during project configuration ([ecb83e3](https://github.com/twittwer/nx-tools/commit/ecb83e36539014483ba0f9d1f9884884135e773a))
+* rewrite compodoc executor (standalone config & watch mode support) ([29fb34c](https://github.com/twittwer/nx-tools/commit/29fb34cd49ad6f14087ec5c727f0c754dc4f05ae))
+* rewrite compodoc generator (standalone config) ([122d772](https://github.com/twittwer/nx-tools/commit/122d772057aa7ccce385d5069d182414cf7cd9ff))
+
+
+
 ## [1.5.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.2...compodoc/v1.5.3) (2021-05-20)
 
 ### Bug Fixes
