@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.6.4](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.3...compodoc/v1.6.4) (2021-10-31)
+
+
+### Bug Fixes
+
+* wrap compodoc watch with nodemon for workspace docs ([a87844e](https://github.com/twittwer/nx-tools/commit/a87844e9c870a753d76169c001eb86a4509f07f6))
+
+
+
 ## [1.6.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.2...compodoc/v1.6.3) (2021-10-31)
 
 
