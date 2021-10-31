@@ -1,5 +1,5 @@
 import { BuildExecutorSchema, CompodocOptions } from './schema';
-import { spawn } from 'child_process';
+import { ChildProcess, spawn } from 'child_process';
 import { join, relative, resolve, sep } from 'path';
 import {
   ExecutorContext,
@@ -37,14 +37,36 @@ export default async function runExecutor(
   }
 
   return new Promise<{ success: boolean }>((resolve) => {
-    options.debug &&
-      console.log('Spawn Compodoc...', {
-        command: cmd,
-        arguments: cmdArgs,
-        options: cmdOpts,
-      });
+    let childProcess: ChildProcess;
 
-    const childProcess = spawn(cmd, cmdArgs, cmdOpts);
+    if (options.watch && options.workspaceDocs) {
+      const _cmd = `${getPackageManagerCommand().exec} nodemon`;
+      const _cmdArgs = [
+        '--ignore dist',
+        '--ext ts',
+        `--exec "${cmd} ${cmdArgs
+          .filter((arg) => !arg.startsWith('--watch'))
+          .join(' ')}"`,
+      ];
+
+      options.debug &&
+        console.log('Spawn Compodoc in nodemon...', {
+          command: _cmd,
+          arguments: _cmdArgs,
+          options: cmdOpts,
+        });
+
+      childProcess = spawn(_cmd, _cmdArgs, cmdOpts);
+    } else {
+      options.debug &&
+        console.log('Spawn Compodoc...', {
+          command: cmd,
+          arguments: cmdArgs,
+          options: cmdOpts,
+        });
+
+      childProcess = spawn(cmd, cmdArgs, cmdOpts);
+    }
 
     process.on('exit', () => childProcess.kill());
     process.on('SIGTERM', () => childProcess.kill());

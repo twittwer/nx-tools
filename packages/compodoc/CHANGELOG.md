@@ -29,7 +29,7 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 
 
-# [1.6.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.3...compodoc/v1.6.0) (2021-10-31)
+## [1.6.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.3...compodoc/v1.6.0) (2021-10-31)
 
 
 ### Bug Fixes
