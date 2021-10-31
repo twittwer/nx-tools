@@ -10,5 +10,21 @@
   },
   "peerDependencies": {
     "@compodoc/compodoc": "^1.1.15"
-  }
+  },
+  "private": false,
+  "license": "MIT",
+  "author": "Tobias Wittwer <t.wittwer95@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twittwer/nx-tools.git"
+  },
+  "homepage": "https://github.com/twittwer/nx-tools/tree/main/packages/compodoc#readme",
+  "bugs": {
+    "url": "https://github.com/twittwer/nx-tools/issues"
+  },
+  "keywords": [
+    "nx-plugin",
+    "compodoc",
+    "documentation"
+  ]
 }
