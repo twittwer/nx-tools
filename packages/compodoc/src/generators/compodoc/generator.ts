@@ -2,13 +2,16 @@ import {
   addDependenciesToPackageJson,
   formatFiles,
   generateFiles,
+  GeneratorCallback,
   getWorkspaceLayout,
   joinPathFragments,
   offsetFromRoot,
   ProjectConfiguration,
   readProjectConfiguration,
+  readWorkspaceConfiguration,
   Tree,
   updateProjectConfiguration,
+  updateWorkspaceConfiguration,
 } from '@nrwl/devkit';
 import { join } from 'path';
 import { CompodocGeneratorSchema } from './schema';
@@ -19,11 +22,7 @@ export default async function runGenerator(
   tree: Tree,
   options: CompodocGeneratorSchema,
 ) {
-  const init = addDependenciesToPackageJson(
-    tree,
-    {},
-    { '@compodoc/compodoc': '^1.1.15' },
-  );
+  const _init = init(tree);
 
   const workspaceLayout = getWorkspaceLayout(tree);
   const projectConfiguration = readProjectConfiguration(tree, options.project);
@@ -48,8 +47,42 @@ export default async function runGenerator(
   }
 
   updateProjectConfiguration(tree, options.project, projectConfiguration);
+
   await formatFiles(tree);
-  return init;
+  return _init;
+}
+
+function init(tree: Tree): GeneratorCallback {
+  const install = addDependenciesToPackageJson(
+    tree,
+    {},
+    { '@compodoc/compodoc': '^1.1.15' },
+  );
+
+  const workspaceConfiguration = readWorkspaceConfiguration(tree);
+  if (
+    workspaceConfiguration.tasksRunnerOptions?.default?.runner ===
+    '@nrwl/workspace/tasks-runners/default'
+  ) {
+    workspaceConfiguration.tasksRunnerOptions.default.options =
+      workspaceConfiguration.tasksRunnerOptions.default.options || {};
+    workspaceConfiguration.tasksRunnerOptions.default.options.cacheableOperations =
+      workspaceConfiguration.tasksRunnerOptions.default.options
+        .cacheableOperations || [];
+
+    if (
+      !workspaceConfiguration.tasksRunnerOptions.default.options.cacheableOperations.includes(
+        'compodoc',
+      )
+    ) {
+      workspaceConfiguration.tasksRunnerOptions.default.options.cacheableOperations.push(
+        'compodoc',
+      );
+      updateWorkspaceConfiguration(tree, workspaceConfiguration);
+    }
+  }
+
+  return install;
 }
 
 function determineTsconfigFile(
