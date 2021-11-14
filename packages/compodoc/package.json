@@ -1,6 +1,6 @@
 {
   "name": "@twittwer/compodoc",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",
