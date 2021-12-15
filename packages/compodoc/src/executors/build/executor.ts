@@ -4,6 +4,7 @@ import { join, relative, resolve, sep } from 'path';
 import {
   ExecutorContext,
   getPackageManagerCommand,
+  joinPathFragments,
   readJsonFile,
 } from '@nrwl/devkit';
 import {
@@ -25,12 +26,13 @@ export default async function runExecutor(
 
   const args = toCompodocOptions(options, context);
 
+  const cwd = options.workspaceDocs
+    ? context.root
+    : joinPathFragments(context.root, project.root);
+
   const cmd = `${getPackageManagerCommand().exec} compodoc`;
   const cmdArgs = toArguments(toCompodocOptions(options, context));
-  const cmdOpts = {
-    cwd: options.workspaceDocs ? context.root : project.root,
-    shell: true,
-  };
+  const cmdOpts = { cwd, shell: true };
 
   if (options.watch && options.exportFormat === 'json') {
     createInitialCompodocJson(args);
@@ -179,7 +181,9 @@ function toRelativePath(
     return undefined;
   }
   const project = context.workspace.projects[context.projectName];
-  const currentDirectory = options.workspaceDocs ? context.root : project.root;
+  const currentDirectory = options.workspaceDocs
+    ? context.root
+    : joinPathFragments(context.root, project.root);
   const absolutePath = resolve(context.root, pathInWorkspace);
   return relative(currentDirectory, absolutePath);
 }
