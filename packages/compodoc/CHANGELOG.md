@@ -2,6 +2,16 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.6.6](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.5...compodoc/v1.6.6) (2021-12-15)
+
+
+### Bug Fixes
+
+* ensure consistent root based working directory ([4471710](https://github.com/twittwer/nx-tools/commit/44717101fec66d59268812e5f69773abb628ec7e))
+* execute compodoc via node_modules instead of package manager ([ee0e7fb](https://github.com/twittwer/nx-tools/commit/ee0e7fba5fd8f7d40e5fbfcefd5dc03690e4b510)), closes [#56](https://github.com/twittwer/nx-tools/issues/56)
+
+
+
 # 0.1.0 (2021-12-15)
 
 
