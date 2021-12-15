@@ -30,7 +30,10 @@ export default async function runExecutor(
     ? context.root
     : joinPathFragments(context.root, project.root);
 
-  const cmd = `${getPackageManagerCommand().exec} compodoc`;
+  const cmd = relative(
+    cwd,
+    joinPathFragments(context.root, 'node_modules', '.bin', 'compodoc'),
+  );
   const cmdArgs = toArguments(toCompodocOptions(options, context));
   const cmdOpts = { cwd, shell: true };
 
