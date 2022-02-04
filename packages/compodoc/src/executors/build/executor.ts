@@ -20,9 +20,13 @@ export default async function runExecutor(
   options: BuildExecutorSchema,
   context: ExecutorContext,
 ) {
-  options.debug && console.log('Prepare Compodoc...\n', options);
 
   const project = context.workspace.projects[context.projectName];
+
+  options.tsConfig = options.tsConfig ? resolve(context.root, options.tsConfig) : resolve(project.root, 'tsconfig.json');
+  options.outputPath = options.outputPath ? resolve(context.root, options.outputPath) : resolve('dist', 'compodoc', context.projectName);
+
+  options.debug && console.log('Prepare Compodoc...\n', options);
 
   const args = toCompodocOptions(options, context);
 
@@ -94,15 +98,10 @@ function toCompodocOptions(
   context: ExecutorContext,
 ): CompodocOptions {
   const _: [BuildExecutorSchema, ExecutorContext] = [options, context];
-  const project = context.workspace.projects[context.projectName];
 
   return {
-    tsconfig: options.tsConfig
-      ? resolve(context.root, options.tsConfig)
-      : resolve(project.root, 'tsconfig.json'),
-    output: options.outputPath
-      ? resolve(context.root, options.outputPath)
-      : resolve('dist', 'compodoc', context.projectName),
+    tsconfig: options.tsConfig,
+    output: options.outputPath,
 
     exportFormat: options.exportFormat,
     minimal: options.exportFormat === 'json',
