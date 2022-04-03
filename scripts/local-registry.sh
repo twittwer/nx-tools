@@ -5,6 +5,10 @@
 
 COMMAND=$1
 
+status() {
+	echo "Current registry: $(npm config get registry)"
+}
+
 enable() {
   echo "Setting registry to local"
 	echo "To Disable: npm run local-registry disable"
@@ -13,22 +17,24 @@ enable() {
 
 disable() {
 	npm config delete registry
-	CURRENT_NPM_REGISTRY=$(npm config get registry)
-	echo "Resetting registry to global"
+	echo "Resetting local registry"
 }
 
 start() {
-	echo "Starting Local Registry"
+	echo "Starting local registry"
 	VERDACCIO_HANDLE_KILL_SIGNALS=true
-	npx verdaccio --config ./verdaccio.json
+	npx verdaccio --config ./.verdaccio/config.json
 }
 
 clear() {
-	echo "Clearing Local Registry"
+	echo "Clearing local registry"
 	rm -rf ./.data/local-registry
 }
 
 case $COMMAND in
+  status)
+    status
+  ;;
   enable)
     enable
   ;;
