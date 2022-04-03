@@ -2,3 +2,7 @@
 
 /dist
 /coverage
+
+.data
+
+/packages/**/files/**/*.json__tpl__

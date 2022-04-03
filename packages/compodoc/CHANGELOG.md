@@ -4,97 +4,71 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 ## [1.6.6](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.5...compodoc/v1.6.6) (2021-12-15)
 
-
 ### Bug Fixes
 
-* ensure consistent root based working directory ([4471710](https://github.com/twittwer/nx-tools/commit/44717101fec66d59268812e5f69773abb628ec7e))
-* execute compodoc via node_modules instead of package manager ([ee0e7fb](https://github.com/twittwer/nx-tools/commit/ee0e7fba5fd8f7d40e5fbfcefd5dc03690e4b510)), closes [#56](https://github.com/twittwer/nx-tools/issues/56)
-
-
+- ensure consistent root based working directory ([4471710](https://github.com/twittwer/nx-tools/commit/44717101fec66d59268812e5f69773abb628ec7e))
+- execute compodoc via node_modules instead of package manager ([ee0e7fb](https://github.com/twittwer/nx-tools/commit/ee0e7fba5fd8f7d40e5fbfcefd5dc03690e4b510)), closes [#56](https://github.com/twittwer/nx-tools/issues/56)
 
 # 0.1.0 (2021-12-15)
 
-
 ### Bug Fixes
 
-* add compodoc to cachable operations [#54](https://github.com/twittwer/nx-tools/issues/54) ([d010072](https://github.com/twittwer/nx-tools/commit/d01007227519eab8532cfb80ca45342747d6f174))
-* add missing package.json configuration ([0698418](https://github.com/twittwer/nx-tools/commit/0698418e6d849da59d60ab1ace900a6abf837e62))
-* deduplicate includes in tsconfig of workspace docs ([bf76ae4](https://github.com/twittwer/nx-tools/commit/bf76ae43c079abbdbd3b26bac2ac687588b8652d))
-* ensure public package access ([ce69c71](https://github.com/twittwer/nx-tools/commit/ce69c71be069759d299cc96900e8a085e724fc59))
-* ensure public version access ([d4ba25a](https://github.com/twittwer/nx-tools/commit/d4ba25a98a6a37130dcda6900c6a7170281ebfb7))
-* wrap compodoc watch with nodemon for workspace docs ([a87844e](https://github.com/twittwer/nx-tools/commit/a87844e9c870a753d76169c001eb86a4509f07f6))
-
+- add compodoc to cachable operations [#54](https://github.com/twittwer/nx-tools/issues/54) ([d010072](https://github.com/twittwer/nx-tools/commit/d01007227519eab8532cfb80ca45342747d6f174))
+- add missing package.json configuration ([0698418](https://github.com/twittwer/nx-tools/commit/0698418e6d849da59d60ab1ace900a6abf837e62))
+- deduplicate includes in tsconfig of workspace docs ([bf76ae4](https://github.com/twittwer/nx-tools/commit/bf76ae43c079abbdbd3b26bac2ac687588b8652d))
+- ensure public package access ([ce69c71](https://github.com/twittwer/nx-tools/commit/ce69c71be069759d299cc96900e8a085e724fc59))
+- ensure public version access ([d4ba25a](https://github.com/twittwer/nx-tools/commit/d4ba25a98a6a37130dcda6900c6a7170281ebfb7))
+- wrap compodoc watch with nodemon for workspace docs ([a87844e](https://github.com/twittwer/nx-tools/commit/a87844e9c870a753d76169c001eb86a4509f07f6))
 
 ### Features
 
-* add debug option to log resulting options & compodoc command ([dd8b6de](https://github.com/twittwer/nx-tools/commit/dd8b6de8edc556b6652aebc8cae96a36e7ac2917))
-* ensure compodoc installation during project configuration ([ecb83e3](https://github.com/twittwer/nx-tools/commit/ecb83e36539014483ba0f9d1f9884884135e773a))
-* rewrite compodoc executor (standalone config & watch mode support) ([29fb34c](https://github.com/twittwer/nx-tools/commit/29fb34cd49ad6f14087ec5c727f0c754dc4f05ae))
-* rewrite compodoc generator (standalone config) ([122d772](https://github.com/twittwer/nx-tools/commit/122d772057aa7ccce385d5069d182414cf7cd9ff))
-
-
+- add debug option to log resulting options & compodoc command ([dd8b6de](https://github.com/twittwer/nx-tools/commit/dd8b6de8edc556b6652aebc8cae96a36e7ac2917))
+- ensure compodoc installation during project configuration ([ecb83e3](https://github.com/twittwer/nx-tools/commit/ecb83e36539014483ba0f9d1f9884884135e773a))
+- rewrite compodoc executor (standalone config & watch mode support) ([29fb34c](https://github.com/twittwer/nx-tools/commit/29fb34cd49ad6f14087ec5c727f0c754dc4f05ae))
+- rewrite compodoc generator (standalone config) ([122d772](https://github.com/twittwer/nx-tools/commit/122d772057aa7ccce385d5069d182414cf7cd9ff))
 
 ## [1.6.5](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.4...compodoc/v1.6.5) (2021-11-14)
 
-
 ### Bug Fixes
 
-* add compodoc to cachable operations [#54](https://github.com/twittwer/nx-tools/issues/54) ([d010072](https://github.com/twittwer/nx-tools/commit/d01007227519eab8532cfb80ca45342747d6f174))
-
-
+- add compodoc to cachable operations [#54](https://github.com/twittwer/nx-tools/issues/54) ([d010072](https://github.com/twittwer/nx-tools/commit/d01007227519eab8532cfb80ca45342747d6f174))
 
 ## [1.6.4](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.3...compodoc/v1.6.4) (2021-10-31)
 
-
 ### Bug Fixes
 
-* wrap compodoc watch with nodemon for workspace docs ([a87844e](https://github.com/twittwer/nx-tools/commit/a87844e9c870a753d76169c001eb86a4509f07f6))
-
-
+- wrap compodoc watch with nodemon for workspace docs ([a87844e](https://github.com/twittwer/nx-tools/commit/a87844e9c870a753d76169c001eb86a4509f07f6))
 
 ## [1.6.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.2...compodoc/v1.6.3) (2021-10-31)
 
-
 ### Bug Fixes
 
-* ensure public package access ([ce69c71](https://github.com/twittwer/nx-tools/commit/ce69c71be069759d299cc96900e8a085e724fc59))
-
-
+- ensure public package access ([ce69c71](https://github.com/twittwer/nx-tools/commit/ce69c71be069759d299cc96900e8a085e724fc59))
 
 ## [1.6.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.1...compodoc/v1.6.2) (2021-10-31)
 
-
 ### Bug Fixes
 
-* add missing package.json configuration ([0698418](https://github.com/twittwer/nx-tools/commit/0698418e6d849da59d60ab1ace900a6abf837e62))
-
-
+- add missing package.json configuration ([0698418](https://github.com/twittwer/nx-tools/commit/0698418e6d849da59d60ab1ace900a6abf837e62))
 
 ## [1.6.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.0...compodoc/v1.6.1) (2021-10-31)
 
-
 ### Bug Fixes
 
-* ensure public version access ([d4ba25a](https://github.com/twittwer/nx-tools/commit/d4ba25a98a6a37130dcda6900c6a7170281ebfb7))
-
-
+- ensure public version access ([d4ba25a](https://github.com/twittwer/nx-tools/commit/d4ba25a98a6a37130dcda6900c6a7170281ebfb7))
 
 ## [1.6.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.3...compodoc/v1.6.0) (2021-10-31)
 
-
 ### Bug Fixes
 
-* deduplicate includes in tsconfig of workspace docs ([bf76ae4](https://github.com/twittwer/nx-tools/commit/bf76ae43c079abbdbd3b26bac2ac687588b8652d))
-
+- deduplicate includes in tsconfig of workspace docs ([bf76ae4](https://github.com/twittwer/nx-tools/commit/bf76ae43c079abbdbd3b26bac2ac687588b8652d))
 
 ### Features
 
-* add debug option to log resulting options & compodoc command ([dd8b6de](https://github.com/twittwer/nx-tools/commit/dd8b6de8edc556b6652aebc8cae96a36e7ac2917))
-* ensure compodoc installation during project configuration ([ecb83e3](https://github.com/twittwer/nx-tools/commit/ecb83e36539014483ba0f9d1f9884884135e773a))
-* rewrite compodoc executor (standalone config & watch mode support) ([29fb34c](https://github.com/twittwer/nx-tools/commit/29fb34cd49ad6f14087ec5c727f0c754dc4f05ae))
-* rewrite compodoc generator (standalone config) ([122d772](https://github.com/twittwer/nx-tools/commit/122d772057aa7ccce385d5069d182414cf7cd9ff))
-
-
+- add debug option to log resulting options & compodoc command ([dd8b6de](https://github.com/twittwer/nx-tools/commit/dd8b6de8edc556b6652aebc8cae96a36e7ac2917))
+- ensure compodoc installation during project configuration ([ecb83e3](https://github.com/twittwer/nx-tools/commit/ecb83e36539014483ba0f9d1f9884884135e773a))
+- rewrite compodoc executor (standalone config & watch mode support) ([29fb34c](https://github.com/twittwer/nx-tools/commit/29fb34cd49ad6f14087ec5c727f0c754dc4f05ae))
+- rewrite compodoc generator (standalone config) ([122d772](https://github.com/twittwer/nx-tools/commit/122d772057aa7ccce385d5069d182414cf7cd9ff))
 
 ## [1.5.3](https://github.com/twittwer/nx-tools/compare/compodoc/v1.5.2...compodoc/v1.5.3) (2021-05-20)
 

@@ -112,6 +112,7 @@ function determineTsconfigFile(
     generateFiles(tree, join(__dirname, 'files'), projectConfiguration.root, {
       tsconfigBase: `./${tsconfig}`,
       includes: includes,
+      tpl: '',
     });
     return 'tsconfig.compodoc.json';
   }

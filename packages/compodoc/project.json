@@ -19,7 +19,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/node:package",
+      "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/compodoc",
@@ -74,7 +74,7 @@
       }
     },
     "release": {
-      "builder": "@nrwl/workspace:run-commands",
+      "executor": "@nrwl/workspace:run-commands",
       "options": {
         "parallel": false
       },
