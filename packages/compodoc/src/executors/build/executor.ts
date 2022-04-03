@@ -1,12 +1,10 @@
-import { BuildExecutorSchema, CompodocOptions } from './schema';
-import { ChildProcess, spawn } from 'child_process';
-import { join, relative, resolve, sep } from 'path';
 import {
   ExecutorContext,
   getPackageManagerCommand,
   joinPathFragments,
   readJsonFile,
 } from '@nrwl/devkit';
+import { ChildProcess, spawn } from 'child_process';
 import {
   copyFileSync,
   existsSync,
@@ -15,6 +13,8 @@ import {
   writeFileSync,
 } from 'fs';
 import { tmpdir } from 'os';
+import { join, relative, resolve } from 'path';
+import { BuildExecutorSchema, CompodocOptions } from './schema';
 
 export default async function runExecutor(
   options: BuildExecutorSchema,
@@ -34,7 +34,7 @@ export default async function runExecutor(
     cwd,
     joinPathFragments(context.root, 'node_modules', '.bin', 'compodoc'),
   );
-  const cmdArgs = toArguments(toCompodocOptions(options, context));
+  const cmdArgs = toArguments(args);
   const cmdOpts = { cwd, shell: true };
 
   if (options.watch && options.exportFormat === 'json') {
@@ -96,13 +96,12 @@ function toCompodocOptions(
   const _: [BuildExecutorSchema, ExecutorContext] = [options, context];
   const project = context.workspace.projects[context.projectName];
 
+  options.tsConfig ??= `${project.root}/tsconfig.json`;
+  options.outputPath ??= `dist/compodoc/${context.projectName}`;
+
   return {
-    tsconfig: options.tsConfig
-      ? resolve(context.root, options.tsConfig)
-      : resolve(project.root, 'tsconfig.json'),
-    output: options.outputPath
-      ? resolve(context.root, options.outputPath)
-      : resolve('dist', 'compodoc', context.projectName),
+    tsconfig: toRelativePath(options.tsConfig, ..._),
+    output: toRelativePath(options.outputPath, ..._),
 
     exportFormat: options.exportFormat,
     minimal: options.exportFormat === 'json',
