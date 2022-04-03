@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.7.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.6...compodoc/v1.7.0) (2022-04-03)
+
+
+### Features
+
+* use always relative paths ([38ecc72](https://github.com/twittwer/nx-tools/commit/38ecc722ef6d96b8a1a29a103f9de5b281387aee)), closes [#63](https://github.com/twittwer/nx-tools/issues/63)
+
+
+
 ## [1.6.6](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.5...compodoc/v1.6.6) (2021-12-15)
 
 ### Bug Fixes
