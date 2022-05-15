@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'compodoc',
   preset: '../../jest.preset.js',
   globals: {

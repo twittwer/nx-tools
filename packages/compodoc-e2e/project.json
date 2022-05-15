@@ -1,5 +1,4 @@
 {
-  "root": "packages/compodoc-e2e",
   "projectType": "application",
   "sourceRoot": "packages/compodoc-e2e/src",
   "targets": {
