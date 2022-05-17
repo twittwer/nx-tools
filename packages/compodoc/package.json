@@ -5,7 +5,7 @@
   "generators": "./generators.json",
   "executors": "./executors.json",
   "dependencies": {
-    "@nrwl/devkit": "^13.1.2",
+    "@nrwl/devkit": "^14.1.5",
     "tslib": "^2.3.1"
   },
   "peerDependencies": {

@@ -1,5 +1,4 @@
 {
-  "root": "packages/compodoc",
   "sourceRoot": "packages/compodoc/src",
   "projectType": "library",
   "targets": {
@@ -14,7 +13,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/packages/compodoc"],
       "options": {
-        "jestConfig": "packages/compodoc/jest.config.js",
+        "jestConfig": "packages/compodoc/jest.config.ts",
         "passWithNoTests": true
       }
     },
