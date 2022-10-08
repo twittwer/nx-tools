@@ -60,10 +60,7 @@ function init(tree: Tree): GeneratorCallback {
   );
 
   const workspaceConfiguration = readWorkspaceConfiguration(tree);
-  if (
-    workspaceConfiguration.tasksRunnerOptions?.default?.runner ===
-    '@nrwl/workspace/tasks-runners/default'
-  ) {
+  if (workspaceConfiguration.tasksRunnerOptions?.default) {
     workspaceConfiguration.tasksRunnerOptions.default.options =
       workspaceConfiguration.tasksRunnerOptions.default.options || {};
     workspaceConfiguration.tasksRunnerOptions.default.options.cacheableOperations =
