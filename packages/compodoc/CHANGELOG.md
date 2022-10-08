@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.8.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.8.1...compodoc/v1.8.2) (2022-10-08)
+
+
+### Bug Fixes
+
+* remove name check for task runner ([748df80](https://github.com/twittwer/nx-tools/commit/748df805ec16c3d76bab60a6e7137715f9668c4c))
+
+
+
 ## [1.8.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.8.0...compodoc/v1.8.1) (2022-10-08)
 
 
