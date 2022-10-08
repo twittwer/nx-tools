@@ -4,12 +4,9 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 # [1.8.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.7.0...compodoc/v1.8.0) (2022-05-17)
 
-
 ### Features
 
-* update to Nx 14 ([3b8506c](https://github.com/twittwer/nx-tools/commit/3b8506cee6f077e22b6112c2fec30889e05f1445))
-
-
+- update to Nx 14 ([3b8506c](https://github.com/twittwer/nx-tools/commit/3b8506cee6f077e22b6112c2fec30889e05f1445))
 
 # [1.7.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.6.6...compodoc/v1.7.0) (2022-04-03)
 
