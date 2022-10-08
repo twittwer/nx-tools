@@ -6,6 +6,7 @@
   "executors": "./executors.json",
   "dependencies": {
     "@nrwl/devkit": "^14.8.3",
+    "nx": "^14.8.3",
     "tslib": "^2.4.0"
   },
   "peerDependencies": {
