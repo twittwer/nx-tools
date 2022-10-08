@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [beta]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+      - name: Setup Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "twittwer@users.noreply.github.com"
+      - name: Install Dependencies
+        run: npm ci
+      - name: Beta Release
+        if: ${{ github.ref == 'refs/heads/beta' }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx nx run compodoc:release:beta
+      - name: Release
+        if: ${{ github.ref == 'refs/heads/main' }}
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx nx run compodoc:release:remote

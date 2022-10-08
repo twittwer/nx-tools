@@ -54,17 +54,22 @@
     "version": {
       "executor": "@jscutlery/semver:version",
       "options": {
-        "baseBranch": "main"
+        "baseBranch": "main",
+        "versionTagPrefix": "${target}/v",
+        "push": true,
+        "postTargets": ["compodoc:github"]
       },
       "configurations": {
         "local": {
-          "versionTagPrefix": "local/${target}/v"
+          "versionTagPrefix": "local/${target}/v",
+          "push": false,
+          "postTargets": []
         },
-        "remote": {
-          "versionTagPrefix": "${target}/v",
-          "push": true,
-          "postTargets": ["compodoc:github"]
-        }
+        "beta": {
+          "baseBranch": "beta",
+          "releaseAs": "prerelease"
+        },
+        "remote": {}
       }
     },
     "github": {
@@ -85,6 +90,14 @@
             "nx run compodoc:version:local",
             "nx run compodoc:build",
             "npm publish dist/packages/compodoc --access public --tag latest"
+          ]
+        },
+        "beta": {
+          "commands": [
+            "npm run local-registry disable",
+            "nx run compodoc:version:beta",
+            "nx run compodoc:build",
+            "npm publish dist/packages/compodoc --access public --tag beta"
           ]
         },
         "remote": {
