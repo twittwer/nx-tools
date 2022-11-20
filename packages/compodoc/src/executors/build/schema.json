@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "outputCapture": "direct-nodejs",
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "title": "Build Compodoc",
@@ -22,7 +24,14 @@
       "description": "Format of generated documentation: html, json (json implicitly enables Compodoc's `minimal` mode)",
       "type": "string",
       "default": "html",
-      "anyOf": [{ "enum": ["html", "json"] }, { "minLength": 1 }]
+      "anyOf": [
+        {
+          "enum": ["html", "json"]
+        },
+        {
+          "minLength": 1
+        }
+      ]
     },
     "name": {
       "description": "Title of the documentation. (`workspaceDocs` uses workspace name as default - defined in `package.json`)",
