@@ -4,21 +4,15 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 ## [1.8.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.8.1...compodoc/v1.8.2) (2022-10-08)
 
-
 ### Bug Fixes
 
-* remove name check for task runner ([748df80](https://github.com/twittwer/nx-tools/commit/748df805ec16c3d76bab60a6e7137715f9668c4c))
-
-
+- remove name check for task runner ([748df80](https://github.com/twittwer/nx-tools/commit/748df805ec16c3d76bab60a6e7137715f9668c4c))
 
 ## [1.8.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.8.0...compodoc/v1.8.1) (2022-10-08)
 
-
 ### Bug Fixes
 
-* add nx as dependency for backwards compatibility ([3a1261a](https://github.com/twittwer/nx-tools/commit/3a1261a9b017ba0bf3a98f176f16a52c276b1d86)), closes [#70](https://github.com/twittwer/nx-tools/issues/70)
-
-
+- add nx as dependency for backwards compatibility ([3a1261a](https://github.com/twittwer/nx-tools/commit/3a1261a9b017ba0bf3a98f176f16a52c276b1d86)), closes [#70](https://github.com/twittwer/nx-tools/issues/70)
 
 # [1.8.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.7.0...compodoc/v1.8.0) (2022-05-17)
 

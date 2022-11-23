@@ -23,7 +23,7 @@ npx nx format
 git add .
 git commit -am "Workspace Setup"
 
-npm i -D @twittwer/compodoc@latest
+npm i --legacy-peer-deps -D @twittwer/compodoc@latest
 
 git commit -am "Install @twittwer/compodoc"
 

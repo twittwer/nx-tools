@@ -56,7 +56,7 @@ function init(tree: Tree): GeneratorCallback {
   const install = addDependenciesToPackageJson(
     tree,
     {},
-    { '@compodoc/compodoc': '^1.1.15' },
+    { '@compodoc/compodoc': '^1.1.19' },
   );
 
   const workspaceConfiguration = readWorkspaceConfiguration(tree);
