@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.9.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.8.2...compodoc/v1.9.0) (2022-11-23)
+
+
+### Features
+
+* update to Nx 15 ([102c80c](https://github.com/twittwer/nx-tools/commit/102c80c7c163cc1787e2c439c6e307635f025b01))
+
+
+
 ## [1.8.2](https://github.com/twittwer/nx-tools/compare/compodoc/v1.8.1...compodoc/v1.8.2) (2022-10-08)
 
 ### Bug Fixes
