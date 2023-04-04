@@ -3,7 +3,7 @@ import {
   getPackageManagerCommand,
   joinPathFragments,
   readJsonFile,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { ChildProcess, spawn } from 'child_process';
 import {
   copyFileSync,
@@ -20,7 +20,9 @@ export default async function runExecutor(
   options: BuildExecutorSchema,
   context: ExecutorContext,
 ) {
-  options.debug && console.log('Prepare Compodoc...\n', options);
+  const debug = (...args: any[]) => options.debug && console.log(...args);
+
+  debug('Prepare Compodoc...\n', options);
 
   const project = context.workspace.projects[context.projectName];
 
@@ -54,21 +56,19 @@ export default async function runExecutor(
           .join(' ')}"`,
       ];
 
-      options.debug &&
-        console.log('Spawn Compodoc in nodemon...', {
-          command: _cmd,
-          arguments: _cmdArgs,
-          options: cmdOpts,
-        });
+      debug('Spawn Compodoc in nodemon...', {
+        command: _cmd,
+        arguments: _cmdArgs,
+        options: cmdOpts,
+      });
 
       childProcess = spawn(_cmd, _cmdArgs, cmdOpts);
     } else {
-      options.debug &&
-        console.log('Spawn Compodoc...', {
-          command: cmd,
-          arguments: cmdArgs,
-          options: cmdOpts,
-        });
+      debug('Spawn Compodoc...', {
+        command: cmd,
+        arguments: cmdArgs,
+        options: cmdOpts,
+      });
 
       childProcess = spawn(cmd, cmdArgs, cmdOpts);
     }
@@ -77,7 +77,7 @@ export default async function runExecutor(
     process.on('SIGTERM', () => childProcess.kill());
 
     childProcess.stdout.on('data', (data) => {
-      console.info(data.toString());
+      console.log(data.toString());
     });
     childProcess.stderr.on('data', (data) => {
       console.error(data.toString());

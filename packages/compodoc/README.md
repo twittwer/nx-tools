@@ -137,7 +137,7 @@ The target definition can be found in `angular.json`/`workspace.json` in the wor
 > Documentation for the whole workspace incl. the README files of all projects (apps/libs) as additional documentation.
 
 - Create a library for shared/workspace wide tooling (e.g. `workspace`)  
-  `nx g @nrwl/workspace:library workspace --unitTestRunner=none`
+  `nx g @nx/workspace:library workspace --unitTestRunner=none`
 - Optionally you can delete some unused code (you should keep at least `tsconfig.json` & `README.md`).
 - Configure Compodoc for the created project  
   `nx g @twittwer/compodoc:config workspace --workspaceDocs`
@@ -178,7 +178,7 @@ or via explicit configuration:
 ### Integration with @nrwl/storybook
 
 At first you have to configure `@nrwl/storybook` & `@twittwer/compodoc` for the project.  
-Wrap `storybook` & `build-storybook` targets with a `@nrwl/workspace:run-commands` executor:
+Wrap `storybook` & `build-storybook` targets with a `@nx/workspace:run-commands` executor:
 
 <details>
 <summary>Option 1: `storybook` / `storybook:build` (1 target with configuration)</summary>
@@ -191,7 +191,7 @@ Wrap `storybook` & `build-storybook` targets with a `@nrwl/workspace:run-command
     "_build-storybook": {  /* @nrwl/storybook */ },
     "compodoc": { /* @twittwer/compodoc */ },
     "storybook": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "commands": [
           "npx nx run <project>:compodoc:json --watch",
@@ -227,7 +227,7 @@ Wrap `storybook` & `build-storybook` targets with a `@nrwl/workspace:run-command
     "_build-storybook": {  /* @nrwl/storybook */ },
     "compodoc": { /* @twittwer/compodoc */ },
     "storybook": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "commands": [
           "npx nx run <project>:compodoc:json --watch",
@@ -237,7 +237,7 @@ Wrap `storybook` & `build-storybook` targets with a `@nrwl/workspace:run-command
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nx/workspace:run-commands",
       "options": {
         "commands": [
           "npx nx run <project>:compodoc:json",

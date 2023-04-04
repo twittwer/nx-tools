@@ -5,11 +5,13 @@
   "sourceRoot": "packages/compodoc-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "compodoc:build",
-        "jestConfig": "packages/compodoc-e2e/jest.config.js"
-      }
+        "jestConfig": "packages/compodoc-e2e/jest.config.js",
+        "maxWorkers": 1,
+        "runInBand": true
+      },
+      "dependsOn": ["compodoc:build"]
     }
   },
   "tags": [],
