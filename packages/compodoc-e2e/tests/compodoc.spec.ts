@@ -1,10 +1,7 @@
-import { getProjects, readProjectConfiguration } from '@nx/devkit';
 import {
-  checkFilesExist,
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq,
 } from '@nx/plugin/testing';
 
 describe('compodoc e2e', () => {

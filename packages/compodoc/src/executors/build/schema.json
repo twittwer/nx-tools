@@ -25,10 +25,7 @@
       "default": "html",
       "anyOf": [
         {
-          "enum": [
-            "html",
-            "json"
-          ]
+          "enum": ["html", "json"]
         },
         {
           "minLength": 1
