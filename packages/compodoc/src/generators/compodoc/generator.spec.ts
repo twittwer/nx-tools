@@ -1,6 +1,6 @@
 // todo: add generator tests
-// import { createTreeWithEmptyV1Workspace } from '@nrwl/devkit/testing';
-// import { Tree, readProjectConfiguration } from '@nrwl/devkit';
+// import { createTreeWithEmptyV1Workspace } from '@nx/devkit/testing';
+// import { Tree, readProjectConfiguration } from '@nx/devkit';
 //
 // import generator from './generator';
 // import { CompodocGeneratorSchema } from './schema';

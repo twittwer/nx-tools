@@ -1,42 +1,47 @@
 import {
-  checkFilesExist,
   ensureNxProject,
   readJson,
   runNxCommandAsync,
-  uniq,
-} from '@nrwl/nx-plugin/testing';
+} from '@nx/plugin/testing';
+
 describe('compodoc e2e', () => {
-  it('should create compodoc', async () => {
-    const plugin = uniq('compodoc');
+  const appName = 'my-e2e-app';
+  const timeout = 120000;
+
+  // Setting up individual workspaces per
+  // test can cause e2e runs to take a long time.
+  // For this reason, we recommend each suite only
+  // consumes 1 workspace. The tests should each operate
+  // on a unique project in the workspace, such that they
+  // are not dependant on one another.
+  beforeAll(async () => {
     ensureNxProject('@twittwer/compodoc', 'dist/packages/compodoc');
-    await runNxCommandAsync(`generate @twittwer/compodoc:compodoc ${plugin}`);
+    await runNxCommandAsync(`generate @nx/node:application ${appName}`);
+  }, timeout);
 
-    const result = await runNxCommandAsync(`build ${plugin}`);
-    expect(result.stdout).toContain('Executor ran');
-  }, 120000);
-
-  describe('--directory', () => {
-    it('should create src in the specified directory', async () => {
-      const plugin = uniq('compodoc');
-      ensureNxProject('@twittwer/compodoc', 'dist/packages/compodoc');
-      await runNxCommandAsync(
-        `generate @twittwer/compodoc:compodoc ${plugin} --directory subdir`,
-      );
-      expect(() =>
-        checkFilesExist(`libs/subdir/${plugin}/src/index.ts`),
-      ).not.toThrow();
-    }, 120000);
+  afterAll(async () => {
+    // `nx reset` kills the daemon, and performs
+    // some work which can help clean up e2e leftovers
+    await runNxCommandAsync('reset');
   });
 
-  describe('--tags', () => {
-    it('should add tags to nx.json', async () => {
-      const plugin = uniq('compodoc');
-      ensureNxProject('@twittwer/compodoc', 'dist/packages/compodoc');
-      await runNxCommandAsync(
-        `generate @twittwer/compodoc:compodoc ${plugin} --tags e2etag,e2ePackage`,
-      );
-      const nxJson = readJson('nx.json');
-      expect(nxJson.projects[plugin].tags).toEqual(['e2etag', 'e2ePackage']);
-    }, 120000);
-  });
+  it(
+    'should run the compodoc generator',
+    async () => {
+      await runNxCommandAsync(`generate @twittwer/compodoc:config ${appName}`);
+
+      const packageJson = readJson('package.json');
+      const projectJson = readJson(`apps/${appName}/project.json`);
+      const compodocTarget = projectJson.targets.compodoc;
+
+      expect(packageJson.devDependencies).toHaveProperty('@compodoc/compodoc');
+      expect(compodocTarget).toBeDefined();
+      expect(compodocTarget).toMatchObject({
+        executor: expect.any(String),
+        options: expect.any(Object),
+        configurations: expect.any(Object),
+      });
+    },
+    timeout,
+  );
 });

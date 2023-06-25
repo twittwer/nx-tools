@@ -7,13 +7,14 @@ import {
   joinPathFragments,
   offsetFromRoot,
   ProjectConfiguration,
+  readNxJson,
   readProjectConfiguration,
-  readWorkspaceConfiguration,
   Tree,
+  updateNxJson,
   updateProjectConfiguration,
-  updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
+} from '@nx/devkit';
 import { join } from 'path';
+
 import { CompodocGeneratorSchema } from './schema';
 
 type WorkspaceLayout = ReturnType<typeof getWorkspaceLayout>;
@@ -59,7 +60,7 @@ function init(tree: Tree): GeneratorCallback {
     { '@compodoc/compodoc': '^1.1.19' },
   );
 
-  const workspaceConfiguration = readWorkspaceConfiguration(tree);
+  const workspaceConfiguration = readNxJson(tree);
   if (workspaceConfiguration.tasksRunnerOptions?.default) {
     workspaceConfiguration.tasksRunnerOptions.default.options =
       workspaceConfiguration.tasksRunnerOptions.default.options || {};
@@ -75,7 +76,7 @@ function init(tree: Tree): GeneratorCallback {
       workspaceConfiguration.tasksRunnerOptions.default.options.cacheableOperations.push(
         'compodoc',
       );
-      updateWorkspaceConfiguration(tree, workspaceConfiguration);
+      updateNxJson(tree, workspaceConfiguration);
     }
   }
 

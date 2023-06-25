@@ -1,7 +1,6 @@
 {
   "$schema": "http://json-schema.org/schema",
   "$id": "Compodoc",
-  "cli": "nx",
   "title": "Configure Compodoc",
   "description": "Generator for Compodoc targets.",
   "type": "object",
