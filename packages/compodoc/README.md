@@ -61,49 +61,53 @@ Additional options (used exclusively by the executor) are indicated by an italic
 
 > For more details you may have a look at the [original Compodoc documentation](https://compodoc.app/guides/options.html) or the [builder's schema.json](./src/builders/compodoc/schema.json)
 
-| Option                | Default                              | Description                                                                                                   |
-| --------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| tsConfig              | `<projectRoot>/tsconfig.json`        | Path to project's tsconfig file.                                                                              |
-| outputPath            | `dist/compodoc/<projectName>`        | The output path of the generated files.                                                                       |
-| exportFormat          | `html`                               | Format of generated documentation. (html, json - enables Compodoc's `minimal` mode as well)                   |
-| _workspaceDocs_       | `false`                              | Use readme of workspace root as entry and add the readme files of all project as additional documentation.    |
-|                       |                                      |                                                                                                               |
-| name                  | `<projectName>`                      | Title of the documentation. (`workspaceDocs` uses workspace name as default - defined in `package.json`)      |
-|                       |                                      |                                                                                                               |
-| includes              |                                      | Path to external markdown files, folder should contain a `summary.json`. (`workspaceDocs` will override this) |
-| includesName          |                                      | Name of menu item containing external markdown files. (`workspaceDocs` uses "Projects" as default)            |
-|                       |                                      |                                                                                                               |
-| assetsFolder          |                                      | External assets folder to copy in generated documentation folder.                                             |
-| unitTestCoverage      |                                      | Path to unit test coverage in json-summary format.                                                            |
-|                       |                                      |                                                                                                               |
-| disableCoverage       | `true`                               | Do not add the documentation coverage report.                                                                 |
-| disableSourceCode     | `false`                              | Do not add source code tab and links to source code.                                                          |
-| disableDomTree        | `false`                              | Do not add dom tree tab.                                                                                      |
-| disableTemplateTab    | `false`                              | Do not add template tab.                                                                                      |
-| disableStyleTab       | `false`                              | Do not add style tab.                                                                                         |
-| disableGraph          | `false`                              | Disable rendering of the dependency graph.                                                                    |
-| disablePrivate        | `true`                               | Do not show private in generated documentation.                                                               |
-| disableProtected      | `false`                              | Do not show protected in generated documentation.                                                             |
-| disableInternal       | `true`                               | Do not show @internal in generated documentation.                                                             |
-| disableLifeCycleHooks | `true`                               | Do not show Angular lifecycle hooks in generated documentation.                                               |
-| disableRoutesGraph    | `false`                              | Do not add the routes graph.                                                                                  |
-| disableSearch         | `false`                              | Do not add the search input.                                                                                  |
-| disableDependencies   | `false`                              | Do not add the dependencies list.                                                                             |
-|                       |                                      |                                                                                                               |
-| language              | `en-US`                              | Language used for generated documentation.                                                                    |
-| theme                 | `gitbook`                            | Theme used for generated documentation.                                                                       |
-| extTheme              |                                      | Path to external theme file.                                                                                  |
-| templates             |                                      | Path to directory of Handlebars templates to override built-in templates.                                     |
-| customLogo            |                                      | Path to custom logo.                                                                                          |
-| customFavicon         |                                      | Path to custom favicon.                                                                                       |
-| hideGenerator         | `false`                              | Do not print the Compodoc logo at the bottom of the page.                                                     |
-|                       |                                      |                                                                                                               |
-| serve                 | `false` (`true` in watch mode)       | Serve generated documentation. (_automatically enabled in watch mode_)                                        |
-| port                  | `8080`                               | Port for serving of documentation.                                                                            |
-| watch                 | `false`                              | Watch for source files changes to automatically rebuild documentation.                                        |
-| silent                | `true` (`false` in watch/serve mode) | Suppress verbose build output.                                                                                |
-|                       |                                      |                                                                                                               |
-| _debug_               | `false`                              | Log resulting executor options & the final Compodoc command with all arguments.                               |
+| Option                    | Default                              | Description                                                                                                                    |
+| ------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| tsConfig                  | `<projectRoot>/tsconfig.json`        | Path to project's tsconfig file.                                                                                               |
+| outputPath                | `dist/compodoc/<projectName>`        | The output path of the generated files.                                                                                        |
+| exportFormat              | `html`                               | Format of generated documentation. (html, json - enables Compodoc's `minimal` mode as well)                                    |
+| _workspaceDocs_           | `false`                              | Use readme of workspace root as entry and add the readme files of all project as additional documentation.                     |
+|                           |                                      |                                                                                                                                |
+| name                      | `<projectName>`                      | Title of the documentation. (`workspaceDocs` uses workspace name as default - defined in `package.json`)                       |
+|                           |                                      |                                                                                                                                |
+| includes                  |                                      | Path to external markdown files, folder should contain a `summary.json`. (`workspaceDocs` will override this)                  |
+| includesName              |                                      | Name of menu item containing external markdown files. (`workspaceDocs` uses "Projects" as default)                             |
+|                           |                                      |                                                                                                                                |
+| assetsFolder              |                                      | External assets folder to copy in generated documentation folder.                                                              |
+| unitTestCoverage          |                                      | Path to unit test coverage in json-summary format.                                                                             |
+|                           |                                      |                                                                                                                                |
+| disableCoverage           | `true`                               | Do not add the documentation coverage report.                                                                                  |
+| disableSourceCode         | `false`                              | Do not add source code tab and links to source code.                                                                           |
+| disableDomTree            | `false`                              | Do not add dom tree tab.                                                                                                       |
+| disableTemplateTab        | `false`                              | Do not add template tab.                                                                                                       |
+| disableStyleTab           | `false`                              | Do not add style tab.                                                                                                          |
+| disableGraph              | `false`                              | Disable rendering of the dependency graph.                                                                                     |
+| disablePrivate            | `true`                               | Do not show private in generated documentation.                                                                                |
+| disableProtected          | `false`                              | Do not show protected in generated documentation.                                                                              |
+| disableInternal           | `true`                               | Do not show @internal in generated documentation.                                                                              |
+| disableLifeCycleHooks     | `true`                               | Do not show Angular lifecycle hooks in generated documentation.                                                                |
+| disableRoutesGraph        | `false`                              | Do not add the routes graph.                                                                                                   |
+| disableSearch             | `false`                              | Do not add the search input.                                                                                                   |
+| disableDependencies       | `false`                              | Do not add the dependencies list.                                                                                              |
+|                           |                                      |                                                                                                                                |
+| coverageTest              | `0` (`70` when coverage enabled)     | Test command of documentation coverage with a threshold.                                                                       |
+| coverageMinimumPerFile    | `0`                                  | Test command of documentation coverage per file with a minimum.                                                                |
+| coverageTestThresholdFail | `true`                               | Test command of documentation coverage (global or per file) will fail with error or just warn user (true: error, false: warn). |
+|                           |                                      |                                                                                                                                |
+| language                  | `en-US`                              | Language used for generated documentation.                                                                                     |
+| theme                     | `gitbook`                            | Theme used for generated documentation.                                                                                        |
+| extTheme                  |                                      | Path to external theme file.                                                                                                   |
+| templates                 |                                      | Path to directory of Handlebars templates to override built-in templates.                                                      |
+| customLogo                |                                      | Path to custom logo.                                                                                                           |
+| customFavicon             |                                      | Path to custom favicon.                                                                                                        |
+| hideGenerator             | `false`                              | Do not print the Compodoc logo at the bottom of the page.                                                                      |
+|                           |                                      |                                                                                                                                |
+| serve                     | `false` (`true` in watch mode)       | Serve generated documentation. (_automatically enabled in watch mode_)                                                         |
+| port                      | `8080`                               | Port for serving of documentation.                                                                                             |
+| watch                     | `false`                              | Watch for source files changes to automatically rebuild documentation.                                                         |
+| silent                    | `true` (`false` in watch/serve mode) | Suppress verbose build output.                                                                                                 |
+|                           |                                      |                                                                                                                                |
+| _debug_                   | `false`                              | Log resulting executor options & the final Compodoc command with all arguments.                                                |
 
 > All paths should be relative to workspace root
 
