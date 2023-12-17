@@ -56,6 +56,13 @@ export interface CompodocOptions {
   /** @default false */
   disableDependencies: boolean;
 
+  /** @default 0 when coverage is deactivated, 70 otherwise */
+  coverageTest?: number;
+  /** @default 0 */
+  coverageMinimumPerFile: number;
+  /** @default true */
+  coverageTestThresholdFail: boolean;
+
   /** @default 'en-US' */
   language: CompodocLanguage;
   /** @default 'gitbook' */

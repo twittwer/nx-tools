@@ -135,6 +135,10 @@ function toCompodocOptions(
     disableSearch: options.disableSearch,
     disableDependencies: options.disableDependencies,
 
+    coverageTest: options.disableCoverage ? 0 : options.coverageTest ?? 70,
+    coverageTestThresholdFail: options.coverageTestThresholdFail,
+    coverageMinimumPerFile: options.coverageMinimumPerFile,
+
     language: options.language,
     theme: options.theme,
     extTheme: toRelativePath(options.extTheme, ..._),
