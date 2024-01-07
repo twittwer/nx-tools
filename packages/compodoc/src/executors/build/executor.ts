@@ -121,7 +121,6 @@ function toCompodocOptions(
     assetsFolder: toRelativePath(options.assetsFolder, ..._),
     unitTestCoverage: toRelativePath(options.unitTestCoverage, ..._),
 
-    disableCoverage: options.disableCoverage,
     disableSourceCode: options.disableSourceCode,
     disableDomTree: options.disableDomTree,
     disableTemplateTab: options.disableTemplateTab,
@@ -134,6 +133,11 @@ function toCompodocOptions(
     disableRoutesGraph: options.disableRoutesGraph,
     disableSearch: options.disableSearch,
     disableDependencies: options.disableDependencies,
+
+    disableCoverage: options.disableCoverage,
+    coverageTest: options.disableCoverage ? 0 : options.coverageTest,
+    coverageTestThresholdFail: options.coverageTestThresholdFail,
+    coverageMinimumPerFile: options.coverageMinimumPerFile,
 
     language: options.language,
     theme: options.theme,

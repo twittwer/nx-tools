@@ -52,11 +52,6 @@
       "description": "Path to unit test coverage in json-summary format.",
       "type": "string"
     },
-    "disableCoverage": {
-      "description": "Do not add the documentation coverage report.",
-      "type": "boolean",
-      "default": true
-    },
     "disableSourceCode": {
       "description": "Do not add source code tab and links to source code.",
       "type": "boolean",
@@ -116,6 +111,30 @@
       "description": "Do not add the dependencies list.",
       "type": "boolean",
       "default": false
+    },
+    "disableCoverage": {
+      "description": "Do not add the documentation coverage report.",
+      "type": "boolean",
+      "default": true
+    },
+    "coverageTest": {
+      "description": "Test command of documentation coverage with a threshold",
+      "type": "integer",
+      "default": 70,
+      "minimum": 0,
+      "maximum": 100
+    },
+    "coverageMinimumPerFile": {
+      "description": "Test command of documentation coverage per file with a minimum",
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 100
+    },
+    "coverageTestThresholdFail": {
+      "description": "Test command of documentation coverage (global or per file) will fail with error or just warn user (true: error, false: warn)",
+      "type": "boolean",
+      "default": true
     },
     "language": {
       "description": "Language used for generated documentation.",
