@@ -52,11 +52,6 @@
       "description": "Path to unit test coverage in json-summary format.",
       "type": "string"
     },
-    "disableCoverage": {
-      "description": "Do not add the documentation coverage report.",
-      "type": "boolean",
-      "default": true
-    },
     "disableSourceCode": {
       "description": "Do not add source code tab and links to source code.",
       "type": "boolean",
@@ -116,6 +111,11 @@
       "description": "Do not add the dependencies list.",
       "type": "boolean",
       "default": false
+    },
+    "disableCoverage": {
+      "description": "Do not add the documentation coverage report.",
+      "type": "boolean",
+      "default": true
     },
     "coverageTest": {
       "description": "Test command of documentation coverage with a threshold",

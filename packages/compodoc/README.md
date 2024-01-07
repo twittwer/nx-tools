@@ -76,7 +76,6 @@ Additional options (used exclusively by the executor) are indicated by an italic
 | assetsFolder              |                                      | External assets folder to copy in generated documentation folder.                                                              |
 | unitTestCoverage          |                                      | Path to unit test coverage in json-summary format.                                                                             |
 |                           |                                      |                                                                                                                                |
-| disableCoverage           | `true`                               | Do not add the documentation coverage report.                                                                                  |
 | disableSourceCode         | `false`                              | Do not add source code tab and links to source code.                                                                           |
 | disableDomTree            | `false`                              | Do not add dom tree tab.                                                                                                       |
 | disableTemplateTab        | `false`                              | Do not add template tab.                                                                                                       |
@@ -90,7 +89,8 @@ Additional options (used exclusively by the executor) are indicated by an italic
 | disableSearch             | `false`                              | Do not add the search input.                                                                                                   |
 | disableDependencies       | `false`                              | Do not add the dependencies list.                                                                                              |
 |                           |                                      |                                                                                                                                |
-| coverageTest              | `0` (`70` when coverage enabled)     | Test command of documentation coverage with a threshold.                                                                       |
+| disableCoverage           | `true`                               | Do not add the documentation coverage report.                                                                                  |
+| coverageTest              | `70` (`0` with disabled coverage)    | Test command of documentation coverage with a threshold.                                                                       |
 | coverageMinimumPerFile    | `0`                                  | Test command of documentation coverage per file with a minimum.                                                                |
 | coverageTestThresholdFail | `true`                               | Test command of documentation coverage (global or per file) will fail with error or just warn user (true: error, false: warn). |
 |                           |                                      |                                                                                                                                |

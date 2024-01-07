@@ -29,8 +29,6 @@ export interface CompodocOptions {
   assetsFolder?: string;
   unitTestCoverage?: string;
 
-  /** @default true */
-  disableCoverage: boolean;
   /** @default false */
   disableSourceCode: boolean;
   /** @default false */
@@ -56,8 +54,10 @@ export interface CompodocOptions {
   /** @default false */
   disableDependencies: boolean;
 
-  /** @default 0 when coverage is deactivated, 70 otherwise */
-  coverageTest?: number;
+  /** @default true */
+  disableCoverage: boolean;
+  /** @default 70 (0 with disabled coverage) */
+  coverageTest: number;
   /** @default 0 */
   coverageMinimumPerFile: number;
   /** @default true */
