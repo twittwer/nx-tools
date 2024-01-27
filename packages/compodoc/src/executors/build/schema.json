@@ -118,21 +118,21 @@
       "default": false
     },
     "coverageTest": {
-      "description": "Test command of documentation coverage with a threshold",
+      "description": "Threshold for global documentation coverage.",
       "type": "integer",
       "default": 0,
       "minimum": 0,
       "maximum": 100
     },
     "coverageMinimumPerFile": {
-      "description": "Test command of documentation coverage per file with a minimum",
+      "description": "Threshold for documentation coverage of each file.",
       "type": "integer",
       "default": 0,
       "minimum": 0,
       "maximum": 100
     },
     "coverageTestThresholdFail": {
-      "description": "Test command of documentation coverage (global or per file) will fail with error or just warn user (true: error, false: warn)",
+      "description": "bort compodoc with an error instead of a warn log, if coverage threshold (global or per file) is not reached (true: error, false: warn).",
       "type": "boolean",
       "default": true
     },
