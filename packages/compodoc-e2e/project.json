@@ -9,7 +9,8 @@
       "options": {
         "jestConfig": "packages/compodoc-e2e/jest.config.js",
         "maxWorkers": 1,
-        "runInBand": true
+        "runInBand": true,
+        "passWithNoTests": false
       },
       "dependsOn": ["compodoc:build"]
     }

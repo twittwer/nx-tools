@@ -6,3 +6,5 @@
 .data
 
 /packages/**/files/**/*.json__tpl__
+
+/.nx/cache
