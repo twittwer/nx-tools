@@ -4,17 +4,13 @@ This file was generated using [@jscutlery/semver](https://github.com/jscutlery/s
 
 # [1.11.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.10.0...compodoc/v1.11.0) (2024-01-27)
 
-
 ### Bug Fixes
 
-* **compodoc:** correct `coverageTest` behavior ([0861a68](https://github.com/twittwer/nx-tools/commit/0861a6892420a3166ba03c433338a703d27549c3))
-
+- **compodoc:** correct `coverageTest` behavior ([0861a68](https://github.com/twittwer/nx-tools/commit/0861a6892420a3166ba03c433338a703d27549c3))
 
 ### Features
 
-* **compodoc:** add documentation coverage flags support ([#83](https://github.com/twittwer/nx-tools/issues/83)) ([494bf20](https://github.com/twittwer/nx-tools/commit/494bf209855dcab3e575d86585bc9a192082139f))
-
-
+- **compodoc:** add documentation coverage flags support ([#83](https://github.com/twittwer/nx-tools/issues/83)) ([494bf20](https://github.com/twittwer/nx-tools/commit/494bf209855dcab3e575d86585bc9a192082139f))
 
 # [1.10.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.9.0...compodoc/v1.10.0) (2023-06-25)
 
