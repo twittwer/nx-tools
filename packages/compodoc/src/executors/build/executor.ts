@@ -121,6 +121,8 @@ function toCompodocOptions(
     assetsFolder: toRelativePath(options.assetsFolder, ..._),
     unitTestCoverage: toRelativePath(options.unitTestCoverage, ..._),
 
+    // This must be disabled to run `coverageTest` (otherwise error).
+    disableCoverage: options.coverageTest ? false : options.disableCoverage,
     disableSourceCode: options.disableSourceCode,
     disableDomTree: options.disableDomTree,
     disableTemplateTab: options.disableTemplateTab,
@@ -134,8 +136,7 @@ function toCompodocOptions(
     disableSearch: options.disableSearch,
     disableDependencies: options.disableDependencies,
 
-    disableCoverage: options.disableCoverage,
-    coverageTest: options.disableCoverage ? 0 : options.coverageTest,
+    coverageTest: options.coverageTest,
     coverageTestThresholdFail: options.coverageTestThresholdFail,
     coverageMinimumPerFile: options.coverageMinimumPerFile,
 
