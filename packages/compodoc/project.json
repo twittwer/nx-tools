@@ -52,13 +52,13 @@
       "executor": "@jscutlery/semver:version",
       "options": {
         "baseBranch": "main",
-        "versionTagPrefix": "${target}/v",
+        "tagPrefix": "${target}/v",
         "push": true,
         "postTargets": ["compodoc:github"]
       },
       "configurations": {
         "local": {
-          "versionTagPrefix": "local/${target}/v",
+          "tagPrefix": "local/${target}/v",
           "push": false,
           "postTargets": []
         },
