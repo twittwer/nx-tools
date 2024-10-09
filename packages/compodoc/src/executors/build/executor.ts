@@ -24,7 +24,7 @@ export default async function runExecutor(
 
   debug('Prepare Compodoc...\n', options);
 
-  const project = context.workspace.projects[context.projectName];
+  const project = context.projectsConfigurations.projects[context.projectName];
 
   const args = toCompodocOptions(options, context);
 
@@ -94,7 +94,7 @@ function toCompodocOptions(
   context: ExecutorContext,
 ): CompodocOptions {
   const _: [BuildExecutorSchema, ExecutorContext] = [options, context];
-  const project = context.workspace.projects[context.projectName];
+  const project = context.projectsConfigurations.projects[context.projectName];
 
   options.tsConfig ??= `${project.root}/tsconfig.json`;
   options.outputPath ??= `dist/compodoc/${context.projectName}`;
@@ -163,7 +163,7 @@ function createIncludesForWorkspace(
   writeFileSync(
     join(tmpDirectory, 'summary.json'),
     JSON.stringify(
-      Object.entries(context.workspace.projects)
+      Object.entries(context.projectsConfigurations.projects)
         .map(([projectName, project]) => {
           const readmeFile = join(project.root, 'README.md');
           return { projectName, readmeFile };
@@ -187,7 +187,7 @@ function toRelativePath(
   if (!pathInWorkspace) {
     return undefined;
   }
-  const project = context.workspace.projects[context.projectName];
+  const project = context.projectsConfigurations.projects[context.projectName];
   const currentDirectory = options.workspaceDocs
     ? context.root
     : joinPathFragments(context.root, project.root);

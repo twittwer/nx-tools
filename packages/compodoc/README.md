@@ -13,7 +13,7 @@
 - [Recipes](#recipes)
   - [Workspace Docs](#workspace-docs)
   - [Watch Mode](#watch-mode)
-  - [Integration with @nrwl/storybook](#integration-with-nrwlstorybook)
+  - [Integration with @nx/storybook](#integration-with-nxstorybook)
 
 ## Getting Started
 
@@ -179,9 +179,9 @@ or via explicit configuration:
 ```
 <!-- prettier-ignore-end -->
 
-### Integration with @nrwl/storybook
+### Integration with @nx/storybook
 
-At first you have to configure `@nrwl/storybook` & `@twittwer/compodoc` for the project.  
+At first you have to configure `@nx/storybook` & `@twittwer/compodoc` for the project.  
 Wrap `storybook` & `build-storybook` targets with a `@nx/workspace:run-commands` executor:
 
 <details>
@@ -191,8 +191,8 @@ Wrap `storybook` & `build-storybook` targets with a `@nx/workspace:run-commands`
 ```json5
 {
   "targets": {
-    "_storybook": { /* @nrwl/storybook */ },
-    "_build-storybook": {  /* @nrwl/storybook */ },
+    "_storybook": { /* @nx/storybook */ },
+    "_build-storybook": {  /* @nx/storybook */ },
     "compodoc": { /* @twittwer/compodoc */ },
     "storybook": {
       "executor": "@nx/workspace:run-commands",
@@ -227,8 +227,8 @@ Wrap `storybook` & `build-storybook` targets with a `@nx/workspace:run-commands`
 ```json5
 {
   "targets": {
-    "_storybook": { /* @nrwl/storybook */ },
-    "_build-storybook": {  /* @nrwl/storybook */ },
+    "_storybook": { /* @nx/storybook */ },
+    "_build-storybook": {  /* @nx/storybook */ },
     "compodoc": { /* @twittwer/compodoc */ },
     "storybook": {
       "executor": "@nx/workspace:run-commands",
