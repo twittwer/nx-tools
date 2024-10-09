@@ -40,4 +40,4 @@ migrations.json
 .DS_Store
 Thumbs.db
 
-.nx/cache
+/.nx

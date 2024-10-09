@@ -15,7 +15,7 @@ npx create-nx-workspace@$NX_VERSION \
 
 cd compodoc-test
 
-npx nx generate @nrwl/angular:library \
+npx nx generate @nx/angular:library \
   --name=lib
 
 npx nx format
