@@ -2,6 +2,10 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.12.1](https://github.com/twittwer/nx-tools/compare/compodoc/v1.12.1-beta.0...compodoc/v1.12.1) (2024-10-09)
+
+
+
 ## [1.12.1-beta.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.13.0-0...compodoc/v1.12.1-beta.0) (2024-10-09)
 
 
