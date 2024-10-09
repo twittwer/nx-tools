@@ -64,7 +64,9 @@
         },
         "beta": {
           "baseBranch": "beta",
-          "releaseAs": "prerelease"
+          "releaseAs": "prerelease",
+          "preid": "beta",
+          "postTargets": ["compodoc:github:beta"]
         },
         "remote": {}
       }
@@ -73,6 +75,11 @@
       "executor": "@jscutlery/semver:github",
       "options": {
         "tag": "${tag}"
+      },
+      "configurations": {
+        "beta": {
+          "prerelease": true
+        }
       }
     },
     "release": {
