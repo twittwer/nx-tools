@@ -2,6 +2,15 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+# [1.13.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.12.0...compodoc/v1.13.0) (2024-10-09)
+
+
+### Features
+
+* upgrade to Nx v20 ([a62c388](https://github.com/twittwer/nx-tools/commit/a62c38844a1b678094eb9d17c48dd705a1f4fd13))
+
+
+
 # [1.12.0](https://github.com/twittwer/nx-tools/compare/compodoc/v1.11.0...compodoc/v1.12.0) (2024-01-27)
 
 
